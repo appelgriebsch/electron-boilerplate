@@ -1,5 +1,41 @@
 html,
 body {
-	padding: 0;
-	margin: 0;	
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+}
+
+md-sidenav md-list {
+	width: 100%;
+	text-align: left;
+}
+
+md-sidenav md-list .md-button {
+	width: 100%;
+	text-align: left;
+}
+
+md-sidenav md-list .md-button.selected {
+	color: #03a9f4;
+}
+
+.menu {
+	background-color: transparent;
+	border: none;
+	height: 38px;
+	width: 38px;
+	margin: 16px;
+}
+
+md-toolbar h1 {
+	margin: auto;
+	font-size: 1.25em;
+	font-weight: 400;
+}
+
+#content {
+	overflow: hidden;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 5px;
 }

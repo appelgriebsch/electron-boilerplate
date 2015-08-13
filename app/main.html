@@ -12,17 +12,53 @@
 		<link rel="stylesheet" href="libs/vendor/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="css/main.css"/>
 	</head>
-	<body ng-app="boilerplateApp" layout="row" ng-controller="AppController as appCtrl">
+	<body ng-app="boilerplateApp" layout="row" ng-controller="AppController as appCtrl" ng-init="appCtrl.initialize()">
 
-    <md-content layout-padding flex>
-      <div class="layout-fill">{{ appCtrl.helloText }}</div>
-    </md-content>
+		<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="sidebar" md-is-locked-open="$mdMedia('gt-sm')">
+
+			<md-toolbar class="md-theme-indigo">
+				<h1 class="md-toolbar-tools">Sidebar</h1>
+			</md-toolbar>
+
+			<div layout="column" layout-align="space-between start"
+					 ng-controller="SidebarController as sidebarCtrl" ng-init="sidebarCtrl.initialize()">
+				<md-list>
+					<md-list-item ng-repeat="item in sidebarCtrl.items">
+						<md-button ng-class="{ 'selected': item === sidebarCtrl.selectedItem }" ng-click="sidebarCtrl.selectItem(item)">
+							 {{ item }}
+						 </md-button>
+					 </md-list-item>
+				 </md-list>
+				 <div flex layout="row" layout-align="end end">
+					 <md-button class="md-fab md-fab-bottom-right" ng-click="sidebarCtrl.addItem()">
+						 <md-icon>add</md-icon>
+					 </md-button>
+				 </div>
+			 </div>
+
+		</md-sidenav>
+
+		<div flex layout="column" tabindex="-1" class="md-whiteframe-z2" role="main">
+
+			<md-toolbar layout="row" class="md-whiteframe-z1">
+				<md-button class="menu" hide-gt-sm ng-click="appCtrl.toggleSidebar()" aria-label="Show Active Sessions">
+					<md-icon>menu</md-icon>
+				</md-button>
+				<h1>Electron Boilerplate</h1>
+			</md-toolbar>
+
+			<md-content flex id="content">
+
+			</md-content>
+
+		</div>
 
     <script type="text/javascript" src="libs/vendor/angular/angular.js"></script>
     <script type="text/javascript" src="libs/vendor/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="libs/vendor/angular-aria/angular-aria.js"></script>
     <script type="text/javascript" src="libs/vendor/angular-material/angular-material.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/appCtrl.js"></script>
+		<script type="text/javascript" src="js/sidebarCtrl.js"></script>
 
 	</body>
 </html>
