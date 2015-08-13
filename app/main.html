@@ -9,7 +9,7 @@
 
 		<title>Electron boilerplate</title>
 		<link rel="stylesheet" href="css/fonts.css"/>
-		<link rel="stylesheet" href="libs/vendor/angular-material/angular-material.css"/>
+		<link rel="stylesheet" href="libs/vendor/angular-material/angular-material.min.css"/>
     <link rel="stylesheet" href="css/main.css"/>
 	</head>
 	<body ng-app="boilerplateApp" layout="row" ng-controller="AppController as appCtrl" ng-init="appCtrl.initialize()">
@@ -25,7 +25,7 @@
 				<md-list>
 					<md-list-item ng-repeat="item in sidebarCtrl.items">
 						<md-button ng-class="{ 'selected': item === sidebarCtrl.selectedItem }" ng-click="sidebarCtrl.selectItem(item)">
-							 {{ item }}
+							 {{ item.text }}
 						 </md-button>
 					 </md-list-item>
 				 </md-list>
@@ -47,18 +47,20 @@
 				<h1>Electron Boilerplate</h1>
 			</md-toolbar>
 
-			<md-content flex id="content">
+			<md-content flex id="content" ui-view>
 
 			</md-content>
 
 		</div>
 
-    <script type="text/javascript" src="libs/vendor/angular/angular.js"></script>
-    <script type="text/javascript" src="libs/vendor/angular-animate/angular-animate.js"></script>
-    <script type="text/javascript" src="libs/vendor/angular-aria/angular-aria.js"></script>
-    <script type="text/javascript" src="libs/vendor/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="libs/vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="libs/vendor/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="libs/vendor/angular-aria/angular-aria.min.js"></script>
+    <script type="text/javascript" src="libs/vendor/angular-material/angular-material.min.js"></script>
+		<script type="text/javascript" src="libs/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
 		<script type="text/javascript" src="js/appCtrl.js"></script>
 		<script type="text/javascript" src="js/sidebarCtrl.js"></script>
+		<script type="text/javascript" src="js/routes.js"></script>
 
 	</body>
 </html>

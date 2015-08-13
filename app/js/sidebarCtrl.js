@@ -2,9 +2,9 @@
 
   'use strict';
 
-  angular.module('boilerplateApp').controller('SidebarController', ['$log', '$q', SidebarController]);
+  angular.module('boilerplateApp').controller('SidebarController', ['$state', '$log', '$q', SidebarController]);
 
-  function SidebarController($log, $q) {
+  function SidebarController($state, $log, $q) {
 
     var self = this;
     self.items = [];
@@ -12,6 +12,7 @@
 
     self.selectItem = function(item) {
       self.selectedItem = item;
+      $state.go('item',  { "item": item.text });
     }
 
     self.initialize = function() {
@@ -20,7 +21,7 @@
 
     self.addItem = function() {
       var count = self.items.length + 1;
-      self.items.push("Item " + count);
+      self.items.push({ text: "Item " + count });
     }
   };
 
