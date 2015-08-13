@@ -1,0 +1,36 @@
+{
+  "name": "boilerplate",
+  "productName": "Boilerplate",
+  "version": "0.0.1",
+  "description": "An Electron boilerplate project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appelgriebsch/electron-boilerplate.git"
+  },
+  "keywords": [
+    "electron",
+    "boilerplate",
+    "angularjs"
+  ],
+  "author": "Andreas Gerlach <andi@appelgriebsch.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
+  },
+  "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
+  "scripts": {
+    "start": "electron app/",
+    "build": "electron-packager app/ $npm_package_productName --out=pkg --ignore=pkg --prune --asar --all --version=0.30.4",
+    "postinstall": "node ./tasks/app_npm_install && node ./tasks/app_bower_install",
+    "app-install": "node ./tasks/app_npm_install",
+    "bower-install": "node ./tasks/app_bower_install"
+  },
+  "dependencies": {
+    "electron-debug": "^0.1.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.0.1",
+    "electron-prebuilt": "^0.30.4"
+  }
+}

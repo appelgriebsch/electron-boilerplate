@@ -1,0 +1,35 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "description": "An Electron boilerplate app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appelgriebsch/electron-boilerplate.git"
+  },
+  "keywords": [
+    "electron",
+    "boilerplate",
+    "angularjs"
+  ],
+  "author": "Andreas Gerlach <andi@appelgriebsch.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
+  },
+  "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
+  "dependencies": {
+    "geopouch": "^2.0.0",
+    "multicast-dns": "^3.0.0",
+    "multicast-dns-service-types": "^1.1.0",
+    "network-address": "^1.0.0",
+    "pouchdb": "^4.0.0",
+    "pouchdb-find": "^0.3.5",
+    "pouchdb-quick-search": "^1.1.0",
+    "socket.io": "^1.3.6",
+    "transform-pouch": "^1.0.2"
+  }
+}
