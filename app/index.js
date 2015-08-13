@@ -30,7 +30,7 @@
   		resizable: true
   	});
 
-  	win.loadUrl('file://' + __dirname + '/index.html');
+  	win.loadUrl('file://' + __dirname + '/main.html');
   	win.on('closed', onClosed);
 
   	return win;
@@ -46,7 +46,7 @@
   var mainWindow;
 
   app.on('window-all-closed', function () {
-  	if (process.platform !== 'darwin') {
+    if (process.platform !== 'darwin') {
   		app.quit();
   	}
   });

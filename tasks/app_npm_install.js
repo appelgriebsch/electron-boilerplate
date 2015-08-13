@@ -12,7 +12,7 @@
   var params = ['install'];
 
   // Maybe there was name of package user wants to install passed as a parameter.
-  if (process.argv.length > 1) {
+  if (process.argv.length > 2) {
       params.push(process.argv[process.argv.length - 1]);
       params.push('--save');
   }
