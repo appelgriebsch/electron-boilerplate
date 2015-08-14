@@ -15,6 +15,7 @@
                templateUrl: "views/index.html"
             })
             .state("item", {
+              url: "/:item",
               templateProvider: function ($timeout, $stateParams) {
                 return $timeout(function () {
                   return '<p>You clicked on item ' + $stateParams.item + '...</p>';
