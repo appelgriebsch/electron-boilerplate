@@ -27,10 +27,10 @@
     "bower-install": "node ./tasks/app_bower_install"
   },
   "dependencies": {
-    "electron-debug": "^0.1.1"
+    "electron-debug": "^0.2.0"
   },
   "devDependencies": {
     "electron-packager": "^5.0.1",
-    "electron-prebuilt": "^0.30.4"
+    "electron-prebuilt": "^0.31.2"
   }
 }
