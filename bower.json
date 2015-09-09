@@ -20,11 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-material": "~0.10.1",
+    "angular-material": "~0.11",
     "angular-ui-router": "~0.2.15",
-    "angular-sanitize": "~1.4.4"
-  },
-  "resolutions": {
-    "angular": "1.4.4"
+    "angular-sanitize": "~1.4"
   }
 }
