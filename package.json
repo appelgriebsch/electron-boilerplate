@@ -21,7 +21,7 @@
   "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
   "scripts": {
     "start": "electron app/",
-    "build": "electron-packager app/ $npm_package_productName --out=pkg --ignore=pkg --prune --asar --all --version=0.30.4",
+    "build": "electron-packager app/ $npm_package_productName --out=pkg --ignore=pkg --prune --asar --all --version=0.32.1",
     "postinstall": "node ./tasks/app_npm_install && node ./tasks/app_bower_install",
     "app-install": "node ./tasks/app_npm_install",
     "bower-install": "node ./tasks/app_bower_install"
@@ -30,7 +30,7 @@
     "electron-debug": "^0.2.0"
   },
   "devDependencies": {
-    "electron-packager": "^5.0.1",
-    "electron-prebuilt": "^0.31.2"
+    "electron-packager": "^5.1.0",
+    "electron-prebuilt": "^0.32.1"
   }
 }
