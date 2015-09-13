@@ -7,7 +7,7 @@
   // Tell the 'npm install' which is about to start that we want for it
   // to compile for Electron.
   process.env.npm_config_disturl = "https://atom.io/download/atom-shell";
-  process.env.npm_config_target = "0.32.1";
+  process.env.npm_config_target = "0.32.2";
 
   var params = ['install'];
 
