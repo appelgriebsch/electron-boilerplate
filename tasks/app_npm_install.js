@@ -13,8 +13,8 @@
 
   // Maybe there was name of package user wants to install passed as a parameter.
   if (process.argv.length > 2) {
-      params.push(process.argv[process.argv.length - 1]);
-      params.push('--save');
+    params.push(process.argv[process.argv.length - 1]);
+    params.push('--save');
   }
 
   var installCommand = null;
@@ -26,9 +26,9 @@
   }
 
   var install = childProcess.spawn(installCommand, params, {
-      cwd: __dirname + '/../app',
-      env: process.env,
-      stdio: 'inherit'
+    cwd: __dirname + '/../app',
+    env: process.env,
+    stdio: 'inherit'
   });
 
 })();
