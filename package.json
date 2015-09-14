@@ -29,5 +29,10 @@
     "electron-prebuilt": "^0.32.2",
     "grunt": "^0.4.5",
     "grunt-electron": "^2.0.0"
+  },
+  "optionalDependencies": {
+    "grunt-electron-debian-installer": "^0.1.0",
+    "grunt-electron-redhat-installer": "^0.1.0",
+    "grunt-electron-windows-installer": "^0.1.0"
   }
 }
