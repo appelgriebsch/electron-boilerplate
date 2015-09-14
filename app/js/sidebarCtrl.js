@@ -7,6 +7,8 @@
   function SidebarController($state, $log, $q) {
 
     var self = this;
+    var notifier = require('node-notifier');
+
     self.items = [];
     self.selectedItem = undefined;
 
@@ -22,6 +24,11 @@
     self.addItem = function() {
       var count = self.items.length + 1;
       self.items.push({ text: "Item " + count });
+
+      notifier.notify({
+        'title': 'Electron Boilerplate',
+        'message': 'Item successfully created!'
+      });
     }
   };
 
