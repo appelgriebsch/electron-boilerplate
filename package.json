@@ -25,10 +25,9 @@
     "postinstall": "node ./tasks/app_npm_install",
     "app-install": "node ./tasks/app_npm_install"
   },
-  "devDependencies": {
+  "dependencies": {
     "electron-prebuilt": "^0.32.2",
     "grunt": "^0.4.5",
-    "grunt-electron": "^2.0.0",
-    "grunt-electron-installer": "^1.0.2"
+    "grunt-electron": "^2.0.0"
   }
 }
