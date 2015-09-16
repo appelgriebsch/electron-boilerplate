@@ -11,81 +11,74 @@
   // adds debug features like hotkeys for triggering dev tools and reload
   require('electron-debug')();
 
-  // initialize pouch db adapter
-  var PouchDB = require('pouchdb');
-  PouchDB.plugin(require('geopouch'));
-  PouchDB.plugin(require('pouchdb-find'));
-  PouchDB.plugin(require('pouchdb-quick-search'));
-  PouchDB.plugin(require('transform-pouch'));
-
   // initialize service finder module
-  var ServiceFinder = require('./libs/ServiceFinder');
+  var ServiceFinder = require('node-servicefinder').ServiceFinder;
 
   // create main application window
-  function createMainWindow () {
+  function createMainWindow() {
 
     var win = new BrowserWindow({
-  		width: 600,
-  		height: 400,
-  		resizable: true
-  	});
+      width: 600,
+      height: 400,
+      resizable: true
+    });
 
-  	win.loadUrl('file://' + __dirname + '/main.html');
-  	win.on('closed', onClosed);
+    win.loadUrl('file://' + __dirname + '/main.html');
+    win.on('closed', onClosed);
 
-  	return win;
+    return win;
   }
 
   function onClosed() {
-  	// deref the window
-  	// for multiple windows store them in an array
-  	mainWindow = null;
+    // deref the window
+    // for multiple windows store them in an array
+    mainWindow = null;
   }
 
   // prevent window being GC'd
   var mainWindow;
 
-  app.on('window-all-closed', function () {
+  app.on('window-all-closed', function() {
     if (process.platform !== 'darwin') {
-  		app.quit();
-  	}
+      app.quit();
+    }
   });
 
-  app.on('activate-with-no-open-windows', function () {
-  	if (!mainWindow) {
-  		mainWindow = createMainWindow();
-  	}
+  app.on('activate-with-no-open-windows', function() {
+    if (!mainWindow) {
+      mainWindow = createMainWindow();
+    }
   });
 
-  app.on('ready', function () {
-  	mainWindow = createMainWindow();
+  app.on('ready', function() {
+    mainWindow = createMainWindow();
   });
+
+  var path = require('path');
+  var os = require('os');
+
+  const dataDir = app.getPath('userData') + path.sep;
+  const cacheDir = app.getPath('userCache') + path.sep;
+  const tempDir = app.getPath('temp') + path.sep;
+  const homeDir = app.getPath('home') + path.sep;
+  const hostname = os.hostname();
+  const username = (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
 
   app.serviceFinder = function(serviceName, protocol, subTypes, includeLocal) {
     return new ServiceFinder(serviceName, protocol, subTypes, includeLocal);
   };
 
-  app.hostname = function() {
-    var os = require('os');
-    return os.hostname();
-  };
-
-  app.username = function() {
-    if (process.platform === 'win32') {
-      return process.env.USERNAME;
-    }
-    else {
-      return process.env.USER;
-    }
-  };
-
-  app.pouchDB = function (dbName) {
-    var path = require('path');
-    var userDataDir = app.getPath('userData') + path.sep;
-    var opts = {
-      prefix: userDataDir
+  app.sysConfig = function() {
+    return {
+      host: hostname,
+      user: username,
+      paths: {
+        home: homeDir,
+        temp: tempDir,
+        data: dataDir,
+        cache: cacheDir
+      }
     };
-    return new PouchDB(dbName, opts);
   };
 
 })();

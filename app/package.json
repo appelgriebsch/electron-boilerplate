@@ -34,6 +34,7 @@
     "multicast-dns-service-types": "^1.1.0",
     "network-address": "^1.0.0",
     "node-notifier": "^4.2.3",
+    "node-servicefinder": "appelgriebsch/node-servicefinder",
     "pouchdb": "^4.0.3",
     "pouchdb-find": "^0.3.5",
     "pouchdb-quick-search": "^1.1.0",
