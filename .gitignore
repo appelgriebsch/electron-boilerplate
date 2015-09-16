@@ -3,3 +3,5 @@ app/libs/vendor/
 app/node_modules/
 pkg/
 .DS_Store
+
+*.un~

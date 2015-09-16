@@ -47,11 +47,35 @@ grunt.initConfig({
     }
   },
 
+  appdmg: {
+    options: {
+      basepath: '.',
+      title: 'boilerplate',
+      icon: 'app/assets/boilerplate.icns',
+      background: 'app/assets/background.png',      
+      'icon-size': 80,
+      contents: [{
+        x: 300,
+        y: 250,
+        type: 'link',
+        path: '/Applications'
+      }, {
+        x: 120,
+        y: 130,
+        type: 'file',
+        path: 'pkg/boilerplate-darwin-x64/boilerplate.app/'
+      }]
+    },
+    target: {
+      dest: 'pkg/installer/boilerplate.dmg'
+    }
+  },
+
   'electron-redhat-installer': {
     options: {
       productName: 'Boilerplate',
       productDescription: 'An Electron boilerplate project.',
-      icon: 'app/assets/boilerplate.png',      
+      icon: 'app/assets/boilerplate.png',
       categories: [
         'Utility'
       ],
@@ -112,10 +136,34 @@ grunt.initConfig({
       src: 'pkg/boilerplate-linux-x64/',
       dest: 'pkg/installer/'
     }
+  },
+
+  'electron-windows-installer': {
+    options: {
+      productName: 'Boilerplate',
+      productDescription: 'An Electron boilerplate project.',
+      icon: 'app/assets/boilerplate.png',
+      rename: function(dest, src) {
+        if (/\.exe$/.test(src)) {
+          src = '<%= name %>-<%= version %>-setup.exe';
+        }
+        return dest + src;
+      }
+    },
+
+    win32: {
+      src: 'pkg/boilerplate-win32-ia32/',
+      dest: 'pkg/installer/win32/'
+    },
+
+    win64: {
+      src: 'pkg/boilerplate-win32-x64/',
+      dest: 'pkg/installer/win32_x64/'
+    }
   }
 
 });
 
-grunt.registerTask('osx', ['electron:osxBuild']);
-grunt.registerTask('win32', ['electron:win32Build']);
+grunt.registerTask('osx', ['electron:osxBuild', 'appdmg']);
+grunt.registerTask('win32', ['electron:win32Build', 'electron-windows-installer']);
 grunt.registerTask('linux', ['electron:linuxBuild', 'electron-redhat-installer', 'electron-debian-installer']);
