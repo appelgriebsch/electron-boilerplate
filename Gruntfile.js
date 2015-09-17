@@ -2,11 +2,39 @@ var grunt = require('grunt');
 require('load-grunt-tasks')(grunt);
 
 grunt.initConfig({
+
+  clean: {
+    osxBuild: ['dist/osx-build'],
+    win32Build: ['dist/win32-build'],
+    linuxBuild: ['dist/linux-build']
+  },
+
+  copy: {
+    osxBuild: {
+      expand: true,
+      cwd: 'app',
+      src: ['**','!node_modules/**/*'],
+      dest: 'dist/osx-build'
+    },
+    win32Build: {
+      expand: true,
+      cwd: 'app',
+      src: ['**','!node_modules/**/*'],
+      dest: 'dist/win32-build/'
+    },
+    linuxBuild: {
+      expand: true,
+      cwd: 'app',
+      src: ['**','!node_modules/**/*'],
+      dest: 'dist/linux-build/'
+    }
+  },
+
   electron: {
     osxBuild: {
       options: {
         name: 'boilerplate',
-        dir: 'app',
+        dir: 'dist/osx-build',
         out: 'pkg',
         version: '0.32.3',
         platform: 'darwin',
@@ -20,7 +48,7 @@ grunt.initConfig({
     win32Build: {
       options: {
         name: 'boilerplate',
-        dir: 'app',
+        dir: 'dist/win32-build',
         out: 'pkg',
         version: '0.32.3',
         platform: 'win32',
@@ -34,7 +62,7 @@ grunt.initConfig({
     linuxBuild: {
       options: {
         name: 'boilerplate',
-        dir: 'app',
+        dir: 'dist/linux-build',
         out: 'pkg',
         version: '0.32.3',
         platform: 'linux',
@@ -52,7 +80,7 @@ grunt.initConfig({
       basepath: '.',
       title: 'boilerplate',
       icon: 'app/assets/boilerplate.icns',
-      background: 'app/assets/background.png',      
+      background: 'app/assets/background.png',
       'icon-size': 80,
       contents: [{
         x: 300,
@@ -164,6 +192,6 @@ grunt.initConfig({
 
 });
 
-grunt.registerTask('osx', ['electron:osxBuild', 'appdmg']);
-grunt.registerTask('win32', ['electron:win32Build', 'electron-windows-installer']);
-grunt.registerTask('linux', ['electron:linuxBuild', 'electron-redhat-installer', 'electron-debian-installer']);
+grunt.registerTask('osx', ['clean:osxBuild', 'copy:osxBuild', 'electron:osxBuild', 'appdmg']);
+grunt.registerTask('win32', ['clean:win32Build', 'copy:win32Build', 'electron:win32Build', 'electron-windows-installer']);
+grunt.registerTask('linux', ['clean:linuxBuild', 'copy:linuxBuild', 'electron:linuxBuild', 'electron-redhat-installer', 'electron-debian-installer']);

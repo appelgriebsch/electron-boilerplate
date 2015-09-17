@@ -1,7 +1,7 @@
 node_modules/
 app/libs/vendor/
 app/node_modules/
+dist/
 pkg/
 .DS_Store
-
-*.un~
+*.*~

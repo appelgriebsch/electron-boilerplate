@@ -21,13 +21,15 @@
   "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
   "scripts": {
     "start": "electron app/",
-    "build": "electron-packager app/ $npm_package_productName --out=pkg --ignore=pkg --prune --asar --all --version=0.32.3",
     "postinstall": "node ./tasks/app_npm_install",
     "app-install": "node ./tasks/app_npm_install"
   },
   "dependencies": {
     "electron-prebuilt": "^0.32.3",
+    "flatten-packages": "^0.1.4",
     "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.8.1",
     "grunt-electron": "^2.0.0",
     "load-grunt-tasks": "^3.2.0"
   },
