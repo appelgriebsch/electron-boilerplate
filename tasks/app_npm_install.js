@@ -20,6 +20,7 @@
   var installCommand = null;
 
   if (process.platform === 'win32') {
+    process.env.npm_config_arch = 'ia32';      // currently only x86 binaries on Windows supported
     installCommand = 'npm.cmd';
   } else {
     installCommand = 'npm';

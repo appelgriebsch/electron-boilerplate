@@ -6,27 +6,33 @@ grunt.initConfig({
   clean: {
     osxBuild: ['dist/osx-build'],
     win32Build: ['dist/win32-build'],
-    linuxBuild: ['dist/linux-build']
+    linuxBuild: ['dist/linux32-build', 'dist/linux64-build']
   },
 
   copy: {
     osxBuild: {
       expand: true,
       cwd: 'app',
-      src: ['**','!node_modules/**/*'],
+      src: ['**', '!node_modules/**/*'],
       dest: 'dist/osx-build'
     },
     win32Build: {
       expand: true,
       cwd: 'app',
-      src: ['**','!node_modules/**/*'],
+      src: ['**', '!node_modules/**/*'],
       dest: 'dist/win32-build/'
     },
-    linuxBuild: {
+    linux32Build: {
       expand: true,
       cwd: 'app',
-      src: ['**','!node_modules/**/*'],
-      dest: 'dist/linux-build/'
+      src: ['**', '!node_modules/**/*'],
+      dest: 'dist/linux32-build/'
+    },
+    linux64Build: {
+      expand: true,
+      cwd: 'app',
+      src: ['**', '!node_modules/**/*'],
+      dest: 'dist/linux64-build/'
     }
   },
 
@@ -38,7 +44,7 @@ grunt.initConfig({
         out: 'pkg',
         version: '0.32.3',
         platform: 'darwin',
-        arch: 'all',
+        arch: 'x64',
         icon: 'app/assets/boilerplate.icns',
         prune: true,
         asar: true,
@@ -52,21 +58,35 @@ grunt.initConfig({
         out: 'pkg',
         version: '0.32.3',
         platform: 'win32',
-        arch: 'all',
+        arch: 'ia32',
         icon: 'app/assets/boilerplate.ico',
         prune: true,
         asar: true,
         ignore: 'pkg'
       }
     },
-    linuxBuild: {
+    linux32Build: {
       options: {
         name: 'boilerplate',
-        dir: 'dist/linux-build',
+        dir: 'dist/linux32-build',
         out: 'pkg',
         version: '0.32.3',
         platform: 'linux',
-        arch: 'all',
+        arch: 'ia32',
+        icon: 'app/assets/boilerplate.png',
+        prune: true,
+        asar: true,
+        ignore: 'pkg'
+      }
+    },
+    linux64Build: {
+      options: {
+        name: 'boilerplate',
+        dir: 'dist/linux64-build',
+        out: 'pkg',
+        version: '0.32.3',
+        platform: 'linux',
+        arch: 'x64',
         icon: 'app/assets/boilerplate.png',
         prune: true,
         asar: true,
@@ -182,11 +202,6 @@ grunt.initConfig({
     win32: {
       src: 'pkg/boilerplate-win32-ia32/',
       dest: 'pkg/installer/win32/'
-    },
-
-    win64: {
-      src: 'pkg/boilerplate-win32-x64/',
-      dest: 'pkg/installer/win32_x64/'
     }
   }
 
@@ -194,4 +209,4 @@ grunt.initConfig({
 
 grunt.registerTask('osx', ['clean:osxBuild', 'copy:osxBuild', 'electron:osxBuild', 'appdmg']);
 grunt.registerTask('win32', ['clean:win32Build', 'copy:win32Build', 'electron:win32Build', 'electron-windows-installer']);
-grunt.registerTask('linux', ['clean:linuxBuild', 'copy:linuxBuild', 'electron:linuxBuild', 'electron-redhat-installer', 'electron-debian-installer']);
+grunt.registerTask('linux', ['clean:linuxBuild', 'copy:linux32Build', 'copy:linux64Build', 'electron:linux32Build', 'electron:linux64Build', 'electron-redhat-installer', 'electron-debian-installer']);
