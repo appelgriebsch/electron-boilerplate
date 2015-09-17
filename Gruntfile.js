@@ -1,4 +1,9 @@
 var grunt = require('grunt');
+var nconf = require('nconf');
+
+nconf.file('build-env.json');
+var electron_version = nconf.get('electron:version');
+
 require('load-grunt-tasks')(grunt);
 
 grunt.initConfig({
@@ -42,7 +47,7 @@ grunt.initConfig({
         name: 'boilerplate',
         dir: 'dist/osx-build',
         out: 'pkg',
-        version: '0.32.3',
+        version: electron_version,
         platform: 'darwin',
         arch: 'x64',
         icon: 'app/assets/boilerplate.icns',
@@ -56,7 +61,7 @@ grunt.initConfig({
         name: 'boilerplate',
         dir: 'dist/win32-build',
         out: 'pkg',
-        version: '0.32.3',
+        version: electron_version,
         platform: 'win32',
         arch: 'ia32',
         icon: 'app/assets/boilerplate.ico',
@@ -70,7 +75,7 @@ grunt.initConfig({
         name: 'boilerplate',
         dir: 'dist/linux32-build',
         out: 'pkg',
-        version: '0.32.3',
+        version: electron_version,
         platform: 'linux',
         arch: 'ia32',
         icon: 'app/assets/boilerplate.png',
@@ -84,7 +89,7 @@ grunt.initConfig({
         name: 'boilerplate',
         dir: 'dist/linux64-build',
         out: 'pkg',
-        version: '0.32.3',
+        version: electron_version,
         platform: 'linux',
         arch: 'x64',
         icon: 'app/assets/boilerplate.png',
