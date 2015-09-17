@@ -7,11 +7,12 @@
 
   nconf.file('../build-env.json');
 
+  var electron_disturl = nconf.get('electron:disturl');
   var electron_version = nconf.get('electron:version');
 
   // Tell the 'npm install' which is about to start that we want for it
   // to compile for Electron.
-  process.env.npm_config_disturl = 'https://atom.io/download/atom-shell';
+  process.env.npm_config_disturl = electron_disturl;
   process.env.npm_config_target = electron_version;
 
   var params = ['install'];

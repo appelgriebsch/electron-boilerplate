@@ -2,6 +2,8 @@ var grunt = require('grunt');
 var nconf = require('nconf');
 
 nconf.file('build-env.json');
+
+var electron_disturl = nconf.get('electron:disturl');
 var electron_version = nconf.get('electron:version');
 
 require('load-grunt-tasks')(grunt);
@@ -9,9 +11,9 @@ require('load-grunt-tasks')(grunt);
 grunt.initConfig({
 
   clean: {
-    osxBuild: ['dist/osx-build'],
-    win32Build: ['dist/win32-build'],
-    linuxBuild: ['dist/linux32-build', 'dist/linux64-build']
+    osxBuild: ['dist/osx-build', 'pkg/boilerplate-darwin-x64'],
+    win32Build: ['dist/win32-build', 'pkg/boilerplate-win32-ia32'],
+    linuxBuild: ['dist/linux-build', 'pkg/boilerplate-linux-x64/']
   },
 
   copy: {
@@ -27,17 +29,38 @@ grunt.initConfig({
       src: ['**', '!node_modules/**/*'],
       dest: 'dist/win32-build/'
     },
-    linux32Build: {
+    linuxBuild: {
       expand: true,
       cwd: 'app',
       src: ['**', '!node_modules/**/*'],
-      dest: 'dist/linux32-build/'
+      dest: 'dist/linux-build/'
+    }
+  },
+
+  'npm-install': {
+    osxBuild: {
+      options: {
+        cwd: 'dist/osx-build',
+        disturl: electron_disturl,
+        distver: electron_version,
+        arch: 'x64'
+      }
     },
-    linux64Build: {
-      expand: true,
-      cwd: 'app',
-      src: ['**', '!node_modules/**/*'],
-      dest: 'dist/linux64-build/'
+    win32Build: {
+      options: {
+        cwd: 'dist/win32-build',
+        disturl: electron_disturl,
+        distver: electron_version,
+        arch: 'ia32'
+      }
+    },
+    linuxBuild: {
+      options: {
+        cwd: 'dist/linuxBuild-build',
+        disturl: electron_disturl,
+        distver: electron_version,
+        arch: 'x64'
+      }
     }
   },
 
@@ -70,24 +93,10 @@ grunt.initConfig({
         ignore: 'pkg'
       }
     },
-    linux32Build: {
+    linuxBuild: {
       options: {
         name: 'boilerplate',
-        dir: 'dist/linux32-build',
-        out: 'pkg',
-        version: electron_version,
-        platform: 'linux',
-        arch: 'ia32',
-        icon: 'app/assets/boilerplate.png',
-        prune: true,
-        asar: true,
-        ignore: 'pkg'
-      }
-    },
-    linux64Build: {
-      options: {
-        name: 'boilerplate',
-        dir: 'dist/linux64-build',
+        dir: 'dist/linux-build',
         out: 'pkg',
         version: electron_version,
         platform: 'linux',
@@ -136,15 +145,6 @@ grunt.initConfig({
         return dest + '<%= name %>-<%= version %>-<%= revision %>.<%= arch %>.rpm';
       }
     },
-
-    linux32: {
-      options: {
-        arch: 'x86'
-      },
-      src: 'pkg/boilerplate-linux-ia32/',
-      dest: 'pkg/installer/'
-    },
-
     linux64: {
       options: {
         arch: 'x86_64'
@@ -173,15 +173,6 @@ grunt.initConfig({
         return dest + '<%= name %>_<%= version %>-<%= revision %>_<%= arch %>.deb';
       }
     },
-
-    linux32: {
-      options: {
-        arch: 'i386'
-      },
-      src: 'pkg/boilerplate-linux-ia32/',
-      dest: 'pkg/installer/'
-    },
-
     linux64: {
       options: {
         arch: 'amd64'
@@ -203,7 +194,6 @@ grunt.initConfig({
         return dest + src;
       }
     },
-
     win32: {
       src: 'pkg/boilerplate-win32-ia32/',
       dest: 'pkg/installer/win32/'
@@ -212,6 +202,6 @@ grunt.initConfig({
 
 });
 
-grunt.registerTask('osx', ['clean:osxBuild', 'copy:osxBuild', 'electron:osxBuild', 'appdmg']);
-grunt.registerTask('win32', ['clean:win32Build', 'copy:win32Build', 'electron:win32Build', 'electron-windows-installer']);
-grunt.registerTask('linux', ['clean:linuxBuild', 'copy:linux32Build', 'copy:linux64Build', 'electron:linux32Build', 'electron:linux64Build', 'electron-redhat-installer', 'electron-debian-installer']);
+grunt.registerTask('osx', ['clean:osxBuild', 'copy:osxBuild', 'npm-install:osxBuild', 'electron:osxBuild', 'appdmg']);
+grunt.registerTask('win32', ['clean:win32Build', 'copy:win32Build', 'npm-install:win32Build', 'electron:win32Build', 'electron-windows-installer']);
+grunt.registerTask('linux', ['clean:linuxBuild', 'copy:linuxBuild', 'npm-install:linuxBuild', 'electron:linuxBuild', 'electron-redhat-installer', 'electron-debian-installer']);

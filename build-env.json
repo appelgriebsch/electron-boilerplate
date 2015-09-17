@@ -1,5 +1,6 @@
 {
   "electron": {
+    "disturl": "https://atom.io/download/atom-shell",
     "version": "0.33.0"
   }
 }
