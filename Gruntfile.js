@@ -43,6 +43,7 @@ grunt.initConfig({
         cwd: 'dist/osx-build',
         disturl: electron_disturl,
         distver: electron_version,
+        target: 'darwin',
         arch: 'x64'
       }
     },
@@ -51,6 +52,7 @@ grunt.initConfig({
         cwd: 'dist/win32-build',
         disturl: electron_disturl,
         distver: electron_version,
+        target: 'win32',
         arch: 'ia32'
       }
     },
@@ -59,6 +61,7 @@ grunt.initConfig({
         cwd: 'dist/linuxBuild-build',
         disturl: electron_disturl,
         distver: electron_version,
+        target: 'linux',
         arch: 'x64'
       }
     }
