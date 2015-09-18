@@ -13,13 +13,22 @@
     PouchDB.plugin(require('pouchdb-quick-search'));
     PouchDB.plugin(require('transform-pouch'));
 
+    var adapter;
+
+    try {
+      adapter = require('leveldown');
+    } catch(err) {
+      console.log('leveldown-adapter not working, fallback to localstorage');
+      adapter = require('localstorage-down');
+    }
+
     function DataService(dbName) {
 
       var remote = require('remote');
       var app = remote.require('app');
       var sysCfg = app.sysConfig();
 
-      var _db = new PouchDB(dbName, { prefix: sysCfg.paths.data });
+      var _db = new PouchDB(dbName, { db: adapter, prefix: sysCfg.paths.data });
 
       return {
 
