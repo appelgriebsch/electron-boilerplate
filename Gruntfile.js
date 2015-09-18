@@ -6,6 +6,11 @@ nconf.file('build-env.json');
 var electron_disturl = nconf.get('electron:disturl');
 var electron_version = nconf.get('electron:version');
 
+var app_name = nconf.get('app:name');
+var app_description = nconf.get('app:description');
+var app_version = nconf.get('app:version');
+var app_icons = nconf.get('app:icons');
+
 require('load-grunt-tasks')(grunt);
 
 grunt.initConfig({
@@ -68,26 +73,26 @@ grunt.initConfig({
   electron: {
     osxBuild: {
       options: {
-        name: 'boilerplate',
+        name: app_name,
         dir: 'build/osx',
         out: 'build',
         version: electron_version,
         platform: 'darwin',
         arch: 'x64',
-        icon: 'app/assets/boilerplate.icns',
+        icon: app_icons.icns,
         prune: true,
         asar: true
       }
     },
     win32Build: {
       options: {
-        name: 'boilerplate',
+        name: app_name,
         dir: 'build/win32',
         out: 'build',
         version: electron_version,
         platform: 'win32',
         arch: 'ia32',
-        icon: 'app/assets/boilerplate.ico',
+        icon: app_icons.ico,
         prune: true,
         asar: true
       }
@@ -100,7 +105,7 @@ grunt.initConfig({
         version: electron_version,
         platform: 'linux',
         arch: 'x64',
-        icon: 'app/assets/boilerplate.png',
+        icon: app_icons.png,
         prune: true,
         asar: true
       }
@@ -110,8 +115,8 @@ grunt.initConfig({
   appdmg: {
     options: {
       basepath: '.',
-      title: 'boilerplate',
-      icon: 'app/assets/boilerplate.icns',
+      title: app_name,
+      icon: app_icons.icns,
       background: 'app/assets/background.png',
       'icon-size': 80,
       contents: [{
@@ -123,19 +128,20 @@ grunt.initConfig({
         x: 120,
         y: 130,
         type: 'file',
-        path: 'build/boilerplate-darwin-x64/boilerplate.app/'
+        path: 'build/' + app_name + '-darwin-x64/' + app_name + '.app/'
       }]
     },
     target: {
-      dest: 'build/pkg/boilerplate.dmg'
+      dest: 'build/pkg/' + app_name + '.dmg'
     }
   },
 
   'electron-redhat-installer': {
     options: {
-      productName: 'Boilerplate',
-      productDescription: 'An Electron boilerplate project.',
-      icon: 'app/assets/boilerplate.png',
+      productName: app_name,
+      productDescription: app_description,
+      productVersion: app_version,
+      icon: app_icons.png,
       categories: [
         'Utility'
       ],
@@ -147,16 +153,17 @@ grunt.initConfig({
       options: {
         arch: 'x86_64'
       },
-      src: 'build/boilerplate-linux-x64/',
+      src: 'build/' + app_name + '-linux-x64/',
       dest: 'build/pkg/'
     }
   },
 
   'electron-debian-installer': {
     options: {
-      productName: 'Boilerplate',
-      productDescription: 'An Electron boilerplate project.',
-      icon: 'app/assets/boilerplate.png',
+      productName: app_name,
+      productDescription: app_description,
+      productVersion: app_version,
+      icon: app_icons.png,
       section: 'devel',
       priority: 'optional',
       lintianOverrides: [
@@ -175,16 +182,17 @@ grunt.initConfig({
       options: {
         arch: 'amd64'
       },
-      src: 'build/boilerplate-linux-x64/',
+      src: 'build/' + app_name + '-linux-x64/',
       dest: 'build/pkg/'
     }
   },
 
   'electron-windows-installer': {
     options: {
-      productName: 'Boilerplate',
-      productDescription: 'An Electron boilerplate project.',
-      icon: 'app/assets/boilerplate.ico',
+      productName: app_name,
+      productDescription: app_description,
+      productVersion: app_version,
+      icon: app_icons.ico,
       rename: function(dest, src) {
         if (/\.exe$/.test(src)) {
           src = '<%= name %>-<%= version %>-setup.exe';
@@ -193,7 +201,7 @@ grunt.initConfig({
       }
     },
     win32: {
-      src: 'build/boilerplate-win32-ia32/',
+      src: 'build/' + app_name + '-win32-ia32/',
       dest: 'build/pkg/'
     }
   }
