@@ -184,7 +184,7 @@ grunt.initConfig({
     options: {
       productName: 'Boilerplate',
       productDescription: 'An Electron boilerplate project.',
-      icon: 'app/assets/boilerplate.png',
+      icon: 'app/assets/boilerplate.ico',
       rename: function(dest, src) {
         if (/\.exe$/.test(src)) {
           src = '<%= name %>-<%= version %>-setup.exe';
