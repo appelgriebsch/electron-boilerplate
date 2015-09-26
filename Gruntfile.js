@@ -94,7 +94,7 @@ grunt.initConfig({
         arch: 'ia32',
         icon: app_icons.ico,
         prune: true,
-        asar: true
+        asar: false
       }
     },
     linuxBuild: {
@@ -107,7 +107,7 @@ grunt.initConfig({
         arch: 'x64',
         icon: app_icons.png,
         prune: true,
-        asar: true
+        asar: false
       }
     }
   },
