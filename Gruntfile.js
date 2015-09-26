@@ -81,7 +81,7 @@ grunt.initConfig({
         arch: 'x64',
         icon: app_icons.icns,
         prune: true,
-        asar: true
+        asar: false
       }
     },
     win32Build: {
