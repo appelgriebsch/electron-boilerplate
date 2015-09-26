@@ -99,7 +99,7 @@ grunt.initConfig({
     },
     linuxBuild: {
       options: {
-        name: 'boilerplate',
+        name: app_name,
         dir: 'build/linux',
         out: 'build',
         version: electron_version,
