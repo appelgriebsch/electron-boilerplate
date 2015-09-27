@@ -141,6 +141,7 @@ grunt.initConfig({
       productName: app_name,
       productDescription: app_description,
       productVersion: app_version,
+      bin: app_name,
       icon: app_icons.png,
       categories: [
         'Utility'
@@ -163,6 +164,7 @@ grunt.initConfig({
       productName: app_name,
       productDescription: app_description,
       productVersion: app_version,
+      bin: app_name,
       icon: app_icons.png,
       section: 'devel',
       priority: 'optional',
