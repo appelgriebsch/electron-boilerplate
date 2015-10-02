@@ -20,7 +20,7 @@
     this.initialize = function() {
 
       $notification.requestPermission().then(() => {
-        this.db.allDocs({ include_docs: true}).then((results) => {
+        this.db.allDocs({ include_docs: true }).then((results) => {
           results.rows.map((row) => {
             $q.when(true).then(() => {
               this.items.push(row.doc);
@@ -34,7 +34,9 @@
       var count = this.items.length + 1;
       var msg = `Item ${count}`;
       var item = {
-        text: msg
+        _id: `item_${count}`,
+        text: msg,
+        created: new Date().toISOString()
       };
 
       this.items.push(item);

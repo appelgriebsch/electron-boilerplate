@@ -5,7 +5,7 @@
   angular.module('boilerplateApp', ['ngMaterial', 'ngSanitize', 'ui.router', 'notification'])
     .config(function($notificationProvider) {
       $notificationProvider.setOptions({
-        icon: __dirname + '/../assets/boilerplate.png'
+        icon: __dirname + '/assets/boilerplate.png'
       });
     })
     .run(
