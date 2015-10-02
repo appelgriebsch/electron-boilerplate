@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An Electron boilerplate project",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "angular-animate": "^1.4.5",
     "angular-aria": "^1.4.5",
     "angular-material": "^0.11.0",
+    "angular-notification": "appelgriebsch/angular-notification",
     "angular-sanitize": "^1.4.5",
     "angular-ui-router": "^0.2.15",
     "electron-debug": "^0.2.1",
@@ -34,10 +35,9 @@
     "leveldown": "^1.4.1",
     "localstorage-down": "^0.6.3",
     "mime": "^1.3.4",
-    "node-notifier": "^4.2.3",
     "node-servicefinder": "appelgriebsch/node-servicefinder",
     "pouchdb": "^4.0.3",
-    "pouchdb-find": "^0.3.5",
+    "pouchdb-find": "^0.4.0",
     "pouchdb-quick-search": "^1.1.0",
     "socket.io": "^1.3.7",
     "transform-pouch": "^1.0.2"
