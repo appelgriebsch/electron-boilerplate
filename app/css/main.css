@@ -40,3 +40,16 @@ md-toolbar h1 {
 	padding-right: 40px;
 	padding-top: 5px;
 }
+
+.fullsize {
+	height: 100%;
+	width: 100%;
+}
+
+.non-scrollable {
+	overflow-y: hidden;
+}
+
+.scrollable {
+	overflow-y: auto;
+}
