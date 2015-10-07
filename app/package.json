@@ -37,9 +37,10 @@
     "mime": "^1.3.4",
     "node-servicefinder": "appelgriebsch/node-servicefinder",
     "pouchdb": "^5.0.0",
+    "pouchdb-auth": "^1.0.5",
     "pouchdb-find": "^0.4.0",
     "pouchdb-quick-search": "^1.1.0",
-    "socket.io": "^1.3.7",
+    "socket-pouch": "^1.0.0",
     "transform-pouch": "^1.0.2"
   }
 }

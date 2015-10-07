@@ -12,6 +12,9 @@
     PouchDB.plugin(require('pouchdb-find'));
     PouchDB.plugin(require('pouchdb-quick-search'));
     PouchDB.plugin(require('transform-pouch'));
+    PouchDB.plugin(require('pouchdb-auth'));
+
+    PouchDB.adapter('socket', require('socket-pouch/client'));
 
     var adapter;
 
