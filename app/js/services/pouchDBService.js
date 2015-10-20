@@ -21,8 +21,8 @@
     try {
       adapter = require('leveldown');
     } catch(err) {
-      console.log('leveldown-adapter not working, fallback to localstorage');
-      adapter = require('localstorage-down');
+      console.log('leveldown-adapter not working, fallback to level.js (IndexedDB)');
+      adapter = require('level-js');
     }
 
     function DataService(dbName) {

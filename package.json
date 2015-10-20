@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "An Electron boilerplate project",
   "main": "index.js",
   "repository": {
@@ -25,7 +25,7 @@
     "app-install": "node ./tasks/app_npm_install"
   },
   "dependencies": {
-    "electron-prebuilt": "0.33.8",
+    "electron-prebuilt": "0.34.0",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.8.1",

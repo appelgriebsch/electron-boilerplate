@@ -1,12 +1,12 @@
 {
   "electron": {
     "disturl": "https://atom.io/download/atom-shell",
-    "version": "0.33.8"
+    "version": "0.34.0"
   },
   "app": {
     "name": "Boilerplate",
     "description": "An Electron boilerplate project",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "icons": {
       "ico": "app/assets/boilerplate.ico",
       "icns": "app/assets/boilerplate.icns",
