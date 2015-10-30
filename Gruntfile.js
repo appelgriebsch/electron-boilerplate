@@ -32,6 +32,12 @@ grunt.initConfig({
       src: ['**', '!node_modules/**/*'],
       dest: 'build/win32/'
     },
+    win64Build: {
+      expand: true,
+      cwd: 'app',
+      src: ['**', '!node_modules/**/*'],
+      dest: 'build/win64/'
+    },
     linuxBuild: {
       expand: true,
       cwd: 'app',
@@ -57,6 +63,15 @@ grunt.initConfig({
         distver: electron_version,
         target: 'win32',
         arch: 'ia32'
+      }
+    },
+    win64Build: {
+      options: {
+        cwd: 'build/win64',
+        disturl: electron_disturl,
+        distver: electron_version,
+        target: 'win32',
+        arch: 'x64'
       }
     },
     linuxBuild: {
@@ -92,6 +107,19 @@ grunt.initConfig({
         version: electron_version,
         platform: 'win32',
         arch: 'ia32',
+        icon: app_icons.ico,
+        prune: true,
+        asar: true
+      }
+    },
+    win64Build: {
+      options: {
+        name: app_name,
+        dir: 'build/win64',
+        out: 'build',
+        version: electron_version,
+        platform: 'win32',
+        arch: 'x64',
         icon: app_icons.ico,
         prune: true,
         asar: true
@@ -205,11 +233,16 @@ grunt.initConfig({
     win32: {
       src: 'build/' + app_name + '-win32-ia32/',
       dest: 'build/pkg/'
+    },
+    win64: {
+      src: 'build/' + app_name + '-win32-x64/',
+      dest: 'build/pkg/'
     }
   }
 
 });
 
 grunt.registerTask('osx', ['clean:build', 'copy:osxBuild', 'npm-install:osxBuild', 'electron:osxBuild', 'appdmg']);
-grunt.registerTask('win32', ['clean:build', 'copy:win32Build', 'npm-install:win32Build', 'electron:win32Build', 'electron-windows-installer']);
+grunt.registerTask('win32', ['clean:build', 'copy:win32Build', 'npm-install:win32Build', 'electron:win32Build', 'electron-windows-installer:win32']);
+grunt.registerTask('win64', ['clean:build', 'copy:win64Build', 'npm-install:win64Build', 'electron:win64Build', 'electron-windows-installer:win64']);
 grunt.registerTask('linux', ['clean:build', 'copy:linuxBuild', 'npm-install:linuxBuild', 'electron:linuxBuild', 'electron-redhat-installer', 'electron-debian-installer']);

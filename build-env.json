@@ -1,7 +1,7 @@
 {
   "electron": {
     "disturl": "https://atom.io/download/atom-shell",
-    "version": "0.34.0"
+    "version": "0.34.2"
   },
   "app": {
     "name": "Boilerplate",
