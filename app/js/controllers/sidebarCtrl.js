@@ -2,9 +2,9 @@
 
   'use strict';
 
-  angular.module('boilerplateApp').controller('SidebarController', ['$state', '$log', '$q', '$notification', 'PouchDBService', SidebarController]);
+  angular.module('boilerplateApp').controller('SidebarController', ['$state', '$log', '$q', '$notification', '$mdToast', 'PouchDBService', SidebarController]);
 
-  function SidebarController($state, $log, $q, $notification, PouchDBService) {
+  function SidebarController($state, $log, $q, $notification, $mdToast, PouchDBService) {
 
     this.items = [];
     this.selectedItem = undefined;
@@ -41,10 +41,15 @@
 
       this.items.push(item);
 
-      $notification('Electron Boilerplate', {
-        body: `${msg} successfully created!`,
-        delay: 2000
-      });
+      if (process.platform === 'win32') {
+        $mdToast.show(
+          $mdToast.simple().content(`${msg} successfully created!`).position('top right').hideDelay(2000));
+      } else {
+        $notification('Electron Boilerplate', {
+          body: `${msg} successfully created!`,
+          delay: 2000
+        });
+      }
 
       return this.db.post(item);
     };

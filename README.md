@@ -3,10 +3,10 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 
 ## Included modules
 * Electron
-* Angular 
+* Angular
 * Angular Material Design
 * Angular UI Router
-* Node-Notifier 
+* Node-Notifier
 * PouchDB + Plugins (geo-spatial, MongoDB-style query language and full-text search engine support)
 * WS
 
@@ -29,10 +29,10 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
   ```bash
   grunt osx
   ```
-* on Windows (7+): creates application .exe and distributable setup.exe (x86 only)
+* on Windows (7+): creates application .exe and distributable setup.exe (x64 only)
 
   ```bash
-  grunt win32
+  grunt win
   ```
 * on Linux (Ubuntu/Fedora): creates application and distributable packages for deb-style and rpm-style distributions (x64 only)
 
