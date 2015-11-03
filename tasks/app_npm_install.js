@@ -2,18 +2,23 @@
 
   'use strict';
 
+  var os = require('os');
+  var path = require('path');
   var childProcess = require('child_process');
   var nconf = require('nconf');
 
-  nconf.file('../build-env.json');
+  nconf.use('file', { file: path.join(__dirname, '../build-env.json') });
 
-  var electron_disturl = nconf.get('electron:disturl');
-  var electron_version = nconf.get('electron:version');
+  var electron_cfg = nconf.get('electron');
+  var electron_disturl = electron_cfg.disturl;
+  var electron_version = electron_cfg.version;
 
   // Tell the 'npm install' which is about to start that we want for it
   // to compile for Electron.
   process.env.npm_config_disturl = electron_disturl;
   process.env.npm_config_target = electron_version;
+  process.env.npm_config_runtime = 'electron';
+  process.env.npm_config_arch = os.arch();
 
   var params = ['install'];
 
@@ -26,7 +31,6 @@
   var installCommand = null;
 
   if (process.platform === 'win32') {
-    process.env.npm_config_arch = 'ia32';      // currently only x86 binaries on Windows supported
     installCommand = 'npm.cmd';
   } else {
     installCommand = 'npm';
