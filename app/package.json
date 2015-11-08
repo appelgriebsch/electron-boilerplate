@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "An Electron boilerplate project",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "angular-notification": "appelgriebsch/angular-notification",
     "angular-sanitize": "^1.4.5",
     "angular-ui-router": "^0.2.15",
-    "electron-debug": "^0.3.0",
+    "electron-debug": "^0.4.0",
     "geopouch": "^2.0.0",
     "jsonld": "^0.4.1",
     "level-js": "^2.2.2",
