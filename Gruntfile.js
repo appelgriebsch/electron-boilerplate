@@ -13,6 +13,7 @@ var electron_version = electron_cfg.version;
 var app_name = nconf.get('app:name');
 var app_description = nconf.get('app:description');
 var app_version = nconf.get('app:version');
+var app_author = nconf.get('app:author');
 var app_icons = nconf.get('app:icons');
 
 require('load-grunt-tasks')(grunt);
@@ -124,7 +125,7 @@ grunt.initConfig({
       basepath: '.',
       title: app_name,
       icon: app_icons.icns,
-      background: 'app/assets/background.png',
+      background: app_icons.installer,
       'icon-size': 80,
       contents: [{
         x: 300,
@@ -196,28 +197,23 @@ grunt.initConfig({
     }
   },
 
-  'electron-windows-installer': {
-    options: {
-      productName: app_name,
-      productDescription: app_description,
-      productVersion: app_version,
-      icon: app_icons.ico,
-      rename: function(dest, src) {
-        if (/\.exe$/.test(src)) {
-          src = '<%= name %>-<%= version %>-setup.exe';
-        }
-        return dest + src;
-      }
-    },
-    win64: {
-      src: 'build/' + app_name + '-win32-x64/',
-      dest: 'build/pkg/'
+  'create-windows-installer': {
+    x64: {
+      appDirectory: 'build/' + app_name + '-win32-x64/',
+      outputDirectory: 'build/pkg/',
+      authors: app_author,
+      loadingGif: app_icons.installer,
+      title: app_name,
+      description: app_description,
+      version: app_version,
+      iconUrl: 'file:///' + __dirname + '/' + app_icons.ico,
+      setupIcon: app_icons.ico
     }
   }
 
 });
 
 grunt.registerTask('osx', ['clean:build', 'copy:osxBuild', 'npm-install:osxBuild', 'electron:osxBuild', 'appdmg']);
-grunt.registerTask('win', ['clean:build', 'copy:win64Build', 'npm-install:win64Build', 'electron:win64Build', 'electron-windows-installer:win64']);
+grunt.registerTask('win', ['clean:build', 'copy:win64Build', 'npm-install:win64Build', 'electron:win64Build', 'create-windows-installer:x64']);
 grunt.registerTask('linux', ['clean:build', 'copy:linux64Build', 'npm-install:linux64Build', 'electron:linux64Build',
                              'electron-redhat-installer:linux64', 'electron-debian-installer:linux64']);

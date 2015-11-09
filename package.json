@@ -36,8 +36,8 @@
   },
   "optionalDependencies": {
     "grunt-appdmg": "^0.3.2",
-    "grunt-electron-debian-installer": "^0.1.0",
-    "grunt-electron-redhat-installer": "^0.2.0",
-    "grunt-electron-windows-installer": "^0.1.0"
+    "grunt-electron-debian-installer": "^0.1",
+    "grunt-electron-redhat-installer": "^0.2",
+    "grunt-electron-installer": "^1.0"
   }
 }
