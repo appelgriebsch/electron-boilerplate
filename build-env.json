@@ -4,6 +4,7 @@
       "version": "0.34.3"
   },
   "app": {
+    "id": "com.appelgriebsch.electron-boilerplate",
     "name": "Boilerplate",
     "description": "An Electron boilerplate project",
     "version": "0.4.1",

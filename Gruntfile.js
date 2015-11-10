@@ -10,6 +10,7 @@ var electron_cfg = nconf.get('electron');
 var electron_disturl = electron_cfg.disturl;
 var electron_version = electron_cfg.version;
 
+var app_bundle_id = nconf.get('app:id');
 var app_name = nconf.get('app:name');
 var app_description = nconf.get('app:description');
 var app_version = nconf.get('app:version');
@@ -88,6 +89,8 @@ grunt.initConfig({
         platform: 'darwin',
         arch: 'x64',
         icon: app_icons.icns,
+        'app-version': app_version,
+        'app-bundle-id': app_bundle_id,
         prune: true,
         asar: true
       }
@@ -101,8 +104,18 @@ grunt.initConfig({
         platform: 'win32',
         arch: 'x64',
         icon: app_icons.ico,
+        'app-version': app_version,
+        'app-bundle-id': app_bundle_id,
         prune: true,
-        asar: true
+        asar: true,
+        'version-string': {
+          CompanyName: app_author,
+          FileDescription: app_description,
+          FileVersion: app_version,
+          OriginalFileName: app_name,
+          ProductVersion: app_version,
+          ProductName: app_name
+        }
       }
     },
     linux64Build: {
@@ -114,6 +127,8 @@ grunt.initConfig({
         platform: 'linux',
         arch: 'x64',
         icon: app_icons.png,
+        'app-version': app_version,
+        'app-bundle-id': app_bundle_id,
         prune: true,
         asar: true
       }
