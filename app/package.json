@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "An Electron boilerplate project",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "ns-popover": "^0.6.8",
     "pouchdb": "^5.0.0",
     "pouchdb-auth": "^1.0.5",
-    "pouchdb-find": "^0.6.0",
+    "pouchdb-find": "^0.7.0",
     "pouchdb-quick-search": "^1.1.0",
     "socket-pouch": "^1.0.0",
     "transform-pouch": "^1.0.2"
