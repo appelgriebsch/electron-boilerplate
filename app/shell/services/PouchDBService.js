@@ -2,8 +2,6 @@
 
   'use strict';
 
-  angular.module('boilerplateApp').service('PouchDBService', [PouchDBService]);
-
   function PouchDBService() {
 
     // initialize pouch db adapter
@@ -20,7 +18,7 @@
 
     try {
       adapter = require('leveldown');
-    } catch(err) {
+    } catch (err) {
       console.log('leveldown-adapter not working, fallback to level.js (IndexedDB)');
       adapter = require('level-js');
     }
@@ -31,7 +29,10 @@
       var app = remote.require('app');
       var sysCfg = app.sysConfig();
 
-      var _db = new PouchDB(dbName, { db: adapter, prefix: sysCfg.paths.data });
+      var _db = new PouchDB(dbName, {
+        db: adapter,
+        prefix: sysCfg.paths.data
+      });
 
       return {
 
@@ -48,5 +49,7 @@
       }
     };
   }
+
+  module.exports = PouchDBService;
 
 })();

@@ -8,68 +8,32 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
 		<title>Electron boilerplate</title>
-		<link rel="stylesheet" href="css/fonts.css"/>
-		<link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css"/>
-    <link rel="stylesheet" href="css/main.css"/>
+
+		<!-- angular material design styles -->
+		<link rel="stylesheet" href="css/fonts.css" />
+		<link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css" />
+		<link rel="stylesheet" href="node_modules/angular-centered/angular-centered.css" />
+		<link rel="stylesheet" href="node_modules/ns-popover/example/nsPopover.css" />
+
+		<!-- our own application style -->
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="css/controls.css" />
 	</head>
-	<body ng-app="boilerplateApp" layout="row" ng-controller="AppController as appCtrl" ng-init="appCtrl.initialize()">
+	<body ng-app="boilerplateApp" layout="row" role="main" ui-view>
 
-		<md-sidenav class="md-sidenav-left md-whiteframe-z2 fullsize non-scrollable" md-component-id="sidebar" md-is-locked-open="$mdMedia('gt-sm')">
-
-			<md-toolbar class="md-theme-indigo">
-				<h1 class="md-toolbar-tools">Sidebar</h1>
-			</md-toolbar>
-
-			<div layout="column" layout-align="space-between start" class="scrollable"
-					 ng-controller="SidebarController as sidebarCtrl" ng-init="sidebarCtrl.initialize()">
-				<md-list>
-					<md-list-item ng-repeat="item in sidebarCtrl.items">
-						<md-button ng-class="{ 'selected': item === sidebarCtrl.selectedItem }" ng-click="sidebarCtrl.selectItem(item)">
-							 {{ item.text }}
-						 </md-button>
-					 </md-list-item>
-				 </md-list>
-				 <div flex layout="row" layout-align="end end">
-					 <md-button class="md-fab md-fab-bottom-right" ng-click="sidebarCtrl.addItem()">
-						 <md-icon>add</md-icon>
-					 </md-button>
-				 </div>
-			 </div>
-
-		</md-sidenav>
-
-		<div flex layout="column" tabindex="-1" class="md-whiteframe-z2" role="main">
-
-			<md-toolbar layout="row" class="md-whiteframe-z1">
-				<md-button class="menu" hide-gt-sm ng-click="appCtrl.toggleSidebar()" aria-label="Show Active Sessions">
-					<md-icon>menu</md-icon>
-				</md-button>
-				<h1>Electron Boilerplate</h1>
-			</md-toolbar>
-
-			<md-content flex id="content" ui-view>
-
-			</md-content>
-
-		</div>
-
-    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-animate/angular-animate.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-aria/angular-aria.min.js"></script>
-    <script type="text/javascript" src="node_modules/angular-material/angular-material.min.js"></script>
+		<!-- angular modules -->
+		<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+		<script type="text/javascript" src="node_modules/angular-animate/angular-animate.min.js"></script>
+		<script type="text/javascript" src="node_modules/angular-aria/angular-aria.min.js"></script>
+		<script type="text/javascript" src="node_modules/angular-material/angular-material.min.js"></script>
 		<script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 		<script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
 		<script type="text/javascript" src="node_modules/angular-notification/angular-notification.min.js"></script>
+		<script type="text/javascript" src="node_modules/angular-centered/angular-centered.js"></script>
+		<script type="text/javascript" src="node_modules/ns-popover/example/nsPopover.js"></script>
 
-		<!-- angular module definition & routing -->
-		<script type="text/javascript" src="js/main.js"></script>
-		<script type="text/javascript" src="js/routes.js"></script>
-
-		<!-- various angular application controllers -->
-		<script type="text/javascript" src="js/controllers/sidebarCtrl.js"></script>
-
-		<!-- various angular application services -->
-		<script type="text/javascript" src="js/services/pouchDBService.js"></script>
+		<!-- our own shell starter -->
+		<script type="text/javascript" src="shell.js"></script>
 
 	</body>
 </html>

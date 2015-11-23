@@ -3,7 +3,24 @@
   'use strict';
 
   var app = require('app');
+
+  var path = require('path');
+  var os = require('os');
+
   var BrowserWindow = require('browser-window');
+  var Tray = require('tray');
+
+  // initialize service finder module
+  var ServiceFinder = require('node-servicefinder').ServiceFinder;
+
+  const appName = app.getName();
+  const appVersion = app.getVersion();
+  const dataDir = app.getPath('userData') + path.sep;
+  const cacheDir = app.getPath('userCache') + path.sep;
+  const tempDir = app.getPath('temp') + path.sep;
+  const homeDir = app.getPath('home') + path.sep;
+  const hostname = os.hostname();
+  const username = (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
 
   // report crashes to the Electron project
   require('crash-reporter').start();
@@ -11,16 +28,13 @@
   // adds debug features like hotkeys for triggering dev tools and reload
   require('electron-debug')();
 
-  // initialize service finder module
-  var ServiceFinder = require('node-servicefinder').ServiceFinder;
-
   // create main application window
   function createMainWindow() {
 
     var win = new BrowserWindow({
       width: 1280,
       height: 800,
-      resizable: true
+      frame: false
     });
 
     win.loadURL('file://' + __dirname + '/main.html');
@@ -48,43 +62,43 @@
 
     var squirrelCommand = process.argv[1];
     switch (squirrelCommand) {
-      case '--squirrel-install':
-      case '--squirrel-updated':
+    case '--squirrel-install':
+    case '--squirrel-updated':
 
-        // Optionally do things such as:
-        //
-        // - Install desktop and start menu shortcuts
-        // - Add your .exe to the PATH
-        // - Write to the registry for things like file associations and
-        //   explorer context menus
+      // Optionally do things such as:
+      //
+      // - Install desktop and start menu shortcuts
+      // - Add your .exe to the PATH
+      // - Write to the registry for things like file associations and
+      //   explorer context menus
 
-        // create shortcuts
-        cp.spawnSync(updateDotExe, ["--createShortcut", target], {
-          detached: true
-        });
+      // create shortcuts
+      cp.spawnSync(updateDotExe, ['--createShortcut', target], {
+        detached: true
+      });
 
-        // Always quit when done
-        app.quit();
-        return true;
+      // Always quit when done
+      app.quit();
+      return true;
 
-      case '--squirrel-uninstall':
-        // Undo anything you did in the --squirrel-install and
-        // --squirrel-updated handlers
+    case '--squirrel-uninstall':
+      // Undo anything you did in the --squirrel-install and
+      // --squirrel-updated handlers
 
-        cp.spawnSync(updateDotExe, ["--removeShortcut", target], {
-          detached: true
-        });
+      cp.spawnSync(updateDotExe, ['--removeShortcut', target], {
+        detached: true
+      });
 
-        // Always quit when done
-        app.quit();
-        return true;
+      // Always quit when done
+      app.quit();
+      return true;
 
-      case '--squirrel-obsolete':
-        // This is called on the outgoing version of your app before
-        // we update to the new version - it's the opposite of
-        // --squirrel-updated
-        app.quit();
-        return true;
+    case '--squirrel-obsolete':
+      // This is called on the outgoing version of your app before
+      // we update to the new version - it's the opposite of
+      // --squirrel-updated
+      app.quit();
+      return true;
     }
   };
 
@@ -95,12 +109,7 @@
 
   // prevent window being GC'd
   var mainWindow;
-
-  app.on('window-all-closed', function() {
-    if (process.platform !== 'darwin') {
-      app.quit();
-    }
-  });
+  var trayIcon;
 
   app.on('activate-with-no-open-windows', function() {
     if (!mainWindow) {
@@ -112,23 +121,18 @@
     mainWindow = createMainWindow();
   });
 
-  var path = require('path');
-  var os = require('os');
-
-  const dataDir = app.getPath('userData') + path.sep;
-  const cacheDir = app.getPath('userCache') + path.sep;
-  const tempDir = app.getPath('temp') + path.sep;
-  const homeDir = app.getPath('home') + path.sep;
-  const hostname = os.hostname();
-  const username = (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
-
   app.serviceFinder = function(serviceName, protocol, subTypes, includeLocal) {
     return new ServiceFinder(serviceName, protocol, subTypes, includeLocal);
   };
 
   app.sysConfig = function() {
     return {
+      app: {
+        name: appName,
+        version: appVersion
+      },
       host: hostname,
+      platform: process.platform,
       user: username,
       paths: {
         home: homeDir,
@@ -137,6 +141,38 @@
         cache: cacheDir
       }
     };
+  };
+
+  app.getMainWindow = function() {
+    return mainWindow;
+  };
+
+  app.close = function() {
+    if (mainWindow) {
+      mainWindow.close();
+    }
+    app.quit();
+  };
+
+  app.toggleFullscreen = function() {
+    if (mainWindow) {
+      mainWindow.setFullScreen(!mainWindow.isFullScreen());
+    }
+  };
+
+  app.minimizeAppToSysTray = function() {
+
+    trayIcon = new Tray(path.join(__dirname, 'assets', 'boilerplate_tray.png'));
+    trayIcon.setToolTip('App is running in background mode.');
+    trayIcon.on('click', () => {
+      if (mainWindow) {
+        mainWindow.show();
+        trayIcon.destroy();
+      }
+    });
+    if (mainWindow) {
+      mainWindow.hide();
+    }
   };
 
 })();
