@@ -1,4 +1,4 @@
-<div layout="column" layout-align="center center" layout-fill ng-init="ctl.initialize()">
+<div layout="column" layout-align="center center" layout-fill class="timeline-container" ng-init="ctl.initialize()">
   <timeline layout-fill>
     <timeline-node ng-repeat="event in ctl.events" side="{{ event.direction }}">
       <timeline-badge class="{{ event.class }}">

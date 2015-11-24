@@ -15,6 +15,9 @@
             views: {
               'module': {
                 templateUrl: `${moduleConfig.path}/todo.html`
+              },
+              'header@app': {
+                template: `${moduleConfig.label}`
               }
             }
           })
