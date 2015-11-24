@@ -4,7 +4,8 @@
 
   function TodoDataService(PouchDBService) {
 
-    var db = PouchDBService.initialize('incidents');
+    var db = PouchDBService.initialize('todos');
+    var uuid = require('uuid');
 
     var saveDoc = function(doc) {
 
@@ -65,6 +66,11 @@
       },
 
       save: function(doc) {
+
+        if (!doc._id) {
+          doc._id = uuid.v4();
+        }
+
         return saveDoc(doc);
       },
 

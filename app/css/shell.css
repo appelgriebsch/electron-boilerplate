@@ -29,3 +29,11 @@ md-content[ui-view='content'] {
 .angular-centered h3 {
   color: white;
 }
+.title {
+  overflow: hidden;
+  max-height: 2.5em;
+  color: white;
+  text-decoration: none;
+  text-shadow: 1px 1px rgb(107, 104, 104);
+  font-weight: 500;
+}

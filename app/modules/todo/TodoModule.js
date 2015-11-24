@@ -37,9 +37,9 @@
 
     var TodoDataService = require('./services/TodoDataService');
     var TodoViewController = require('./controllers/TodoViewController');
-    
-    angular.module('boilerplateApp').service('TodoDataService', ['PouchDBService', TodoDataService]);    
-    angular.module('boilerplateApp').controller('TodoViewController', ['$scope', '$state', '$q', 'TodoDataService', TodoViewController]);
+
+    angular.module('boilerplateApp').service('TodoDataService', ['PouchDBService', TodoDataService]);
+    angular.module('boilerplateApp').controller('TodoViewController', ['$scope', '$state', '$q', '$mdDialog', 'TodoDataService', TodoViewController]);
   }
 
   module.exports = TodoModule;
