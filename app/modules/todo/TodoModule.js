@@ -35,8 +35,11 @@
           });
       });
 
+    var TodoDataService = require('./services/TodoDataService');
     var TodoViewController = require('./controllers/TodoViewController');
-    angular.module('boilerplateApp').controller('TodoViewController', ['$scope', '$state', '$q', TodoViewController]);
+    
+    angular.module('boilerplateApp').service('TodoDataService', ['PouchDBService', TodoDataService]);    
+    angular.module('boilerplateApp').controller('TodoViewController', ['$scope', '$state', '$q', 'TodoDataService', TodoViewController]);
   }
 
   module.exports = TodoModule;

@@ -2,25 +2,21 @@
 
   'use strict';
 
-  function TodoViewController($scope, $state, $q) {
+  function TodoViewController($scope, $state, $q, TodoDataService) {
 
     this.todos = [];
 
     this.initialize = function() {
 
-      //var init = [ActivityDataService.initialize()];
+      var init = [TodoDataService.initialize()];
 
-      /*Promise.all(init).then(() => {
-        return ActivityDataService.events();
-      }).then((events) => {
-        events.rows.map((event) => {
-          var doc = event.doc;
-          var direction = (this.events.length % 2 == 0 ? 'left' : 'right');
-          doc.direction = direction;
-          this.events.push(doc);
+      Promise.all(init).then(() => {
+        return TodoDataService.events();
+      }).then((todos) => {
+        todos.rows.map((todo) => {
+          this.todos.push(todo);
         });
-      });
-      */
+      });      
     };
   }
 
