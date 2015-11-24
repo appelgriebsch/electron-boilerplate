@@ -6,7 +6,6 @@ html, body {
   overflow: none;
   -webkit-user-select: none;
 }
-
 md-content[ui-view='content'], md-content[ui-view='module'] {
   height: 100%;
   width: 99%;
@@ -15,8 +14,8 @@ md-content[ui-view='content'], md-content[ui-view='module'] {
 md-content[ui-view='content'] {
   padding: 20px;
   height: 75vh;
+  overflow-y: auto;
 }
-
 .hidden {
   visibility: hidden;
   position: absolute;
@@ -24,19 +23,9 @@ md-content[ui-view='content'] {
 .md-48 {
   font-size: 48px;
 }
-.timeline-badge {
-  z-index: 1 !important;
-}
 .angular-center-container {
   background-color: rgba(0, 0, 0, 0.66);
 }
 .angular-centered h3 {
   color: white;
-}
-.md-icon-button.info-btn {
-  float: right;
-  margin: -6px 6px;
-  height: 32px;
-  line-height: 32px;
-  width: 32px;
 }
