@@ -30,6 +30,7 @@
     "angular-material": "^0.11.0",
     "angular-notification": "appelgriebsch/angular-notification",
     "angular-sanitize": "^1.4.5",
+    "angular-timeline": "^1.2.1",
     "angular-ui-router": "^0.2.15",
     "electron-debug": "^0.5.0",
     "geopouch": "^2.0.0",
@@ -44,6 +45,7 @@
     "pouchdb-find": "^0.7.0",
     "pouchdb-quick-search": "^1.1.0",
     "socket-pouch": "^1.0.0",
-    "transform-pouch": "^1.0.2"
+    "transform-pouch": "^1.0.2",
+    "uuid": "^2.0.1"
   }
 }

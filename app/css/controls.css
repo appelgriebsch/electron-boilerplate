@@ -21,7 +21,7 @@ md-toolbar .md-button:not(.selected) md-icon {
   color: #bdbdbd;
 }
 md-toolbar.md-whiteframe-z3 {
-  min-height: 64px;
+  min-height: 88px;
 }
 md-toolbar h1 {
   margin: auto;

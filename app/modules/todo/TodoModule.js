@@ -24,6 +24,9 @@
               'content': {
                 templateUrl: `${moduleConfig.path}/views/todo.view.html`,
                 controller: 'TodoViewController as ctl'
+              },
+              'actions@app': {
+                templateUrl: `${moduleConfig.path}/views/todo.actions.html`
               }
             }
           });

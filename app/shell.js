@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('boilerplateApp', ['ngMaterial', 'ngSanitize', 'ui.router', 'angular-centered', 'notification', 'nsPopover'])
+  angular.module('boilerplateApp', ['ngMaterial', 'ngSanitize', 'ui.router', 'angular-timeline', 'angular-centered', 'notification', 'nsPopover'])
     .config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette('blue')
@@ -42,6 +42,8 @@
     ]);
 
   var PouchDBService = require('./shell/services/PouchDBService');
+  var ActivityDataService = require('./shell/services/ActivityDataService');
+  var ActivityService = require('./shell/services/ActivityService');
 
   var ModuleProvider = require('./scripts/ModuleProvider');
   var ShellController = require('./shell/controllers/ShellController');
@@ -52,6 +54,9 @@
   angular.module('boilerplateApp').provider('modules', [ModuleProvider]);
 
   angular.module('boilerplateApp').service('PouchDBService', [PouchDBService]);
-  angular.module('boilerplateApp').controller('ShellController', ['$scope', '$log', '$q', '$mdSidenav', '$notification', '$mdToast', 'modules', ShellController]);
+  angular.module('boilerplateApp').service('ActivityDataService', ['PouchDBService', ActivityDataService]);
+  angular.module('boilerplateApp').service('ActivityService', ['ActivityDataService', ActivityService]);
+
+  angular.module('boilerplateApp').controller('ShellController', ['$scope', '$log', '$q', '$mdSidenav', '$notification', '$mdToast', 'modules', 'ActivityService', ShellController]);
 
 })(global.angular);

@@ -46,7 +46,7 @@
         </svg>
       </a>
     </div>
-    <div class="md-toolbar-tools" ng-if="shell.modules.length > 1">
+    <div class="md-toolbar-tools">
       <span class="draggable" flex></span>
       <md-button class="md-icon-button" md-no-ink ng-repeat="module in shell.modules"
                  ng-href="#{{ module.info.url }}" ng-class="{ selected: $state.includes('{{ module.info.state }}') }">

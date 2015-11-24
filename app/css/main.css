@@ -7,50 +7,36 @@ html, body {
   -webkit-user-select: none;
 }
 
-md-sidenav md-list {
-	width: 100%;
-	text-align: left;
+md-content[ui-view='content'], md-content[ui-view='module'] {
+  height: 100%;
+  width: 99%;
+  overflow: hidden;
+}
+md-content[ui-view='content'] {
+  padding: 20px;
+  height: 75vh;
 }
 
-md-sidenav md-list .md-button {
-	width: 100%;
-	text-align: left;
+.hidden {
+  visibility: hidden;
+  position: absolute;
 }
-
-md-sidenav md-list .md-button.selected {
-	color: #03a9f4;
+.md-48 {
+  font-size: 48px;
 }
-
-.menu {
-	background-color: transparent;
-	border: none;
-	height: 38px;
-	width: 38px;
-	margin: 16px;
+.timeline-badge {
+  z-index: 1 !important;
 }
-
-md-toolbar h1 {
-	margin: auto;
-	font-size: 1.25em;
-	font-weight: 400;
+.angular-center-container {
+  background-color: rgba(0, 0, 0, 0.66);
 }
-
-#content {
-	overflow: hidden;
-	padding-left: 40px;
-	padding-right: 40px;
-	padding-top: 5px;
+.angular-centered h3 {
+  color: white;
 }
-
-.fullsize {
-	height: 100%;
-	width: 100%;
-}
-
-.non-scrollable {
-	overflow-y: hidden;
-}
-
-.scrollable {
-	overflow-y: auto;
+.md-icon-button.info-btn {
+  float: right;
+  margin: -6px 6px;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
 }
