@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "An Electron boilerplate project",
   "main": "index.js",
   "scripts": {
