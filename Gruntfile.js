@@ -254,7 +254,7 @@ grunt.initConfig({
   'create-windows-installer': {
     ia32: {
       appDirectory: 'build/' + app_name + '-win32-ia32/',
-      outputDirectory: 'build/pkg/',
+      outputDirectory: 'build/pkg/win32/',
       authors: app_author,
       loadingGif: app_icons.installer,
       title: app_name,
@@ -265,7 +265,7 @@ grunt.initConfig({
     },
     x64: {
       appDirectory: 'build/' + app_name + '-win32-x64/',
-      outputDirectory: 'build/pkg/',
+      outputDirectory: 'build/pkg/win64/',
       authors: app_author,
       loadingGif: app_icons.installer,
       title: app_name,
