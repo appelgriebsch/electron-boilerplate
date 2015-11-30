@@ -32,6 +32,12 @@ grunt.initConfig({
       src: ['**', '!node_modules/**/*'],
       dest: 'build/osx/'
     },
+    win32Build: {
+      expand: true,
+      cwd: 'app',
+      src: ['**', '!node_modules/**/*'],
+      dest: 'build/win32/'
+    },
     win64Build: {
       expand: true,
       cwd: 'app',
@@ -54,6 +60,16 @@ grunt.initConfig({
         distver: electron_version,
         target: 'darwin',
         arch: 'x64',
+        runtime: 'electron'
+      }
+    },
+    win32Build: {
+      options: {
+        cwd: path.join(__dirname, 'build/win32'),
+        disturl: electron_disturl,
+        distver: electron_version,
+        target: 'win32',
+        arch: 'ia32',
         runtime: 'electron'
       }
     },
@@ -93,6 +109,29 @@ grunt.initConfig({
         'app-bundle-id': app_bundle_id,
         prune: true,
         asar: true
+      }
+    },
+    win32Build: {
+      options: {
+        name: app_name,
+        dir: 'build/win32',
+        out: 'build',
+        version: electron_version,
+        platform: 'win32',
+        arch: 'ia32',
+        icon: app_icons.ico,
+        'app-version': app_version,
+        'app-bundle-id': app_bundle_id,
+        prune: true,
+        asar: true,
+        'version-string': {
+          CompanyName: app_author,
+          FileDescription: app_description,
+          FileVersion: app_version,
+          OriginalFileName: app_name,
+          ProductVersion: app_version,
+          ProductName: app_name
+        }
       }
     },
     win64Build: {
@@ -213,6 +252,17 @@ grunt.initConfig({
   },
 
   'create-windows-installer': {
+    ia32: {
+      appDirectory: 'build/' + app_name + '-win32-ia32/',
+      outputDirectory: 'build/pkg/',
+      authors: app_author,
+      loadingGif: app_icons.installer,
+      title: app_name,
+      description: app_description,
+      version: app_version,
+      iconUrl: 'file:///' + __dirname + '/' + app_icons.ico,
+      setupIcon: app_icons.ico
+    },
     x64: {
       appDirectory: 'build/' + app_name + '-win32-x64/',
       outputDirectory: 'build/pkg/',
@@ -229,6 +279,7 @@ grunt.initConfig({
 });
 
 grunt.registerTask('osx', ['clean:build', 'copy:osxBuild', 'npm-install:osxBuild', 'electron:osxBuild', 'appdmg']);
-grunt.registerTask('win', ['clean:build', 'copy:win64Build', 'npm-install:win64Build', 'electron:win64Build', 'create-windows-installer:x64']);
+grunt.registerTask('win', ['clean:build', 'copy:win32Build', 'copy:win64Build', 'npm-install:win32Build','npm-install:win64Build',
+                           'electron:win32Build', 'create-windows-installer:ia32', 'electron:win64Build', 'create-windows-installer:x64']);
 grunt.registerTask('linux', ['clean:build', 'copy:linux64Build', 'npm-install:linux64Build', 'electron:linux64Build',
                              'electron-redhat-installer:linux64', 'electron-debian-installer:linux64']);
