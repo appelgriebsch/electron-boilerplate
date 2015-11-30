@@ -29,7 +29,7 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
   ```bash
   grunt osx
   ```
-* on Windows (7+): creates application .exe and distributable setup.exe (x64 only)
+* on Windows (7+): creates application .exe and distributable setup.exe (x86 and x64)
 
   ```bash
   grunt win
