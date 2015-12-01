@@ -58,5 +58,9 @@
     </div>
   </md-toolbar>
   <md-content flex layout-fill layout-margin ui-view="module"></md-content>
-  <div layout="row" layout-align="end end" layout-margin ui-view="actions"></div>
+  <div layout="row" layout-align="end start" layout-margin>
+    <div class="layout-padding" ui-view="status"></div>
+    <span flex></span>
+    <div ui-view="actions"></div>
+  </div>
 </div>

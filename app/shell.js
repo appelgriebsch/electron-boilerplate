@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('boilerplateApp', ['ngMaterial', 'ngSanitize', 'ui.router', 'angular-timeline', 'angular-centered', 'notification', 'nsPopover'])
+  angular.module('boilerplateApp', ['ngMaterial', 'ngSanitize', 'ui.router', 'angular-timeline', 'angular-centered', 'notification'])
     .config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette('blue')

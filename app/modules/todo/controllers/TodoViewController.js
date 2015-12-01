@@ -18,6 +18,9 @@
             this.todos.push(todo.doc);
           });
         });
+      }).catch((err) => {
+        $scope.setError('AddAction', 'assignment', err);
+        $scope.setReady(true);
       });
     };
 
@@ -40,8 +43,23 @@
           status: 'open',
           createdAt: new Date().toISOString()
         };
+
         this.todos.push(todo);
-        return TodoDataService.save(todo);
+
+        TodoDataService.save(todo).then((result) => {
+
+          var info = $scope.createEventFromTemplate('AddAction', 'assignment');
+          info.description = `Todo <i>${answer}</i> created successfully!`;
+          info.object = todo;
+          delete info.result;
+
+          $scope.writeLog('info', info).then(() => {
+            $scope.notify('Todo created successfully', info.description);
+          });
+        }).catch((err) => {
+          $scope.setError('AddAction', 'assignment', err);
+          $scope.setReady(true);
+        });
       }, function() {
         return;
       });

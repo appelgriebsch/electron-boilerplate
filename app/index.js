@@ -2,13 +2,15 @@
 
   'use strict';
 
-  var app = require('app');
+  var electron = require('electron');
+  var app = electron.app;
+  var ipc = electron.ipcMain;
 
   var path = require('path');
   var os = require('os');
 
-  var BrowserWindow = require('browser-window');
-  var Tray = require('tray');
+  var BrowserWindow = electron.BrowserWindow;
+  var Tray = electron.Tray;
 
   // initialize service finder module
   var ServiceFinder = require('node-servicefinder').ServiceFinder;
@@ -111,7 +113,7 @@
   var mainWindow;
   var trayIcon;
 
-  app.on('activate-with-no-open-windows', function() {
+  app.on('activate', function() {
     if (!mainWindow) {
       mainWindow = createMainWindow();
     }
