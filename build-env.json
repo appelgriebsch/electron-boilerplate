@@ -6,7 +6,7 @@
   "app": {
     "id": "com.appelgriebsch.electron-boilerplate",
     "name": "Boilerplate",
-    "description": "An Electron boilerplate project",
+    "description": "An Electron boilerplate project (react.js variant)",
     "version": "0.6.0",
     "author": "Appelgriebsch",
     "icons": {

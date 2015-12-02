@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "version": "0.6.0",
-  "description": "An Electron boilerplate project",
+  "description": "An Electron boilerplate project (react.js variant)",
   "main": "index.js",
   "repository": {
     "type": "git",
