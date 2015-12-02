@@ -19,6 +19,7 @@ md-content[ui-view='content'] {
 .hidden {
   visibility: hidden;
   position: absolute;
+  display: none;
 }
 .md-48 {
   font-size: 48px;

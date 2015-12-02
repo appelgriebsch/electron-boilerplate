@@ -7,7 +7,7 @@
     var db = PouchDBService.initialize('activities');
     var uuid = require('uuid');
 
-    var saveDoc = function(doc) {
+    var _saveDoc = function(doc) {
 
       var promise = Promise.resolve(
         db.get(doc._id)
@@ -30,6 +30,17 @@
       );
 
       return promise;
+    };
+
+    var _scanObject = function(doc) {
+      for (var key in doc) {
+        if (doc[key] === Object(doc[key])) {
+          _scanObject(doc[key]);
+        } else if ((typeof doc[key] === 'string') && (doc[key].substring(0, 2) === '${')) {
+          console.log(key + ': ' + doc[key]);
+          delete doc[key]; // remove any placeholder from outgoing stream
+        }
+      }
     };
 
     return {
@@ -106,8 +117,8 @@
         this.templates = template;
 
         return Promise.all([
-          saveDoc(ddoc),
-          saveDoc(template)
+          _saveDoc(ddoc),
+          _saveDoc(template)
         ]);
       },
 
@@ -162,7 +173,9 @@
           activity: event
         };
 
-        return saveDoc(doc);
+        _scanObject(doc);
+        console.log(doc);
+        return _saveDoc(doc);
       }
     };
   }
