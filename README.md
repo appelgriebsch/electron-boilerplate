@@ -6,13 +6,12 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 * Angular
 * Angular Material Design
 * Angular UI Router
-* Node-Notifier
 * PouchDB + Plugins (geo-spatial, MongoDB-style query language and full-text search engine support)
 * WS
 
 ## Getting started
 * install latest node.js from [here](http://www.nodejs.org)
-* clone git repository (```git clone https://github.com/appelgriebsch/electron-boilerplate.git```)
+* clone git repository (```git clone -b angularjs https://github.com/appelgriebsch/electron-boilerplate.git ./myproject```)
 * open terminal and run ```npm install``` to install dependencies
 * start application in debug by executing ```npm start``` in terminal
 
