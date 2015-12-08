@@ -12,7 +12,6 @@
 
 	<!-- angular material design styles -->
 	<link rel="stylesheet" href="css/fonts.css" />
-
 	<link rel="stylesheet" href="css/shell.css" />
 
 </head>
@@ -23,7 +22,10 @@
 
 	<script type="application/javascript" src="node_modules/react/dist/react-with-addons.min.js"></script>
 	<script type="application/javascript" src="node_modules/react-dom/dist/react-dom.min.js"></script>
-	<script type="application/javascript" src="shell.js"></script>
+	<script type="application/javascript">
+		require('babel-register')
+		require('./main').start();
+	</script>
 
 </body>
 
