@@ -32,15 +32,13 @@
       let componentStyle = styles.titleBar;
       let titleStyle = styles.title;
 
-      componentStyle.backgroundColor = this.props.style.backgroundColor;
-
       const titleComponent =
-        <div style={titleStyle}>
+        <div style={titleStyle} {...this.props}>
           {this.props.title}
         </div>;
 
       return (
-        <div style={componentStyle}>
+        <div style={componentStyle} {...this.props}>
           {titleComponent}
         </div>
       );

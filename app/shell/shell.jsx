@@ -28,6 +28,7 @@
           <TitleBar
             title={`${appCfg.app.name} v${appCfg.app.version}`}
             style={{
+              color: '#303030',
               backgroundColor: Colors.deepOrangeA700
             }}
             onClosePress={() => { alert('close'); }}
