@@ -6,7 +6,7 @@
 
     var moduleConfig = config;
 
-    angular.module('boilerplateApp')
+    angular.module('electron-app')
       .config(function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
@@ -33,7 +33,7 @@
       });
 
     var ActivitiesViewController = require('./controllers/ActivitiesViewController');
-    angular.module('boilerplateApp').controller('ActivitiesViewController', ['$scope', '$state', '$q', 'ActivityDataService', ActivitiesViewController]);
+    angular.module('electron-app').controller('ActivitiesViewController', ['$scope', '$state', '$q', 'ActivityDataService', ActivitiesViewController]);
   }
 
   module.exports = ActivityModule;
