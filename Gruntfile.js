@@ -44,6 +44,12 @@ grunt.initConfig({
       src: ['**', '!node_modules/**/*'],
       dest: 'build/win64/'
     },
+    linux32Build: {
+      expand: true,
+      cwd: 'app',
+      src: ['**', '!node_modules/**/*'],
+      dest: 'build/linux32/'
+    },
     linux64Build: {
       expand: true,
       cwd: 'app',
@@ -80,6 +86,16 @@ grunt.initConfig({
         distver: electron_version,
         target: 'win32',
         arch: 'x64',
+        runtime: 'electron'
+      }
+    },
+    linux32Build: {
+      options: {
+        cwd: path.join(__dirname, 'build/linux32'),
+        disturl: electron_disturl,
+        distver: electron_version,
+        target: 'linux',
+        arch: 'ia32',
         runtime: 'electron'
       }
     },
@@ -157,6 +173,21 @@ grunt.initConfig({
         }
       }
     },
+    linux32Build: {
+      options: {
+        name: app_name,
+        dir: 'build/linux32',
+        out: 'build',
+        version: electron_version,
+        platform: 'linux',
+        arch: 'ia32',
+        icon: app_icons.png,
+        'app-version': app_version,
+        'app-bundle-id': app_bundle_id,
+        prune: true,
+        asar: true
+      }
+    },
     linux64Build: {
       options: {
         name: app_name,
@@ -212,6 +243,13 @@ grunt.initConfig({
         return dest + '<%= name %>-<%= version %>-<%= revision %>.<%= arch %>.rpm';
       }
     },
+    linux32: {
+      options: {
+        arch: 'x86'
+      },
+      src: 'build/' + app_name + '-linux-ia32/',
+      dest: 'build/pkg/'
+    },
     linux64: {
       options: {
         arch: 'x86_64'
@@ -241,6 +279,13 @@ grunt.initConfig({
       rename: function(dest, src) {
         return dest + '<%= name %>_<%= version %>-<%= revision %>.<%= arch %>.deb';
       }
+    },
+    linux32: {
+      options: {
+        arch: 'x86'
+      },
+      src: 'build/' + app_name + '-linux-ia32/',
+      dest: 'build/pkg/'
     },
     linux64: {
       options: {
@@ -281,5 +326,6 @@ grunt.initConfig({
 grunt.registerTask('osx', ['clean:build', 'copy:osxBuild', 'npm-install:osxBuild', 'electron:osxBuild', 'appdmg']);
 grunt.registerTask('win', ['clean:build', 'copy:win32Build', 'copy:win64Build', 'npm-install:win32Build','npm-install:win64Build',
                            'electron:win32Build', 'create-windows-installer:ia32', 'electron:win64Build', 'create-windows-installer:x64']);
-grunt.registerTask('linux', ['clean:build', 'copy:linux64Build', 'npm-install:linux64Build', 'electron:linux64Build',
+grunt.registerTask('linux', ['clean:build', 'copy:linux32Build', 'copy:linux64Build', 'npm-install:linux32Build', 'npm-install:linux64Build',
+                             'electron:linux32Build', 'electron:linux64Build', 'electron-redhat-installer:linux32', 'electron-debian-installer:linux32',
                              'electron-redhat-installer:linux64', 'electron-debian-installer:linux64']);
