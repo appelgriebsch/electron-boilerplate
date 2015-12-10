@@ -7,13 +7,14 @@ html, body {
   -webkit-user-select: none;
 }
 md-content[ui-view='content'], md-content[ui-view='module'] {
-  height: 100%;
-  width: 99%;
+  height: 85vh;
+  width: 99vw;
   overflow: hidden;
 }
 md-content[ui-view='content'] {
   padding: 20px;
-  height: 75vh;
+  height: 100%;
+  width: 100%;
   overflow-y: auto;
 }
 .hidden {
