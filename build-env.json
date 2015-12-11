@@ -1,7 +1,7 @@
 {
   "electron": {
     "disturl": "https://atom.io/download/atom-shell",
-      "version": "0.35.4"
+      "version": "0.36.0"
   },
   "app": {
     "id": "com.appelgriebsch.electron-boilerplate",
