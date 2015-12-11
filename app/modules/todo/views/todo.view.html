@@ -1,6 +1,6 @@
 <div flex layout-fill layout="column" ng-init="ctl.initialize()" ng-cloak>
   <md-grid-list md-cols-gt-lg="8" md-cols-gt-md="6" md-cols-gt-sm="2" md-cols-sm="1" md-gutter-gt-md="12px" md-gutter-gt-sm="6px" md-row-height-gt-md="1:1" md-row-height="4:3">
-    <md-grid-tile class="doc-tile" md-colspan-sm="1" md-colspan="2" md-rowspan="1" ng-repeat="todo in ctl.todos" ng-click="$state.go('.itemSelected', { doc: todo._id }, { relative: ctl.state })">
+    <md-grid-tile class="doc-tile" md-colspan-sm="1" md-colspan="2" md-rowspan="1" ng-repeat="todo in ctl.todos" ng-blur="$state.go('.', {}, { relative: ctl.state })" ng-click="$state.go('.itemSelected', { doc: todo._id }, { relative: ctl.state })">
       <md-icon ng-if="todo.status === 'finished'" class="md-48">assignment_turned_in</md-icon>
       <md-icon ng-if="todo.status !== 'finished'" class="md-48">assignment</md-icon>
       <div class="hover-actions" layout="row" layout-padding>

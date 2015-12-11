@@ -54,6 +54,8 @@
           info.object = doc;
           info.result = result;
 
+          doc._rev = result.rev;
+
           $scope.writeLog('info', info).then(() => {
             $scope.notify('Todo updated successfully', info.description);
           });
