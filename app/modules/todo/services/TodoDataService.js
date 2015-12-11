@@ -13,7 +13,7 @@
         db.get(doc._id)
         .then(function(result) {
 
-          if ((result) && (result.version !== doc.version)) {
+          if ((result.version === undefined) || (result.version !== doc.version)) {
             doc._rev = result._rev;
             return db.put(doc);
           }

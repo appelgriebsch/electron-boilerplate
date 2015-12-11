@@ -3,14 +3,18 @@
   overflow: hidden;
 }
 
-.hover-button {
+.hover-actions {
   z-index: 2;
   position: absolute;
   right: 0;
   top: 0;
+  visibility: hidden;
+  margin-right: -20px;
+  margin-top: -20px;
+}
+.hover-button {
   width: 40px;
   height: 40px;
-  visibility: hidden;
   border-radius: 50%;
 }
 
@@ -20,7 +24,5 @@
 
 .doc-tile:hover .hover-button {
   visibility: visible;
-  margin-right: -20px;
-  margin-top: -20px;
   background: rgba(0,0,0,0.54);
 }

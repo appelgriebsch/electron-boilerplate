@@ -3,9 +3,17 @@
     <md-grid-tile class="doc-tile" md-colspan-sm="1" md-colspan="2" md-rowspan="1" ng-repeat="todo in ctl.todos" ng-click="$state.go('.itemSelected', { doc: todo._id }, { relative: ctl.state })">
       <md-icon ng-if="todo.status === 'finished'" class="md-48">assignment_turned_in</md-icon>
       <md-icon ng-if="todo.status !== 'finished'" class="md-48">assignment</md-icon>
-      <button class="md-icon-button hover-button" md-no-ink ng-click="ctl.removeDocument($event, todo)">
-        <md-icon>delete</md-icon>
-      </button>
+      <div class="hover-actions" layout="row" layout-padding>
+        <button ng-if="todo.status !== 'finished'" class="md-icon-button hover-button" md-no-ink ng-click="ctl.toggleTodo($event, todo)">
+          <md-icon>check</md-icon>
+        </button>
+        <button ng-if="todo.status === 'finished'" class="md-icon-button hover-button" md-no-ink ng-click="ctl.toggleTodo($event, todo)">
+          <md-icon>radio_button_unchecked</md-icon>
+        </button>
+        <button class="md-icon-button hover-button" md-no-ink ng-click="ctl.removeTodo($event, todo)">
+          <md-icon>delete</md-icon>
+        </button>
+      </div>
       <md-grid-tile-footer>
         <h3 class="title">
           {{ todo.title }}

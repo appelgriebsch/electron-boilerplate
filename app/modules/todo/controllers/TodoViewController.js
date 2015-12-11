@@ -30,7 +30,41 @@
       });
     };
 
-    this.removeDocument = (evt, doc) => {
+    this.toggleTodo = (evt, doc) => {
+
+      var status = doc.status;
+
+      switch(status) {
+      case 'open':
+        status = 'finished';
+        break;
+      case 'finished':
+        status = 'open';
+        break;
+      }
+
+      $q.when(true).then(() => {
+
+        doc.status = status;
+
+        TodoDataService.save(doc).then((result) => {
+
+          var info = $scope.createEventFromTemplate('AddAction', 'assignment');
+          info.description = `Todo <i>${doc.title}</i> has been marked ${status}!`;
+          info.object = doc;
+          info.result = result;
+
+          $scope.writeLog('info', info).then(() => {
+            $scope.notify('Todo updated successfully', info.description);
+          });
+        }).catch((err) => {
+          $scope.setError('AddAction', 'assignment', err);
+          $scope.setReady(true);
+        });
+      });
+    };
+
+    this.removeTodo = (evt, doc) => {
 
       var confirm = $mdDialog.confirm()
         .title('Would you like to delete this document?')
