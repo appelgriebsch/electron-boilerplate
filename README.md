@@ -7,7 +7,6 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 * Angular Material Design
 * Angular UI Router
 * PouchDB + Plugins (geo-spatial, MongoDB-style query language and full-text search engine support)
-* WS
 
 ## Getting started
 * install latest node.js from [here](http://www.nodejs.org)
