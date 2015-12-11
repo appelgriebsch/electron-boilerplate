@@ -1,0 +1,26 @@
+.statusLine {
+  width: 95%;
+  overflow: hidden;
+}
+
+.hover-button {
+  z-index: 2;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  visibility: hidden;
+  border-radius: 50%;
+}
+
+.hover-button md-icon {
+  color: white;
+}
+
+.doc-tile:hover .hover-button {
+  visibility: visible;
+  margin-right: -20px;
+  margin-top: -20px;
+  background: rgba(0,0,0,0.54);
+}

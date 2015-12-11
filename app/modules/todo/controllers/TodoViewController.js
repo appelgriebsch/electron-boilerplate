@@ -4,6 +4,10 @@
 
   function TodoViewController($scope, $state, $q, $mdDialog, TodoDataService) {
 
+    var appCfg = require('electron').remote.app.sysConfig();
+
+    this.state = $state.$current;
+    this.baseState = this.state.parent.toString();
     this.todos = [];
 
     this.initialize = function() {
@@ -15,12 +19,49 @@
       }).then((todos) => {
         todos.rows.map((todo) => {
           $q.when(true).then(() => {
-            this.todos.push(todo.doc);
+            var t = todo.doc;
+            t.user = t.user || appCfg.user;
+            this.todos.push(t);
           });
         });
       }).catch((err) => {
         $scope.setError('AddAction', 'assignment', err);
         $scope.setReady(true);
+      });
+    };
+
+    this.removeDocument = (evt, doc) => {
+
+      var confirm = $mdDialog.confirm()
+        .title('Would you like to delete this document?')
+        .content(doc.title)
+        .targetEvent(evt)
+        .ok('Delete')
+        .cancel('Cancel');
+
+      $mdDialog.show(confirm).then(() => {
+
+        TodoDataService.delete(doc).then(() => {
+
+          var info = $scope.createEventFromTemplate('DeleteAction', 'delete');
+          info.description = `Document <i>${doc.title}</i> has been deleted.`;
+          info.object = doc;
+          delete info.result;
+
+          $scope.writeLog('warning', info).then(() => {
+            $scope.notify('Document deleted successfully', info.description);
+
+            var idx = this.todos.indexOf(doc);
+            if (idx > -1) {
+              this.todos.splice(idx, 1);
+            }
+            $scope.setReady(true);
+          });
+
+        }).catch((err) => {
+          $scope.setError('DeleteAction', 'delete', err);
+          $scope.setReady(true);
+        });
       });
     };
 
@@ -41,6 +82,7 @@
         var todo = {
           title: answer,
           status: 'open',
+          user: appCfg.user,
           createdAt: new Date().toISOString()
         };
 

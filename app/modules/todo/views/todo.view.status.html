@@ -1,0 +1,9 @@
+<div class="statusLine" layout="column" layout-fill ng-init="ctl.initialize()">
+  <md-divider layout-fill layout-padding></md-divider>
+  <div layout-fill layout="row">
+    <span><b>{{ ctl.todo.user }}</b></span>
+    <span flex></span>
+    <small>{{ ctl.todo.createdAt | date: 'short' }}</small>
+  </div>
+  <h3>{{ ctl.todo.title }}</h3>
+</div>
