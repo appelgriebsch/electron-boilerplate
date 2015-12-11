@@ -105,6 +105,7 @@
         parent: angular.element(document.body),
         templateUrl: __dirname + '/../views/todo.new.html',
         controller: ($scope, $mdDialog) => {
+          $scope.todoItem = '';
           $scope.ok = function () {
             $mdDialog.hide($scope.todoItem);
           };
@@ -120,7 +121,7 @@
           createdAt: new Date().toISOString()
         };
 
-        this.todos.push(todo);
+        this.todos.unshift(todo);
 
         TodoDataService.save(todo).then((result) => {
 
