@@ -1,8 +1,3 @@
-.statusLine {
-  width: 95%;
-  overflow: hidden;
-}
-
 .hover-actions {
   z-index: 2;
   position: absolute;
@@ -25,4 +20,8 @@
 .doc-tile:hover .hover-button {
   visibility: visible;
   background: rgba(0,0,0,0.54);
+}
+
+.selectionBorder {
+  outline: -webkit-focus-ring-color auto 5px;
 }

@@ -39,3 +39,12 @@ md-content[ui-view='content'] {
   text-shadow: 1px 1px rgb(107, 104, 104);
   font-weight: 500;
 }
+.statusLine {
+  z-index: 20;
+  width: 95%;
+  overflow: hidden;
+}
+.statusLine.animated {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+}

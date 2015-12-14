@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('electron-app', ['ngMaterial', 'ngSanitize', 'ui.router', 'angular-timeline', 'angular-centered', 'notification'])
+  angular.module('electron-app', ['ngMaterial', 'ngSanitize', 'ui.router', 'ngAnimate', 'angular-timeline', 'angular-centered', 'notification'])
     .config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette('blue')
