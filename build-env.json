@@ -1,13 +1,13 @@
 {
   "electron": {
     "disturl": "https://atom.io/download/atom-shell",
-      "version": "0.35.4"
+      "version": "0.36.0"
   },
   "app": {
     "id": "com.appelgriebsch.electron-boilerplate",
     "name": "Boilerplate",
     "description": "An Electron boilerplate project (react.js variant)",
-    "version": "0.6.2",
+    "version": "0.7.0",
     "author": "Appelgriebsch",
     "icons": {
       "ico": "app/assets/boilerplate.ico",

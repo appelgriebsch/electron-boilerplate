@@ -21,6 +21,22 @@ require('load-grunt-tasks')(grunt);
 
 grunt.initConfig({
 
+  babel: {
+    options: {
+      sourceMap: true,
+      presets: ['babel-preset-es2015', 'babel-preset-react']
+    },
+    dist: {
+      files: [{
+        expand: true,
+        cwd: 'app',
+        src: ['**/*.jsx', '!node_modules/**/*'],
+        dest: 'app',
+        ext: '.js'
+      }]
+    }
+  },
+
   clean: {
     build: ['build']
   },
@@ -323,9 +339,9 @@ grunt.initConfig({
 
 });
 
-grunt.registerTask('osx', ['clean:build', 'copy:osxBuild', 'npm-install:osxBuild', 'electron:osxBuild', 'appdmg']);
-grunt.registerTask('win', ['clean:build', 'copy:win32Build', 'copy:win64Build', 'npm-install:win32Build','npm-install:win64Build',
+grunt.registerTask('osx', ['babel', 'clean:build', 'copy:osxBuild', 'npm-install:osxBuild', 'electron:osxBuild', 'appdmg']);
+grunt.registerTask('win', ['babel', 'clean:build', 'copy:win32Build', 'copy:win64Build', 'npm-install:win32Build','npm-install:win64Build',
                            'electron:win32Build', 'create-windows-installer:ia32', 'electron:win64Build', 'create-windows-installer:x64']);
-grunt.registerTask('linux', ['clean:build', 'copy:linux32Build', 'copy:linux64Build', 'npm-install:linux32Build', 'npm-install:linux64Build',
+grunt.registerTask('linux', ['babel', 'clean:build', 'copy:linux32Build', 'copy:linux64Build', 'npm-install:linux32Build', 'npm-install:linux64Build',
                              'electron:linux32Build', 'electron:linux64Build', 'electron-redhat-installer:linux32', 'electron-debian-installer:linux32',
                              'electron-redhat-installer:linux64', 'electron-debian-installer:linux64']);

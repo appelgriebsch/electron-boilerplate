@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "An Electron boilerplate project (react.js variant)",
   "main": "index.js",
   "repository": {
@@ -18,15 +18,24 @@
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
   },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
   "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
   "scripts": {
-    "start": "electron app/",
+    "start": "grunt babel && electron app/",
     "postinstall": "node ./tasks/app_npm_install",
     "app-install": "node ./tasks/app_npm_install"
   },
   "dependencies": {
-    "electron-prebuilt": "0.35.4",
+    "electron-prebuilt": "0.36.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
     "grunt": "^0.4.5",
+    "grunt-babel": "^6.0.0",
     "grunt-contrib-clean": "^0.7.0",
     "grunt-contrib-copy": "^0.8.1",
     "grunt-electron": "^2.0.0",
