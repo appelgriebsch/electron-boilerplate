@@ -9,6 +9,7 @@
     this.state = $state.$current;
     this.baseState = this.state.parent.toString();
     this.todos = [];
+    this.selectedDocument;
 
     this.initialize = function() {
 
@@ -99,6 +100,34 @@
           $scope.setReady(true);
         });
       });
+    };
+
+    this.selectDocument = (evt, doc) => {
+
+      if (doc === this.selectedDocument) {
+        return;
+      }
+
+      var statusElem = document.querySelectorAll('.statusLine');
+
+      if (statusElem.length > 0) {
+
+        angular.element(statusElem[0]).removeClass('fadeInUp');
+        angular.element(statusElem[0]).addClass('fadeOutDown');
+
+        angular.element(statusElem[0]).one('webkitAnimationEnd', () => {
+          $q.when(true).then(() => {
+            this.selectedDocument = doc;
+            $state.go('.itemSelected', { doc: doc._id }, { relative: this.state });
+          });
+        });
+      }
+      else {
+        $q.when(true).then(() => {
+          this.selectedDocument = doc;
+          $state.go('.itemSelected', { doc: doc._id }, { relative: this.state });
+        });
+      }
     };
 
     $scope.$on('add-todo', (event, args) => {

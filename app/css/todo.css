@@ -25,3 +25,7 @@ md-grid-list {
   visibility: visible;
   background: rgba(0,0,0,0.54);
 }
+
+.selectionBorder {
+  outline: -webkit-focus-ring-color auto 5px;
+}
