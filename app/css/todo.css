@@ -1,6 +1,5 @@
-.statusLine {
-  width: 95%;
-  overflow: hidden;
+md-grid-list {
+  margin-bottom: 10%;
 }
 
 .hover-actions {
