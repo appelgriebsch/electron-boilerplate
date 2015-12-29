@@ -13,6 +13,7 @@
     this.isBusy = false;
     this.statusMessage = '';
     this.isDirty = false;
+    this.fabOpen = false;
 
     $scope.setBusy = (msg) => {
       $q.when(true).then(() => {
@@ -52,6 +53,8 @@
 
     $scope.setError = (template, icon, error) => {
       $scope.notify('An error occured!', error.message);
+
+      console.log(error);
 
       var info = $scope.createEventFromTemplate(template, icon, error);
       return $scope.writeLog('error', info);
