@@ -2,10 +2,6 @@
 
   'use strict';
 
-  require('babel-register')({
-    extensions: ['.jsx']
-  });
-
   var electron = require('electron');
   var app = electron.app;
   var ipc = electron.ipcMain;
