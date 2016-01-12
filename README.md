@@ -18,7 +18,7 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 
 ## Screenshot
 
-![screenshot](https://github.com/appelgriebsch/electron-boilerplate/blob/master/screenshot.png)
+![screenshot](screenshot.png)
 
 ## Build Distributable Packages
 
