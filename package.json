@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.8.3",
+  "version": "0.8.5",
   "description": "An Electron boilerplate project",
   "main": "index.js",
   "repository": {
@@ -25,19 +25,19 @@
     "app-install": "node ./tasks/app_npm_install"
   },
   "dependencies": {
-    "electron-prebuilt": "0.36.7",
+    "electron-prebuilt": "0.36.8",
     "grunt": "^0.4.5",
-    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^0.8.1",
     "grunt-electron": "^2.0.0",
-    "grunt-npm-install": "appelgriebsch/grunt-npm-install",
+    "grunt-npm-install": "gitlab:appelgriebsch/grunt-npm-install",
     "load-grunt-tasks": "^3.4.0",
     "nconf": "^0.8.0"
   },
   "optionalDependencies": {
     "grunt-appdmg": "^0.3.2",
-    "grunt-electron-debian-installer": "^0.1",
-    "grunt-electron-redhat-installer": "^0.2",
+    "grunt-electron-installer-debian": "^0.2",
+    "grunt-electron-installer-redhat": "^0.3",
     "grunt-electron-installer": "^1.0"
   }
 }
