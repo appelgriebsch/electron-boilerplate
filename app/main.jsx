@@ -5,6 +5,7 @@ import electron from 'electron'
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 
 import Shell from './shell/shell'
+import Activity from './modules/activity/activity'
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -15,5 +16,6 @@ injectTapEventPlugin();
 ReactDOM.render(  
   <Router history={hashHistory}>
     <Route path="/" component={Shell}>
+      <IndexRoute component={Activity}/>      
     </Route>
   </Router>, document.getElementById('app'));
