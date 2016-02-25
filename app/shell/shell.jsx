@@ -10,8 +10,6 @@ import TitleBar from './titlebar'
 
 const appCfg = electron.remote.app.sysConfig();
 
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
-
 export default class Shell extends React.Component {
 
   getChildContext() {
@@ -38,6 +36,7 @@ export default class Shell extends React.Component {
           style={{
               backgroundColor: Colors.deepOrangeA700
         }} />
+        { this.props.children }
       </AppCanvas>
     );
   };
