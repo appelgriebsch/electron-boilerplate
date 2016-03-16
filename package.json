@@ -18,8 +18,7 @@
     "id": "com.appelgriebsch.electron-boilerplate",
     "ico": "app/assets/boilerplate.ico",
     "icns": "app/assets/boilerplate.icns",
-    "png": "app/assets/boilerplate.png",
-    "installer": "app/assets/installer.png"
+    "png": "app/assets/boilerplate.png"
   },
   "license": "MIT",
   "bugs": {
@@ -39,7 +38,7 @@
     "build:linux-x64": "npm run build:prepare && npm run rebuild:linux-x64 && npm run package:linux-x64 && npm run setup:linux-x64",
     "build:osx": "npm run clean:build && npm run build:osx-app -s && npm run build:osx-mas -s",
     "build:osx-app": "npm run build:prepare && npm run rebuild:osx-app && npm run package:osx-app && npm run setup:osx-dmg",
-    "build:osx-mas": "npm run build:prepare && npm run rebuild:osx-mas && npm run package:osx-mas",
+    "build:osx-mas": "npm run build:prepare && npm run rebuild:osx-mas && npm run package:osx-mas && npm run setup:osx-dmg",
     "build:win32": "npm run clean:build && npm run build:win32-ia32 -s && npm run build:win32-x64 -s",
     "build:win32-ia32": "npm run build:prepare && npm run rebuild:win32-ia32 && npm run package:win32-ia32 && npm run setup:win32-ia32",
     "build:win32-x64": "npm run build:prepare && npm run rebuild:win32-x64 && npm run package:win32-x64 && npm run setup:win32-x64",
@@ -51,11 +50,11 @@
     "rebuild:win32-x64": "electron-rebuild --pre-gyp-fix --arch x64 --platform win32 --electron-prebuilt-dir node_modules/electron-prebuilt/ --module-dir app/node_modules/",
     "package:linux-ia32": "electron-packager app/ $npm_package_productName --arch ia32 --platform linux --app-version $npm_package_version --asar --icon $npm_package_config_png --prune --out build/",
     "package:linux-x64": "electron-packager app/ $npm_package_productName --arch x64 --platform linux --app-version $npm_package_version --asar --icon $npm_package_config_png --prune --out build/",
-    "package:osx-app": "electron-packager app/ $npm_package_productName --arch x64 --platform darwin --app-version $npm_package_version --asar --icon $npm_package_config_png --prune --out build/",
-    "package:osx-mas": "electron-packager app/ $npm_package_productName --arch x64 --platform mas --app-version $npm_package_version --asar --icon $npm_package_config_png --prune --out build/",
+    "package:osx-app": "electron-packager app/ $npm_package_productName --arch x64 --platform darwin --app-version $npm_package_version --app-bundle-id $npm_package_config_id --asar --icon $npm_package_config_png --prune --out build/",
+    "package:osx-mas": "electron-packager app/ $npm_package_productName --arch x64 --platform mas --app-version $npm_package_version --app-bundle-id $npm_package_config_id --asar --icon $npm_package_config_png --prune --out build/",
     "setup:linux-ia32": "",
     "setup:linux-x64": "",
-    "setup:osx-dmg": "",
+    "setup:osx-dmg": "appdmg package-osx.json build/Boilerplate.dmg",
     "setup:win32-ia32": "",
     "setup:win32-x64": ""
   },
