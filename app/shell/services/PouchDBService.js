@@ -10,7 +10,6 @@
     PouchDB.plugin(require('pouchdb-find'));
     PouchDB.plugin(require('pouchdb-quick-search'));
     PouchDB.plugin(require('transform-pouch'));
-    PouchDB.plugin(require('pouchdb-auth'));
 
     var remote = require('remote');
     var app = remote.require('app');

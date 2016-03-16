@@ -28,3 +28,6 @@ build
 node_modules
 app/node_modules
 .idea/
+
+# vim backup files
+.*~
