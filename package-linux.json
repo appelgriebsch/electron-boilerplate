@@ -1,4 +1,7 @@
 {
   "icon": "app/assets/boilerplate.png",
-  "bin": "Boilerplate"
+  "bin": "Boilerplate",
+  "categories": [
+    "Utility"
+  ]
 }
