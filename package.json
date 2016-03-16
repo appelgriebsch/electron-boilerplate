@@ -28,7 +28,7 @@
   "scripts": {
     "postinstall": "npm run app-install && npm run rebuild",
     "start": "electron app/",
-    "app-install": "cd app && npm install $@",
+    "app-install": "cd app && npm install --no-optional",
     "rebuild": "electron-rebuild --pre-gyp-fix --electron-prebuilt-dir node_modules/electron-prebuilt/ --module-dir app/node_modules/",
     "clean": "rimraf app/node_modules/",
     "clean:build": "rimraf build/",
