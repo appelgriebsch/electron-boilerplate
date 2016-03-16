@@ -4,7 +4,7 @@
 
   function ActivityDataService(PouchDBService) {
 
-    var db = PouchDBService.initialize('activities');
+    var db;
     var uuid = require('uuid');
 
     var _saveDoc = function(doc) {
@@ -116,10 +116,15 @@
 
         this.templates = template;
 
-        return Promise.all([
-          _saveDoc(ddoc),
-          _saveDoc(template)
-        ]);
+        return PouchDBService.initialize('activities').then((pouchdb) => {
+
+          db = pouchdb;
+
+          return Promise.all([
+            _saveDoc(ddoc),
+            _saveDoc(template)
+          ]);
+        });
       },
 
       createFromTemplate: function(type, icon, error) {

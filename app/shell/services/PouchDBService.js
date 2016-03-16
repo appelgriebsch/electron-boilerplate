@@ -12,40 +12,41 @@
     PouchDB.plugin(require('transform-pouch'));
     PouchDB.plugin(require('pouchdb-auth'));
 
-    PouchDB.adapter('socket', require('socket-pouch/client'));
+    var remote = require('remote');
+    var app = remote.require('app');
 
-    var adapter;
-
-    try {
-      adapter = require('leveldown');
-    } catch (err) {
-      console.log('leveldown-adapter not working, fallback to level.js (IndexedDB)');
-      adapter = require('level-js');
-    }
+    var sysCfg = app.sysConfig();
+    var settings = { adapter: 'leveldb', prefix: sysCfg.paths.data };
 
     function DataService(dbName) {
 
-      var remote = require('remote');
-      var app = remote.require('app');
-      var sysCfg = app.sysConfig();
+      var promise = new Promise((resolve, reject) => {
 
-      var _db = new PouchDB(dbName, {
-        db: adapter,
-        prefix: sysCfg.paths.data
+        new PouchDB(dbName, settings).then((result) => {
+          resolve(result);
+        })
+        .catch((err) => {
+          console.log('leveldb-adapter is not working, fallback to SQLite (websql)');
+          require('pouchdb/extras/websql');
+          settings.adapter = 'websql';
+          new PouchDB(dbName, settings)
+          .then((result2) => {
+            resolve(result2);
+          })
+          .catch((err2) => {
+            console.log('websql-adapter is also not working. have to stop!');
+            reject(err2);
+          });
+        });
       });
 
-      return {
-
-        instance: function() {
-          return _db;
-        }
-      };
+      return promise;
     }
 
     return {
 
       initialize: function(dbName) {
-        return new DataService(dbName).instance();
+        return new DataService(dbName);
       }
     };
   }

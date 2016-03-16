@@ -4,7 +4,7 @@
 
   function TodoDataService(PouchDBService) {
 
-    var db = PouchDBService.initialize('todos');
+    var db;
     var uuid = require('uuid');
 
     var saveDoc = function(doc) {
@@ -48,7 +48,12 @@
           }
         };
 
-        return saveDoc(ddoc);
+        return PouchDBService.initialize('todos').then((pouchdb) => {
+
+          db = pouchdb;
+
+          return saveDoc(ddoc);
+        });
       },
 
       todos: function() {
