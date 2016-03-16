@@ -1,3 +1,6 @@
 {
-
+  "icon": "app/assets/boilerplate.ico",
+  "categories": [
+    "Utility"
+  ]
 }
