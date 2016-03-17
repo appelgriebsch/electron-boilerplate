@@ -38,7 +38,7 @@
     "build:linux-x64": "npm run build:prepare && npm run rebuild:linux-x64 && npm run package:linux-x64 && npm run setup:linux-x64",
     "build:osx": "npm run clean:build && npm run build:osx-app -s && npm run build:osx-mas -s",
     "build:osx-app": "npm run build:prepare && npm run rebuild:osx-app && npm run package:osx-app && npm run setup:osx-dmg",
-    "build:osx-mas": "npm run build:prepare && npm run rebuild:osx-mas && npm run package:osx-mas && npm run setup:osx-dmg",
+    "build:osx-mas": "npm run build:prepare && npm run rebuild:osx-mas && npm run package:osx-mas && npm run setup:osx-mas",
     "build:win32": "npm run clean:build && npm run build:win32-ia32 -s && npm run build:win32-x64 -s",
     "build:win32-ia32": "npm run build:prepare && npm run rebuild:win32-ia32 && npm run package:win32-ia32 && npm run setup:win32-ia32",
     "build:win32-x64": "npm run build:prepare && npm run rebuild:win32-x64 && npm run package:win32-x64 && npm run setup:win32-x64",
@@ -54,11 +54,12 @@
     "package:osx-mas": "electron-packager app/ $npm_package_productName --arch x64 --platform mas --app-version $npm_package_version --app-bundle-id $npm_package_config_id --asar --icon $npm_package_config_png --prune --out build/",
     "package:win32-ia32": "electron-packager app/ $npm_package_productName --arch ia32 --platform win32 --app-version $npm_package_version --asar --icon $npm_package_config_ico --version-string.CompanyName $npm_package_author --version-string.ProductName $npm_package_productName --version-string.FileDescription $npm_package_description --prune --out build/",
     "package:win32-x64": "electron-packager app/ $npm_package_productName --arch x64 --platform win32 --app-version $npm_package_version --asar --icon $npm_package_config_ico --version-string.CompanyName $npm_package_author --version-string.ProductName $npm_package_productName --version-string.FileDescription $npm_package_description --prune --out build/",
-    "setup:linux-ia32": "electron-installer-debian --src build/Boilerplate-linux-ia32/ --dest dist/ --arch ia32 --config package-linux.json && electron-installer-redhat --src build/Boilerplate-linux-ia32/ --dest dist/ --arch ia32 --config package-linux.json",
-    "setup:linux-x64": "electron-installer-debian --src build/Boilerplate-linux-x64/ --dest dist/ --arch amd64 --config package-linux.json && electron-installer-redhat --src build/Boilerplate-linux-x64/ --dest dist/ --arch amd64 --config package-linux.json",
-    "setup:osx-dmg": "appdmg package-osx.json dist/Boilerplate.dmg",
-    "setup:win32-ia32": "electron-installer-windows --src build/Boilerplate-win32-ia32/ --dest dist/ --arch ia32 --config package-win32.json",
-    "setup:win32-x64": "electron-installer-windows --src build/Boilerplate-win32-x64/ --dest dist/ --arch amd64 --config package-win32.json"
+    "setup:linux-ia32": "electron-installer-debian --src build/Boilerplate-linux-ia32/ --dest dist/linux/ia32 --arch ia32 --config package-linux.json && electron-installer-redhat --src build/Boilerplate-linux-ia32/ --dest dist/linux/ia32 --arch ia32 --config package-linux.json",
+    "setup:linux-x64": "electron-installer-debian --src build/Boilerplate-linux-x64/ --dest dist/linux/x64 --arch amd64 --config package-linux.json && electron-installer-redhat --src build/Boilerplate-linux-x64/ --dest dist/linux/x64 --arch amd64 --config package-linux.json",
+    "setup:osx-dmg": "appdmg package-osx.json dist/Boilerplate-standalone-$npm_package_version.dmg",
+    "setup:osx-mas": "appdmg package-osx.json dist/Boilerplate-mas-$npm_package_version.dmg",
+    "setup:win32-ia32": "electron-installer-windows --src build/Boilerplate-win32-ia32/ --dest dist/win32/ia32 --arch ia32 --config package-win32.json",
+    "setup:win32-x64": "electron-installer-windows --src build/Boilerplate-win32-x64/ --dest dist/win32/x64 --arch amd64 --config package-win32.json"
   },
   "dependencies": {
     "electron-packager": "^5.2.1",
