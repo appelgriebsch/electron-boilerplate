@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "0.9.0",
+  "version": "0.9.5",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,12 @@
     "boilerplate",
     "angularjs"
   ],
+  "config": {
+    "id": "com.appelgriebsch.electron-boilerplate",
+    "ico": "assets/boilerplate.ico",
+    "icns": "assets/boilerplate.icns",
+    "png": "assets/boilerplate.png"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
