@@ -2,12 +2,12 @@
 An electron boilerplate project incl. PouchDB, React + NuclearJS, Grommet UI Framework
 
 ## Included modules
-* Electron
-* ReactJS
-* React-Router
-* NuclearJS (ImmutableJS and Flux-based architecture)
-* Grommet UI framework
-* PouchDB + Plugins (geo-spatial, MongoDB-style query language and full-text search engine support)
+* [Electron](http://electron.atom.io)
+* [ReactJS](http://facebook.github.io/react/)
+* [React-Router](https://github.com/reactjs/react-router)
+* [NuclearJS](https://optimizely.github.io/nuclear-js/) (ImmutableJS and Flux-based architecture)
+* [Grommet UI framework](http://www.grommet.io/)
+* [PouchDB](https://pouchdb.com/) + Plugins (geo-spatial, MongoDB-style query language and full-text search engine support)
 
 ## Getting started
 * install node.js (at least Node 4.4.x+ and NPM 2.14.x+ required) from [here](http://www.nodejs.org)
