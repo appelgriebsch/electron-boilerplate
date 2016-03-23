@@ -1,5 +1,10 @@
-import React from 'react'
 import electron from 'electron'
 
-import GridList from 'material-ui/lib/grid-list/grid-list';
-import GridTile from 'material-ui/lib/grid-list/grid-tile';
+export default class Todo extends React.Component {
+
+  render() {
+    return (
+      'Hello World'
+    );
+  };
+};

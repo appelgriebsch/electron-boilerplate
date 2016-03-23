@@ -1,0 +1,20 @@
+{
+  "title": "Boilerplate",
+  "icon": "app/assets/boilerplate.icns",
+  "background": "app/assets/installer.png",
+  "icon-size": 80,
+  "contents": [
+    {
+      "x": 300,
+      "y": 250,
+      "type": "link",
+      "path": "/Applications"
+    },
+    {
+      "x": 120,
+      "y": 130,
+      "type": "file",
+      "path": "build/Boilerplate-darwin-x64/Boilerplate.app"
+    }
+  ]
+}

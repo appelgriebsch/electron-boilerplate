@@ -20,6 +20,8 @@ coverage
 # node-waf configuration
 .lock-wscript
 
+.vscode/
+
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build
 
@@ -27,3 +29,4 @@ build
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 app/node_modules
+app/vendor

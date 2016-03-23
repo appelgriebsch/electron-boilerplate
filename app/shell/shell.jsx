@@ -1,7 +1,6 @@
-import React from 'react'
 import electron from 'electron'
-import { App, Split, Sidebar, Header, Article, Section, Icons, Box, Title, Menu } from 'grommet'
 
+const { App, Split, Sidebar, Header, Article, Section, Icons, Box, Title, Menu } = global.Grommet;
 const appCfg = electron.remote.app.sysConfig();
 
 export default class Shell extends React.Component {

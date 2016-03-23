@@ -1,7 +1,7 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "version": "0.8.7",
+  "version": "0.9.0",
   "description": "An Electron boilerplate project (react.js variant)",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "keywords": [
     "electron",
     "boilerplate",
-    "angularjs"
+    "reactjs"
   ],
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "license": "MIT",
@@ -25,22 +25,17 @@
   "dependencies": {
     "electron-debug": "^0.5.0",
     "geopouch": "^2.0.0",
-    "grommet": "^0.5.3",
     "history": "^2.0.0",
-    "level-js": "^2.2.2",
     "leveldown": "^1.4.4",
     "mime": "^1.3.4",
     "node-servicefinder": "appelgriebsch/node-servicefinder",
     "nuclear-js": "^1.2.1",
     "pouchdb": "^5.1.0",
-    "pouchdb-auth": "^2.0.0",
     "pouchdb-find": "^0.9.0",
     "pouchdb-quick-search": "^1.1.0",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
+    "react": "^0.14.7",
     "react-router": "^2.0.0",
     "react-tap-event-plugin": "^0.2.1",
-    "socket-pouch": "^1.0.0",
     "transform-pouch": "^1.0.2",
     "uuid": "^2.0.1"
   }

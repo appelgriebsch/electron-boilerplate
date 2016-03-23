@@ -1,7 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import electron from 'electron'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 
 import Shell from './shell/shell'
