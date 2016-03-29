@@ -132,12 +132,12 @@
 
     $scope.$on('add-todo', (event, args) => {
       $mdDialog.show({
-        targetEvent: event,
+        clickOutsideToClose: false,
         parent: angular.element(document.body),
         templateUrl: __dirname + '/../views/todo.new.html',
         controller: ($scope, $mdDialog) => {
           $scope.todoItem = '';
-          $scope.ok = function () {
+          $scope.answer = function () {
             $mdDialog.hide($scope.todoItem);
           };
           $scope.cancel = function() {
