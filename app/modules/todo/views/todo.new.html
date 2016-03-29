@@ -8,13 +8,11 @@
      </md-button>
    </div>
   </md-toolbar>
-  <md-dialog-content flex layout="row">
-    <md-content flex layout-padding layout-margin style="width:240px;height:100px;">
-      <md-input-container>
-        <label>Todo</label>
-        <input ng-model="todoItem" required md-maxlength="140" type="text">
-      </md-input-container>
-    </md-content>
+  <md-dialog-content layout-padding layout-margin flex layout="row">
+    <md-input-container flex layout-fill>
+      <label>Todo</label>
+      <input ng-model="todoItem" required md-maxlength="140" type="text">
+    </md-input-container>
     <md-dialog-actions layout="row" layout-align="end end" layout-margin>
       <md-button class="md-fab md-primary md-button" ng-click="ok()" ng-disabled="todoItem === ''">OK</md-button>
     </md-dialog-actions>

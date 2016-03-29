@@ -53,3 +53,8 @@ md-content[ui-view='content'] {
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
 }
+
+md-fab-speed-dial.md-scale.md-is-open .md-fab-action-item {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
