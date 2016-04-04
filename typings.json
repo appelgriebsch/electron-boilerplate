@@ -1,0 +1,11 @@
+{
+  "name": "boilerplate",
+  "version": false,
+  "dependencies": {},
+  "ambientDependencies": {
+    "github-electron": "registry:dt/github-electron#0.37.2+20160326005648",
+    "node": "registry:dt/node#4.0.0+20160330064709",
+    "pouchdb/pouch": "registry:dt/pouchdb/pouch#0.1.0+20160316155526",
+    "react-global": "registry:dt/react-global#0.14.0+20160316155526"
+  }
+}
