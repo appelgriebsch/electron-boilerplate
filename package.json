@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "0.9.5",
+  "version": "1.0.0",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "app/index.js",
   "repository": {
