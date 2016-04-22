@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function ShellController($scope, $log, $q, $mdSidenav, $notification, $mdToast, modulesProvider, ActivityService) {
+  function ShellController($scope, $log, $q, $mdSidenav, $mdToast, modulesProvider, ActivityService) {
 
     var remote = require('remote');
     var app = remote.require('app');
@@ -33,18 +33,11 @@
 
     $scope.notify = (title, message) => {
 
-      if (process.platform === 'win32') {
-        $mdToast.show({
-          template: `<md-toast><span flex>${message}</span></md-toast>`,
-          position: 'bottom right',
-          hideDelay: 2000
-        });
-      } else {
-        $notification(title, {
-          body: message,
-          delay: 2000
-        });
-      }
+      $mdToast.show({
+        template: `<md-toast><span flex>${message}</span></md-toast>`,
+        position: 'bottom right',
+        hideDelay: 2000
+      });
     };
 
     $scope.createEventFromTemplate = (template, icon, error) => {
@@ -84,7 +77,6 @@
     this.initialize = function() {
       this.modules = modulesProvider.modules;
       return Promise.all([
-        $notification.requestPermission(),
         ActivityService.initialize()
       ]);
     };

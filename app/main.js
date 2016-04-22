@@ -2,16 +2,11 @@
 
   'use strict';
 
-  angular.module('electron-app', ['ngMaterial', 'ngSanitize', 'ui.router', 'ngAnimate', 'angular-timeline', 'angular-centered', 'notification'])
+  angular.module('electron-app', ['ngMaterial', 'ngSanitize', 'ui.router', 'ngAnimate', 'angular-timeline', 'angular-centered'])
     .config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette('blue')
         .accentPalette('grey');
-    })
-    .config(function($notificationProvider) {
-      $notificationProvider.setOptions({
-        icon: __dirname + '/assets/boilerplate.png'
-      });
     })
     .config(function($stateProvider, $urlRouterProvider) {
 
@@ -45,6 +40,8 @@
   var ActivityDataService = require('./shell/services/ActivityDataService');
   var ActivityService = require('./shell/services/ActivityService');
 
+  var LevelGraphService = require('./shell/services/LevelGraphService');
+
   var ModuleProvider = require('./scripts/ModuleProvider');
   var ShellController = require('./shell/controllers/ShellController');
 
@@ -57,6 +54,8 @@
   angular.module('electron-app').service('ActivityDataService', ['PouchDBService', ActivityDataService]);
   angular.module('electron-app').service('ActivityService', ['ActivityDataService', ActivityService]);
 
-  angular.module('electron-app').controller('ShellController', ['$scope', '$log', '$q', '$mdSidenav', '$notification', '$mdToast', 'modules', 'ActivityService', ShellController]);
+  angular.module('electron-app').service('LevelGraphService', [LevelGraphService]);
+
+  angular.module('electron-app').controller('ShellController', ['$scope', '$log', '$q', '$mdSidenav', '$mdToast', 'modules', 'ActivityService', ShellController]);
 
 })(global.angular);
