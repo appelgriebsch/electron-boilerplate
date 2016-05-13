@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "angular-timeline": "^1.2.1",
     "angular-ui-router": "^0.2.15",
     "animate.css": "^3.4.0",
-    "electron-debug": "^0.7.0",
+    "electron-debug": "^1.0.0",
     "geopouch": "^2.0.0",
     "level": "^1.4.0",
     "leveldown": "^1.4.4",
