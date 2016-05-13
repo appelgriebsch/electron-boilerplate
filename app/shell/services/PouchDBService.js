@@ -11,8 +11,7 @@
     PouchDB.plugin(require('pouchdb-quick-search'));
     PouchDB.plugin(require('transform-pouch'));
 
-    var remote = require('remote');
-    var app = remote.require('app');
+    var app = require('electron').remote.app;
 
     var sysCfg = app.sysConfig();
     var settings = { adapter: 'leveldb', prefix: sysCfg.paths.data };

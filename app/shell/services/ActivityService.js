@@ -4,8 +4,7 @@
 
   function ActivityService(ActivityDataService) {
 
-    var remote = require('remote');
-    var app = remote.require('app');
+    var app = require('electron').remote.app;
     var sysCfg = app.sysConfig();
 
     var _prefill = function(event) {

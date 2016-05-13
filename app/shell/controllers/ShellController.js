@@ -4,8 +4,7 @@
 
   function ShellController($scope, $log, $q, $mdSidenav, $mdToast, modulesProvider, ActivityService) {
 
-    var remote = require('remote');
-    var app = remote.require('app');
+    var app = require('electron').remote.app;
     var appCfg = app.sysConfig();
 
     this.appName = `${appCfg.app.name} v${appCfg.app.version}`;

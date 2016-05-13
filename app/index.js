@@ -24,7 +24,7 @@
   const username = (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
 
   // report crashes to the Electron project
-  require('crash-reporter').start();
+  //require('crash-reporter').start();
 
   // adds debug features like hotkeys for triggering dev tools and reload
   require('electron-debug')();
