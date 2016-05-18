@@ -1,16 +1,15 @@
 <div flex layout-fill layout="column" ng-cloak ng-init="ctl.initialize()">
-  <div layout="row">
-    <md-input-container layout-fill>
-      <label>Search Term</label>
-      <input ng-model="ctl.query" ng-keydown="ctl.search($event)">
-    </md-input-container>
-    <span flex></span>
-    <md-button ng-if="ctl.query.length > 0" class="md-icon-button" ng-click="ctl.reset()">
-      <md-icon>close</md-icon>
-    </md-button>
-    <md-button class="md-icon-button" ng-click="ctl.search()">
-      <md-icon>search</md-icon>
-    </md-button>
-  </div>
+  <md-autocomplete md-input-minlength="2"
+                   md-input-maxlength="18"
+                   md-selected-item="ctl.query"
+                   md-search-text="ctl.searchText"
+                   md-items="item in ctl.findTerm(ctl.searchText)"
+                   md-item-text="item.label"
+                   md-selected-item-change="ctl.search()"
+                   md-floating-label="Search Term">
+   <md-item-template>
+     <span md-highlight-text="ctrl.searchText">{{ item.label }}</span>
+   </md-item-template>
+  </md-autocomplete>
   <div id="ontology-graph" flex layout-fill></div>
 </div>

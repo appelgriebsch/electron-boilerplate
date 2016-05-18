@@ -8,12 +8,29 @@
     var path = require('path');
     var fs = require('fs');
 
+    var knownURIs = [{
+      prefix: 'owl',
+      uri: 'http://www.w3.org/2002/07/owl#'
+    }, {
+      prefix: 'rdf',
+      uri: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    }, {
+      prefix: 'rdfs',
+      uri: 'http://www.w3.org/2000/01/rdf-schema#'
+    }, {
+      prefix: 'xml',
+      uri: 'http://www.w3.org/XML/1998/namespace'
+    }, {
+      prefix: 'xsd',
+      uri: 'http://www.w3.org/2001/XMLSchema#'
+    }];
+
     var _importTTL = function(doc) {
 
       var promise = new Promise((resolve, reject) => {
 
         var stream = fs.createReadStream(doc)
-                       .pipe(db.n3.putStream());
+          .pipe(db.n3.putStream());
 
         stream.on('finish', function() {
           resolve(db);
@@ -25,6 +42,85 @@
       });
 
       return promise;
+    };
+
+    var _prefixForURI = function(uri) {
+      var item = knownURIs.find((entry) => {
+        return entry.uri === uri;
+      });
+      return item ? item.prefix : uri;
+    };
+
+    var _uriForPrefix = function(prefix) {
+      var item = knownURIs.find((entry) => {
+        return entry.prefix === prefix;
+      });
+      return item ? item.uri : prefix;
+    };
+
+    var _loadNode = function(uri) {
+
+      var promise = new Promise((resolve, reject) => {
+
+        var nodes = [];
+
+        db.get({
+          subject: uri
+        }, function(err, subjNodes) {
+          if (err) {
+            reject(err);
+          } else {
+            nodes = nodes.concat(subjNodes);
+            db.get({
+              object: uri
+            }, function(err, objNodes) {
+              if (err) {
+                reject(err);
+              } else {
+                nodes = nodes.concat(objNodes);
+                resolve(nodes);
+              }
+            });
+          }
+        });
+      });
+
+      return promise;
+    };
+
+    var _labelForNode = function(identifier) {
+
+      var label = identifier;
+
+      if (identifier.startsWith('http://') || identifier.startsWith('https://')) {
+        var idx = identifier.lastIndexOf('#') + 1;
+        var uri = identifier.substr(0, idx);
+        var name = identifier.substr(idx);
+        var prefix = _prefixForURI(uri);
+        label = `${prefix}:${name}`;
+      }
+
+      return label;
+    };
+
+    var _labelForEdge = function(identifier) {
+
+      var label = identifier;
+
+      if (identifier.startsWith('http://') || identifier.startsWith('https://')) {
+        var idx = identifier.lastIndexOf('#') + 1;
+        var uri = identifier.substr(0, idx);
+        var name = identifier.substr(idx);
+        var prefix = _prefixForURI(uri);
+        label = `${prefix}:${name}`;
+      }
+
+      if ((label === 'rdf:type') ||
+          (label === 'rdfs:subClassOf')) {
+        label = 'isA';
+      }
+
+      return label;
     };
 
     return {
@@ -41,25 +137,58 @@
       },
 
       node: function(uri) {
+        return _loadNode(uri);
+      },
+
+      prefixForURI: function(uri) {
+        return _prefixForURI(uri);
+      },
+
+      uriForPrefix: function(prefix) {
+        return _uriForPrefix(prefix);
+      },
+
+      ontology: function() {
 
         var promise = new Promise((resolve, reject) => {
 
-          var nodes = [];
+          var owlURI = _uriForPrefix('owl');
+          var ontologyNode = `${owlURI}Ontology`;
 
-          db.get({ subject: uri }, function(err, subjNodes) {
+          _loadNode(ontologyNode).then((result) => {
+            if (result.length > 0) {
+              knownURIs.push({
+                prefix: '_',
+                uri: `${result[0].subject}#`
+              });
+            }
+            resolve(result[0].subject);
+          }).catch((err) => {
+            reject(err);
+          });
+        });
+
+        return promise;
+      },
+
+      classes: function() {
+
+        var promise = new Promise((resolve, reject) => {
+
+          var pred = `${_uriForPrefix('rdf')}type`;
+          var obj = `${_uriForPrefix('owl')}Class`;
+
+          db.get({
+            predicate: pred,
+            object: obj
+          }, function(err, subjNodes) {
             if (err) {
               reject(err);
             } else {
-              nodes = nodes.concat(subjNodes);
-              db.get({ object: uri }, function(err, objNodes) {
-                if (err) {
-                  reject(err);
-                }
-                else {
-                  nodes = nodes.concat(objNodes);
-                  resolve(nodes);
-                }
+              var nodes = subjNodes.map((subjNode) => {
+                return { identifier: subjNode.subject, label: _labelForNode(subjNode.subject) };
               });
+              resolve(nodes);
             }
           });
         });
@@ -67,16 +196,39 @@
         return promise;
       },
 
-      save: function(doc) {
+      properties: function() {
 
+        var promise = new Promise((resolve, reject) => {
+
+          var pred = `${_uriForPrefix('rdf')}type`;
+          var obj = `${_uriForPrefix('owl')}ObjectProperty`;
+
+          db.get({
+            predicate: pred,
+            object: obj
+          }, function(err, subjNodes) {
+            if (err) {
+              reject(err);
+            } else {
+              var nodes = subjNodes.map( (subjNode) => {
+                return _labelForEdge(subjNode.subject);
+              });
+              resolve(nodes);
+            }
+          });
+        });
+
+        return promise;
       },
 
-      delete: function(doc) {
+      labelForNode: function(identifier) {
 
+        return _labelForNode(identifier);
       },
 
-      search: function(query) {
+      labelForEdge: function(identifier) {
 
+        return _labelForEdge(identifier);
       }
     };
   }
