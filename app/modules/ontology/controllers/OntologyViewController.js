@@ -39,6 +39,7 @@
     this.searchText = '';
     this.baseURI = '';
     this.classes = [];
+    this.properties = [];
     this.state = $state.$current;
     this.baseState = this.state.parent.toString();
 
@@ -76,36 +77,72 @@
 
       return this.data.edges.get({
         filter: function(item) {
-          return ((item.from == from) && (item.to == to) && (item.identifier === identifier));
+          return ((item.from == from.id) && (item.to == to.id) && (item.identifier === identifier));
         }
       });
     };
 
-    var _createEdge = (from, to, identifier) => {
+    var _createGraphItems = (subject, object, predicate) => {
 
-      var edge = _findEdge(from, to, identifier);
+      var subjNode = _findNode(subject);
+      var objNode = _findNode(object);
+      var relation = predicate;
 
-      if (edge.length == 0) {
+      var from = subjNode ? subjNode[0] : undefined;
+      var to = objNode ? objNode[0] : undefined;
 
-        var label = OntologyDataService.labelForEdge(identifier);
-        var newEdge = {
-          from: from,
-          to: to,
-          identifier: identifier,
-          title: label
-        };
+      var label = OntologyDataService.labelForEdge(relation);
 
-        if (label === 'isA') {
+      var newEdge = {
+        identifier: relation,
+        title: label
+      };
+
+      if (label === 'property') { // replace domain and range relationships with related objects
+
+        to = _createNode(object);
+
+        var prop = this.properties.find((elem) => {
+          return (elem.property === subject) && ((elem.domain === object) || (elem.range === object));
+        });
+
+        if (!prop) {
+          from = _createNode(subject);
+        } else {
+          newEdge.title = OntologyDataService.labelForEdge(prop.property);
+          relation = newEdge.identifier = prop.property;
+
+          if (to.identifier === prop.domain) {
+            from = _createNode(prop.range);
+          } else if (to.identifier === prop.range) {
+            from = _createNode(prop.domain);
+          }
+        }
+      } else {
+
+        from = _createNode(subject);
+        to = _createNode(object);
+
+        if (label === 'isA') { // layout updates for sub class relationships
+
           newEdge.arrows = {
             to: {
               scaleFactor: 0.5
             }
           };
-          newEdge.dashes = true;
-        }
 
+          newEdge.dashes = true;
+          newEdge.color = '#bad6f4';
+        }
+      }
+
+      var edge = _findEdge(from, to, relation);
+
+      if (edge.length == 0) {
+        newEdge.from = from.id;
+        newEdge.to = to.id;
         this.data.edges.add(newEdge);
-        edge = _findEdge(from, to, identifier);
+        edge = _findEdge(from, to, relation);
       }
 
       return edge[0];
@@ -121,15 +158,13 @@
           $q.when(true).then(() => {
             results.forEach((item) => {
 
-              if (item.object !== `${owlURI}Class`) {
-
-                var subjNode = _createNode(item.subject);
-                var objNode = _createNode(item.object);
-
-                _createEdge(subjNode.id, objNode.id, item.predicate);
+              if (!item.object.startsWith(owlURI)) {
+                _createGraphItems(item.subject, item.object, item.predicate);
               }
             });
 
+            var mainNode = _findNode(queryString);
+            this.network.selectNodes([mainNode[0].id], true);
             this.network.fit();
           });
         });
@@ -148,6 +183,9 @@
     };
 
     this.initialize = function() {
+
+      $scope.setBusy('Loading ontology data...');
+
       _createGraph();
       var init = [OntologyDataService.initialize()];
       Promise.all(init).then(() => {
@@ -157,8 +195,13 @@
         return OntologyDataService.classes();
       }).then((result) => {
         this.classes = result;
-      }).catch((err) => {
-        console.log(err);
+        return OntologyDataService.properties();
+      }).then((result => {
+        this.properties = result;
+        $scope.setReady(false);
+      })).catch((err) => {
+        $scope.setError('SearchAction', 'search', err);
+        $scope.setReady(true);
       });
     };
 
@@ -166,7 +209,7 @@
 
       var foundNodes = [];
       this.classes.forEach((entry) => {
-        var idx = entry.label.search(searchText);
+        var idx = entry.label.search(new RegExp(searchText, 'i'));
         if (idx != -1) {
           foundNodes.push(entry);
         }
