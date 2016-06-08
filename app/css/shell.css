@@ -1,8 +1,28 @@
-html, body, #app {
-  padding: 0px;
-  margin: 0px;
+html, body {
+  padding: 0;
+  margin: 0;
   height: 100%;
   width: 100%;
-  overflow: none;
+  overflow: hidden;
   -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.8);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(127, 127, 127, 0.4);
 }

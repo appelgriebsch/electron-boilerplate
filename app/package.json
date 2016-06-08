@@ -45,6 +45,7 @@
     "pouchdb": "^5.1.0",
     "pouchdb-find": "^0.10.0",
     "pouchdb-quick-search": "^1.1.0",
+    "radium": "^0.17.1",
     "react": "^15.0.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.0.0",

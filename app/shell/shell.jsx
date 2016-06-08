@@ -5,8 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {blue500, blue700} from 'material-ui/styles/colors';
 
-import StyleOSX from './MainWindow-OSX';
-import StyleWin from './MainWindow-Win';
+import Window from './Window';
 
 const app = electron.remote.app;
 const appCfg = app.sysConfig();
@@ -16,8 +15,6 @@ const muiTheme = getMuiTheme({
     primary2Color: blue700
   }
 });
-
-const MainWindow = appCfg.platform === 'darwin' ?  StyleOSX : StyleWin;
 
 export default class Shell extends React.Component {
 
@@ -31,7 +28,7 @@ export default class Shell extends React.Component {
   }
 
   toggleFullScreen() {
-    app.toggleFullScreen();
+    app.toggleFullscreen();
   }
 
   closeApp() {
@@ -41,11 +38,14 @@ export default class Shell extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <MainWindow appName={this.title} activeModule="Test" closeHandler={this.closeApp}
-                                                             fullScreenHandler={this.toggleFullScreen}
-                                                             minimizeHandler={this.minimizeApp}>
+        <Window appName={this.title}
+                activeModule='Todo'
+                style={appCfg.platform}
+                closeHandler={this.closeApp}
+                fullScreenHandler={this.toggleFullScreen}
+                minimizeHandler={this.minimizeApp}>
           { this.props.children }
-        </MainWindow>
+        </Window>
       </MuiThemeProvider>
     );
   };
