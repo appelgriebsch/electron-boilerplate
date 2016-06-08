@@ -30,4 +30,13 @@ dist
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 app/node_modules
-app/vendor
+
+# build artefacts from babel-compile
+app/modules/**/*.js*
+!app/modules/**/*.jsx
+
+app/shell/**/*.js*
+!app/shell/**/*.jsx
+
+app/*.js*
+!app/*.jsx
