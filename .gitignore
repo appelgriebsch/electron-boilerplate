@@ -40,3 +40,4 @@ app/shell/**/*.js*
 
 app/*.js*
 !app/*.jsx
+!app/index.js

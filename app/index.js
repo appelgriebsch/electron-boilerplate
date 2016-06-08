@@ -44,6 +44,10 @@
     win.on('closed', onClosed);
     win.webContents.on('crashed', onCrash);
     win.on('unresponsive', onCrash);
+
+    const devToolsPath = path.join(__dirname, '..', 'devTools', 'react');    
+    BrowserWindow.addDevToolsExtension(devToolsPath);
+
     return win;
   }
 
