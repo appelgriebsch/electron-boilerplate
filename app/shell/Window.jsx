@@ -52,8 +52,9 @@ class Window extends React.Component {
           { headerComponents }
         </div>
         <AppBar title={this.props.activeModule} showMenuIconButton={false}>
-          {this.props.children}
+          {this.props.modules}
         </AppBar>
+        {this.props.children}
       </div>
     );
   }

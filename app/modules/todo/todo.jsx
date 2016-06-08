@@ -1,10 +1,17 @@
+// @flow
 import electron from 'electron'
+import React from 'react';
+import Radium from 'radium';
 
-export default class Todo extends React.Component {
+class Todo extends React.Component {
 
   render() {
     return (
-      'Hello World'
+      <div>
+        <h1>Todo list</h1>
+      </div>
     );
-  };
-};
+  }
+}
+
+export default Radium(Todo);
