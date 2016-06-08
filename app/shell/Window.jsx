@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Radium from 'radium';
 import AppBar from 'material-ui/AppBar';
@@ -15,7 +16,7 @@ const WindowStyle = {
   width: '100%',
   overflow: 'hidden',
   WebkitUserSelect: 'none'
-}
+};
 
 class Window extends React.Component {
 
@@ -23,7 +24,7 @@ class Window extends React.Component {
 
     var headerComponents = {};
     if (this.props.style !== 'darwin') {
-      headerComponents =
+      headerComponents = (
         <div style={{height: '24px', flex: 1, alignContent: 'flex-end', alignItems: 'flex-end', justifyContent: 'flex-end', display: 'flex', padding: '2px'}}>
           <AppTitle title={this.props.appName} />
           <DragHandler key="drag_1" />
@@ -31,8 +32,9 @@ class Window extends React.Component {
           <MaximizeButton style={this.props.style} clickHandler={this.props.fullScreenHandler} />
           <CloseButton style={this.props.style} clickHandler={this.props.closeHandler} />
         </div>
+      );
     } else {
-      headerComponents =
+      headerComponents = (
         <div style={{height: '24px', flex: 1, alignContent: 'flex-start', alignItems: 'flex-start', justifyContent: 'flex-start', display: 'flex', padding: '2px'}}>
           <CloseButton style={this.props.style} clickHandler={this.props.closeHandler} />
           <MinimizeButton style={this.props.style} clickHandler={this.props.minimizeHandler} />
@@ -41,6 +43,7 @@ class Window extends React.Component {
           <AppTitle title={this.props.appName} />
           <DragHandler key="drag_2" />
         </div>
+      );
     }
 
     return (
@@ -54,10 +57,10 @@ class Window extends React.Component {
       </div>
     );
   }
-};
+}
 
 Window.contextTypes = {
-  muiTheme: React.PropTypes.object.isRequired,
+  muiTheme: React.PropTypes.object.isRequired
 };
 
 export default Radium(Window);

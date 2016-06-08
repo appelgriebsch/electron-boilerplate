@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Radium from 'radium';
 
@@ -16,7 +17,7 @@ class AppTitle extends React.Component {
     return (
       <span style={[appTitleStyle]}>{ this.props.title }</span>
     );
-  };
+  }
 }
 
 export default Radium(AppTitle);

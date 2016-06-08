@@ -1,3 +1,4 @@
+// @flow
 (function() {
 
   'use strict';
@@ -45,7 +46,7 @@
     win.webContents.on('crashed', onCrash);
     win.on('unresponsive', onCrash);
 
-    const devToolsPath = path.join(__dirname, '..', 'devTools', 'react');    
+    const devToolsPath = path.join(__dirname, '..', 'devTools', 'react');
     BrowserWindow.addDevToolsExtension(devToolsPath);
 
     return win;

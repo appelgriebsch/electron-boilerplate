@@ -48,5 +48,5 @@ export default class Shell extends React.Component {
         </Window>
       </MuiThemeProvider>
     );
-  };
-};
+  }
+}

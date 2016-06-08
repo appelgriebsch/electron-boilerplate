@@ -1,3 +1,4 @@
+// @flow
 export const winIconStyle = {
   width: '10px',
   height: '10px',
@@ -45,7 +46,7 @@ export const osxIconStyle = {
   ':hover': {
     opacity: 100
   }
-}
+};
 
 export const osxButtonStyle = {
   base: {
@@ -81,4 +82,4 @@ export const osxButtonStyle = {
       borderColor: '#128622'
     }
   }
-}
+};

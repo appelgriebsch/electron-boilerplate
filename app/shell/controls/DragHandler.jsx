@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Radium from 'radium';
 
@@ -12,7 +13,7 @@ class DragHandler extends React.Component {
     return (
       <span key={this.props.key} style={[dragStyle]} />
     );
-  };
+  }
 }
 
 export default Radium(DragHandler);
