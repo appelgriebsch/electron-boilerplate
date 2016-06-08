@@ -1,31 +1,34 @@
-import electron from 'electron'
+// @flow
+import electron from 'electron';
+import React from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {blue500} from 'material-ui/styles/colors';
 
-const { App, Split, Sidebar, Header, Article, Section, Icons, Box, Title, Menu } = global.Grommet;
+import AppBar from 'material-ui/AppBar';
+
 const appCfg = electron.remote.app.sysConfig();
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: blue500
+  }
+});
+
 
 export default class Shell extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.title = `${appCfg.app.name} ${appCfg.app.version}`;
+  }
+
   render() {
     return (
-       <App centered={false}>
-          <Header size="small" justify="between" colorIndex="grey-1" pad="small">
-            <Title>
-              { appCfg.app.name } { appCfg.app.version }
-            </Title>
-          </Header>
-          <Split flex="right" fixed={true}>
-            <Sidebar size="small" colorIndex="grey-1" fixed={true}>
-                <Header pad={{horizontal: 'small'}}>
-                  <Icons.Base.Menu/>
-                </Header>
-                <Menu>
-                </Menu>
-            </Sidebar>
-            <Article>
-              <Section>{ this.props.children }</Section>
-            </Article>
-          </Split>
-       </App>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <AppBar title={this.title} showMenuIconButton={false}>
+          {this.props.children}
+        </AppBar>
+      </MuiThemeProvider>
     );
   };
 };

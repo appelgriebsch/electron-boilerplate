@@ -1,4 +1,0 @@
-/// <reference path="browser/ambient/github-electron/index.d.ts" />
-/// <reference path="browser/ambient/node/index.d.ts" />
-/// <reference path="browser/ambient/pouchdb/pouch/index.d.ts" />
-/// <reference path="browser/ambient/react-global/index.d.ts" />
