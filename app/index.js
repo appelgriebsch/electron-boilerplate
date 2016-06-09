@@ -127,6 +127,12 @@
 
   app.on('ready', function() {
     mainWindow = createMainWindow();
+
+    const isDev = require('electron-is-dev');
+    if (isDev) {
+      const devToolsPath = path.join(__dirname, '..', 'devTools', 'batarang');    
+      BrowserWindow.addDevToolsExtension(devToolsPath);
+    }
   });
 
   app.serviceFinder = function(serviceName, protocol, subTypes, includeLocal) {

@@ -1,0 +1,32 @@
+{
+   "background": {
+      "scripts": [ "background.js" ]
+   },
+   "content_scripts": [ {
+      "js": [ "inject.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_start"
+   } ],
+   "description": "Extends the Developer Tools, adding tools for debugging and profiling AngularJS applications.",
+   "devtools_page": "devtoolsBackground.html",
+   "icons": {
+      "128": "img/webstore-icon.png",
+      "16": "img/webstore-icon.png",
+      "48": "img/webstore-icon.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC9hsXx3+F75DyGto3mkm0FB2sycQzyMqXQAySn2Qj67vIHFMSrVZ0ItPzGnWJwoRoaDI7cQF9c/WLDpLJQwGe5CV5z84MueOME3e45JJEwN+YsW5ufEavmp+pk1c9h/Wyi8bMoSWJGIrOG72wCTFOdnyN6nocA0dm4w7UWsxLLEQIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "21.0.1180.57",
+   "name": "AngularJS Batarang",
+   "page_action": {
+      "default_icon": {
+         "19": "img/icon19.png",
+         "38": "img/icon38.png"
+      },
+      "default_title": "AngularJS Super-Powered"
+   },
+   "permissions": [ "tabs", "\u003Call_urls>" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.10.7",
+   "web_accessible_resources": [ "dist/hint.js" ]
+}
