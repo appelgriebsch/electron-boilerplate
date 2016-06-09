@@ -1,5 +1,6 @@
 // @flow
 import PouchDB from 'pouchdb';
+import electron from 'electron';
 
 PouchDB.plugin(require('geopouch'));
 PouchDB.plugin(require('pouchdb-find'));
@@ -9,7 +10,8 @@ PouchDB.plugin(require('transform-pouch'));
 class PouchDBService {
 
   constructor(name) {
-    this.pouchdbService = new PouchDB(name, { adapter: 'leveldb' });
+    const appCfg = electron.remote.app.sysConfig();
+    this.pouchdbService = new PouchDB(name, { adapter: 'leveldb', prefix: appCfg.paths.data });
   }
 
   query(view, options) {
