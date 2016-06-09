@@ -11,7 +11,7 @@ const dragStyle = {
 class DragHandler extends React.Component {
   render() {
     return (
-      <span key={this.props.key} style={[dragStyle]} />
+      <span style={[dragStyle]} />
     );
   }
 }

@@ -27,7 +27,7 @@ class Window extends React.Component {
       headerComponents = (
         <div style={{height: '24px', flex: 1, alignContent: 'flex-end', alignItems: 'flex-end', justifyContent: 'flex-end', display: 'flex', padding: '2px'}}>
           <AppTitle title={this.props.appName} />
-          <DragHandler key="drag_1" />
+          <DragHandler key="left" />
           <MinimizeButton style={this.props.style} clickHandler={this.props.minimizeHandler} />
           <MaximizeButton style={this.props.style} clickHandler={this.props.fullScreenHandler} />
           <CloseButton style={this.props.style} clickHandler={this.props.closeHandler} />
@@ -39,9 +39,9 @@ class Window extends React.Component {
           <CloseButton style={this.props.style} clickHandler={this.props.closeHandler} />
           <MinimizeButton style={this.props.style} clickHandler={this.props.minimizeHandler} />
           <MaximizeButton style={this.props.style} clickHandler={this.props.fullScreenHandler} />
-          <DragHandler key="drag_1" />
+          <DragHandler key="left" />
           <AppTitle title={this.props.appName} />
-          <DragHandler key="drag_2" />
+          <DragHandler key="right" />
         </div>
       );
     }

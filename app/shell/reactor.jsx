@@ -1,4 +1,6 @@
 // @flow
 import { Reactor } from 'nuclear-js';
-const reactor = new Reactor({ debug: true });
+const isDev = require('electron-is-dev');
+
+const reactor = new Reactor({ debug: isDev });
 export default reactor;

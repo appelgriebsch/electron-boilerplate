@@ -46,9 +46,6 @@
     win.webContents.on('crashed', onCrash);
     win.on('unresponsive', onCrash);
 
-    const devToolsPath = path.join(__dirname, '..', 'devTools', 'react');
-    BrowserWindow.addDevToolsExtension(devToolsPath);
-
     return win;
   }
 
@@ -132,6 +129,13 @@
 
   app.on('ready', function() {
     mainWindow = createMainWindow();
+
+    const isDev = require('electron-is-dev');
+    if (isDev) {
+      const devToolsPath = path.join(__dirname, '..', 'devTools', 'react');
+      BrowserWindow.addDevToolsExtension(devToolsPath);
+    }
+
   });
 
   app.serviceFinder = function(serviceName, protocol, subTypes, includeLocal) {
