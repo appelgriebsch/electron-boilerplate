@@ -2,22 +2,18 @@
 import { Store, toImmutable } from 'nuclear-js';
 import ActionTypes from './todoActionTypes';
 
-class TodoStore {
+export default Store({
 
   getInitialState() {
     return toImmutable({});
-  }
+  },
 
   initialize() {
-    this.on(ActionTypes.RECEIVE_TODOS, receiveTodos);
+    this.on(ActionTypes.RECEIVE_TODOS, (state, payload) => {
+      let newTodos = toImmutable(payload.todos)
+                      .toMap()
+                      .mapKeys((k, v) => v.get('_id'));
+      return state.merge(newTodos);
+    });
   }
-}
-
-function receiveTodos(state, { todos }) {
-  let newTodos = toImmutable(todos)
-      .toMap()
-      .mapKeys((k, v) => v.get('_id'));
-  return state.merge(newTodos);
-}
-
-export default Store(TodoStore);
+});

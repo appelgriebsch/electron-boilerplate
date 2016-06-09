@@ -3,20 +3,16 @@ import reactor from '../../shell/reactor';
 import ActionTypes from './todoActionTypes';
 import TodoDB from './todoDataService';
 
-class TodoActions {
+var db = new TodoDB('todos');
 
-  constructor() {
-    this.db = new TodoDB('todos');
-  }
+export default {
 
   fetchTodos() {
-    this.db.initialize().then(() => {
-      return this.db.todos;
-    }).then((results) => {
-      let todos = results.rows;
-      reactor.dispatch(ActionTypes.RECEIVE_TODOS, { todos });
+    db.initialize().then(() => {
+      return db.todos;
+    }).then((result) => {
+      let rows = result.rows.map((row) => row.doc);
+      reactor.dispatch(ActionTypes.RECEIVE_TODOS, { todos: rows });
     });
   }
-}
-
-export default TodoActions;
+};
