@@ -1,8 +1,8 @@
 {
   "name": "boilerplate",
   "productName": "Boilerplate",
-  "description": "An Electron boilerplate project (react.js variant)",
-  "version": "0.9.0",
+  "description": "An Electron boilerplate project",
+  "version": "0.9.1",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "app/index.js",
   "repository": {
@@ -14,6 +14,12 @@
     "boilerplate",
     "reactjs"
   ],
+  "config": {
+    "id": "com.appelgriebsch.electron-boilerplate",
+    "ico": "app/assets/boilerplate.ico",
+    "icns": "app/assets/boilerplate.icns",
+    "png": "app/assets/boilerplate.png"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
