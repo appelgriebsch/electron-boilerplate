@@ -41,6 +41,8 @@
     "angular-timeline": "^1.2.1",
     "angular-ui-router": "^0.3.0",
     "animate.css": "^3.4.0",
+    "duet": "^4.0.0",
+    "duet-channel": "^1.0.0",
     "electron-debug": "^1.0.0",
     "geopouch": "^2.0.0",
     "level": "^1.4.0",
