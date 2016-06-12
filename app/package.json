@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
   "dependencies": {
+    "duet": "^4.0.0",
+    "duet-channel": "^1.0.0",
     "electron-debug": "^1.0.0",
     "geopouch": "^2.0.0",
     "history": "^3.0.0",
