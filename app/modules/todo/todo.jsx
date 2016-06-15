@@ -10,7 +10,10 @@ import { GridList, GridTile } from 'material-ui/GridList';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import { gridLayoutStyle, mainContentStyle, floatingButtonStyles } from './todoStyles';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import { gridLayoutStyle, mainContentStyle, floatingButtonStyles, textEntryStyles } from './todoStyles';
 
 reactor.registerStores({
   'todos': TodoStore
@@ -22,15 +25,40 @@ const Todo = React.createClass({
 
   mixins: [reactor.ReactMixin],
 
+  getInitialState: function() {
+    return { todoDlgOpen: false };
+  },
+
   getDataBindings() {
     return {
       todos: ['todos']
     };
   },
 
+  handleNewTodoDlgOpen() {
+    this.setState({ todoDlgOpen: true });
+  },
+
+  handleNewTodoDlgConfirm() {
+    this.setState( { todoDlgOpen: false });
+  },
+
+  handleNewTodoDlgCancel() {
+    this.setState( { todoDlgOpen: false });
+  },
+
   render() {
 
     const cols = 4;     // TODO: responsive layout phone: 1 col, tablet: 2 cols
+    const todoDlgButtons = [
+      <FlatButton label="Create"
+                  primary={true}
+                  keyboardFocused={true}
+                  onTouchTap={this.handleNewTodoDlgConfirm} />,
+      <FlatButton label="Cancel"
+        secondary={true}
+        onTouchTap={this.handleNewTodoDlgCancel} />
+    ];
 
     return (
       <div style={[ mainContentStyle.base, mainContentStyle.nonOverflow ]}>
@@ -46,9 +74,18 @@ const Todo = React.createClass({
                     </GridTile>);
           }).toList()}
         </GridList>
-        <FloatingActionButton style={floatingButtonStyles.bottom}>
+        <FloatingActionButton style={floatingButtonStyles.bottom} onTouchTap={this.handleNewTodoDlgOpen}>
           <FontIcon color="black" className="material-icons">add</FontIcon>
         </FloatingActionButton>
+        <Dialog title="Create a new Todo"
+                modal={true}
+                actions={todoDlgButtons}
+                open={this.state.todoDlgOpen}>
+          <TextField style={textEntryStyles.large}
+                  hintText="Your new Todo"
+                  errorText="This field is required"
+                  floatingLabelText="Please insert your new Todo" />
+        </Dialog>
       </div>
     );
   }

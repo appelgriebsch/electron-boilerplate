@@ -29,3 +29,9 @@ export const floatingButtonStyles = {
     marginBottom: '20px'
   }
 }
+
+export const textEntryStyles = {
+  large: {
+    width: '100%'
+  }
+}
