@@ -26,7 +26,7 @@ const Todo = React.createClass({
   mixins: [reactor.ReactMixin],
 
   getInitialState: function() {
-    return { todoDlgOpen: false };
+    return { todoDlgOpen: false, todoText: '' };
   },
 
   getDataBindings() {
@@ -35,11 +35,16 @@ const Todo = React.createClass({
     };
   },
 
+  handleNewTodoText(event) {
+    this.setState({ todoText: event.target.value });
+  },
+
   handleNewTodoDlgOpen() {
     this.setState({ todoDlgOpen: true });
   },
 
   handleNewTodoDlgConfirm() {
+    TodoActions.addTodo(this.state.todoText);
     this.setState( { todoDlgOpen: false });
   },
 
@@ -53,11 +58,10 @@ const Todo = React.createClass({
     const todoDlgButtons = [
       <FlatButton label="Create"
                   primary={true}
-                  keyboardFocused={true}
                   onTouchTap={this.handleNewTodoDlgConfirm} />,
       <FlatButton label="Cancel"
-        secondary={true}
-        onTouchTap={this.handleNewTodoDlgCancel} />
+                  secondary={true}
+                  onTouchTap={this.handleNewTodoDlgCancel} />
     ];
 
     return (
@@ -80,11 +84,13 @@ const Todo = React.createClass({
         <Dialog title="Create a new Todo"
                 modal={true}
                 actions={todoDlgButtons}
-                open={this.state.todoDlgOpen}>
+                open={this.state.todoDlgOpen}
+                onRequestClose={this.handleNewTodoDlgCancel}>
           <TextField style={textEntryStyles.large}
                   hintText="Your new Todo"
                   errorText="This field is required"
-                  floatingLabelText="Please insert your new Todo" />
+                  floatingLabelText="Please insert your new Todo"
+                  onChange={this.handleNewTodoText} />
         </Dialog>
       </div>
     );

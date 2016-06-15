@@ -1,5 +1,6 @@
 // @flow
 import PouchDBService from '../../shell/pouchdb';
+import uuid from 'uuid';
 
 const viewSpec = {
   _id: '_design/todos',
@@ -39,6 +40,15 @@ class TodoDataService extends PouchDBService {
 
   removeTodo(id) {
     return this.remove(id);
+  }
+
+  addTodo(todo) {
+
+    if (!todo._id) {
+      todo._id = uuid.v4();
+    }
+
+    return this.save(todo);
   }
 }
 

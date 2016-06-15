@@ -15,5 +15,11 @@ export default Store({
                       .mapKeys((k, v) => v.get('_id'));
       return state.merge(newTodos);
     });
+    this.on(ActionTypes.ADD_TODO, (state, payload) => {
+      let newTodos = toImmutable([payload.todo])
+                      .toMap()
+                      .mapKeys((k,v) => v.get('_id'));
+      return state.merge(newTodos);
+    });
   }
 });
