@@ -9,7 +9,8 @@ import TodoActions from './todoActions';
 import { GridList, GridTile } from 'material-ui/GridList';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
-import { gridLayoutStyle, mainContentStyle } from './todoStyles';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import { gridLayoutStyle, mainContentStyle, floatingButtonStyles } from './todoStyles';
 
 reactor.registerStores({
   'todos': TodoStore
@@ -45,6 +46,9 @@ const Todo = React.createClass({
                     </GridTile>);
           }).toList()}
         </GridList>
+        <FloatingActionButton style={floatingButtonStyles.bottom}>
+          <FontIcon color="black" className="material-icons">add</FontIcon>
+        </FloatingActionButton>
       </div>
     );
   }

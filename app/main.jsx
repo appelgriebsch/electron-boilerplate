@@ -18,4 +18,4 @@ ReactDOM.render(
     <Route path="/" component={Shell}>
       <IndexRoute component={Todo} />
     </Route>
-  </Router>, document.getElementById('app'));
+  </Router>, document.querySelector('div[role=app]'));

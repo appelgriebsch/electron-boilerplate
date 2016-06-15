@@ -19,3 +19,13 @@ export const mainContentStyle = {
     overflow: 'hidden'
   }
 };
+
+export const floatingButtonStyles = {
+  bottom: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    marginRight: '20px',
+    marginBottom: '20px'
+  }
+}
