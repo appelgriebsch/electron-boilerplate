@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import Radium from 'radium';
-import AppBar from 'material-ui/AppBar';
+
+import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
 
 import AppTitle from './controls/AppTitle';
 import DragHandler from './controls/DragHandler';
@@ -48,13 +49,24 @@ class Window extends React.Component {
 
     return (
       <div style={[WindowStyle]}>
-        <div style={{backgroundColor: this.context.muiTheme.palette.primary1Color, width: '100%'}}>
+        <div style={{width: '100%'}} className="mdl-color--primary">
           { headerComponents }
         </div>
-        <AppBar title={this.props.activeModule} showMenuIconButton={false}>
-          {this.props.modules}
-        </AppBar>
-        {this.props.children}
+        <Layout fixedHeader>
+          <Header title={this.props.activeModule}>
+            <Navigation>
+              {this.props.modules}
+            </Navigation>
+          </Header>
+          <Drawer title={this.props.activeModule}>
+            <Navigation>
+              {this.props.modules}
+            </Navigation>
+          </Drawer>
+          <Content>
+            {this.props.children}
+          </Content>
+        </Layout>
       </div>
     );
   }

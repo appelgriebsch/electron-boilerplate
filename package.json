@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
   "scripts": {
-    "postinstall": "npm run app-install && npm run electron-version && npm run rebuild",
+    "postinstall": "npm run app-install && npm run electron-version",
     "start": "npm run babel-build && electron app/",
     "app-install": "cd app && npm install --no-optional",
     "electron-version": "cd build && node -e \"var electron = require('../node_modules/electron-prebuilt/package.json'); console.log(electron.version);\" > electron.version",
