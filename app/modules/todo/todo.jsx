@@ -25,7 +25,7 @@ const Todo = React.createClass({
 
   mixins: [reactor.ReactMixin],
 
-  getInitialState: function() {
+  getInitialState() {
     return { todoDlgOpen: false, todoText: '' };
   },
 

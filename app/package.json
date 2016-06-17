@@ -50,6 +50,7 @@
     "pouchdb-quick-search": "^1.1.0",
     "radium": "^0.17.1",
     "react": "^15.0.0",
+    "react-calendar-heatmap": "^1.0.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.0.0",
     "react-tap-event-plugin": "^1.0.0",
