@@ -17,7 +17,11 @@ class Shell extends React.Component {
     super();
     this.title = `${appCfg.app.name} ${appCfg.app.version}`;
     this.sqlDB = new SqlDatabase(appCfg.app.name);
-    this.docDB = new DocumentDatabase(appCfg.app.name);    
+    this.docDB = new DocumentDatabase(appCfg.app.name);
+
+    this.minimizeApp = this.minimizeApp.bind(this);
+    this.toggleFullScreen = this.toggleFullScreen.bind(this);
+    this.closeApp = this.closeApp.bind(this);
   }
 
   minimizeApp() {
@@ -29,7 +33,9 @@ class Shell extends React.Component {
   }
 
   closeApp() {
-    app.close();
+    this.docDB.save({ event: 'closed' }).then(() => {
+      app.close();
+    });
   }
 
   render() {
