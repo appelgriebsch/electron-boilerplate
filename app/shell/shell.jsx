@@ -1,17 +1,23 @@
 // @flow
 import electron from 'electron';
 import React from 'react';
+import Radium from 'radium';
+
+import DocumentDatabase from './DocumentDatabase';
+import SqlDatabase from './SqlDatabase';
 
 import Window from './Window';
 
 const app = electron.remote.app;
 const appCfg = app.sysConfig();
 
-export default class Shell extends React.Component {
+class Shell extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.title = `${appCfg.app.name} ${appCfg.app.version}`;
+    this.sqlDB = new SqlDatabase(appCfg.app.name);
+    this.docDB = new DocumentDatabase(appCfg.app.name);    
   }
 
   minimizeApp() {
@@ -39,3 +45,5 @@ export default class Shell extends React.Component {
     );
   }
 }
+
+export default Radium(Shell);
