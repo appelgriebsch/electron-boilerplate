@@ -40,8 +40,6 @@
   var ActivityDataService = require('./shell/services/ActivityDataService');
   var ActivityService = require('./shell/services/ActivityService');
 
-  var LevelGraphService = require('./shell/services/LevelGraphService');
-
   var ModuleProvider = require('./scripts/ModuleProvider');
   var ShellController = require('./shell/controllers/ShellController');
 
@@ -53,8 +51,6 @@
   angular.module('electron-app').service('PouchDBService', [PouchDBService]);
   angular.module('electron-app').service('ActivityDataService', ['PouchDBService', ActivityDataService]);
   angular.module('electron-app').service('ActivityService', ['ActivityDataService', ActivityService]);
-
-  angular.module('electron-app').service('LevelGraphService', [LevelGraphService]);
 
   angular.module('electron-app').controller('ShellController', ['$scope', '$log', '$q', '$mdSidenav', '$mdToast', 'modules', 'ActivityService', ShellController]);
 

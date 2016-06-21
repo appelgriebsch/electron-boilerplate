@@ -12,15 +12,6 @@
         tooltip: 'Access your todos',
         icon: 'toc'
       },
-      ontology: {
-        path: 'modules/ontology',
-        name: 'OntologyModule',
-        url: '/app/ontology/view',
-        state: 'app.ontology',
-        label: 'Ontology',
-        tooltip: 'Browse the Ontology',
-        icon: 'blur_on'
-      },
       activities: {
         path: 'modules/activities',
         name: 'ActivityModule',
