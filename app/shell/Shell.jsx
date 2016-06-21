@@ -3,8 +3,8 @@ import electron from 'electron';
 import React from 'react';
 import Radium from 'radium';
 
-import DocumentDatabase from './DocumentDatabase';
-import SqlDatabase from './SqlDatabase';
+import DocumentDatabase from './services/DocumentDatabase';
+import SqlDatabase from './services/SqlDatabase';
 
 import Window from './Window';
 
@@ -12,8 +12,8 @@ const app = electron.remote.app;
 const appCfg = app.sysConfig();
 
 /**
- * 
- * 
+ *
+ *
  * @class Shell
  * @extends {React.Component}
  */
@@ -21,7 +21,7 @@ class Shell extends React.Component {
 
   /**
    * Creates an instance of Shell.
-   * 
+   *
    */
   constructor() {
     super();
@@ -35,21 +35,21 @@ class Shell extends React.Component {
   }
 
   /**
-   * 
+   *
    */
   minimizeApp() {
     app.minimizeAppToSysTray();
   }
 
   /**
-   * 
+   *
    */
   toggleFullScreen() {
     app.toggleFullscreen();
   }
 
   /**
-   * 
+   *
    */
   closeApp() {
     this.docDB.save({ event: 'closed' }).then(() => {
@@ -58,8 +58,8 @@ class Shell extends React.Component {
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @returns
    */
   render() {
