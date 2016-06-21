@@ -5,8 +5,19 @@ import uuid from 'uuid';
 PouchDB.plugin(require('pouchdb-find'));
 PouchDB.plugin(require('pouchdb-quick-search'));
 
+/**
+ * 
+ * 
+ * @class DocumentDatabase
+ */
 class DocumentDatabase {
 
+  /**
+   * Creates an instance of DocumentDatabase.
+   * 
+   * @param {any} dbName
+   * @param {number} [dbVersion=1]
+   */
   constructor(dbName, dbVersion = 1) {
     this.db = new PouchDB(`${dbName}.${dbVersion}`, {
       adapter: 'idb',
@@ -14,6 +25,12 @@ class DocumentDatabase {
     });
   }
 
+  /**
+   * 
+   * 
+   * @param {any} doc
+   * @returns
+   */
   save(doc) {
 
     if (!doc._id) {
@@ -41,6 +58,12 @@ class DocumentDatabase {
     return promise;
   }
 
+  /**
+   * 
+   * 
+   * @param {any} id
+   * @returns
+   */
   get(id) {
     return this.db.get(id);
   }

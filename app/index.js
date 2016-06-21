@@ -24,15 +24,16 @@
   const hostname = os.hostname();
   const username = (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
 
-  // report crashes to the Electron project
-  // require('crash-reporter').start();
-
   // adds debug features like hotkeys for triggering dev tools and reload
   require('electron-debug')();
 
   process.on('uncaughtException', onCrash);
 
-  // create main application window
+  /**
+   *  create main application window 
+   * 
+   * @returns
+   */
   function createMainWindow() {
 
     var win = new BrowserWindow({
@@ -49,16 +50,29 @@
     return win;
   }
 
+  /**
+   *  
+   */
   function onClosed() {
     // deref the window
     // for multiple windows store them in an array
     mainWindow = null;
   }
 
+  /**
+   * 
+   * 
+   * @param {any} exc
+   */
   function onCrash(exc) {
     console.log(exc);
   }
 
+  /**
+   * 
+   * 
+   * @returns
+   */
   var handleStartupEvent = function() {
 
     if (process.platform !== 'win32') {
@@ -121,12 +135,18 @@
   var mainWindow;
   var trayIcon;
 
+  /**
+   *  
+   */
   app.on('activate', function() {
     if (!mainWindow) {
       mainWindow = createMainWindow();
     }
   });
 
+  /**
+   *  
+   */
   app.on('ready', function() {
     mainWindow = createMainWindow();
 
@@ -138,10 +158,24 @@
 
   });
 
+  /**
+   * 
+   * 
+   * @param {any} serviceName
+   * @param {any} protocol
+   * @param {any} subTypes
+   * @param {any} includeLocal
+   * @returns
+   */
   app.serviceFinder = function(serviceName, protocol, subTypes, includeLocal) {
     return new ServiceFinder(serviceName, protocol, subTypes, includeLocal);
   };
 
+  /**
+   * 
+   * 
+   * @returns
+   */
   app.sysConfig = function() {
     return {
       app: {
@@ -160,10 +194,18 @@
     };
   };
 
+  /**
+   * 
+   * 
+   * @returns
+   */
   app.getMainWindow = function() {
     return mainWindow;
   };
 
+  /**
+   * 
+   */
   app.close = function() {
     if (mainWindow) {
       mainWindow.close();
@@ -171,12 +213,18 @@
     app.quit();
   };
 
+  /**
+   * 
+   */
   app.toggleFullscreen = function() {
     if (mainWindow) {
       mainWindow.setFullScreen(!mainWindow.isFullScreen());
     }
   };
 
+  /**
+   * 
+   */
   app.minimizeAppToSysTray = function() {
 
     trayIcon = new Tray(path.join(__dirname, 'assets', 'boilerplate_tray.png'));

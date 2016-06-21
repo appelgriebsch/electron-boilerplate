@@ -11,8 +11,18 @@ import Window from './Window';
 const app = electron.remote.app;
 const appCfg = app.sysConfig();
 
+/**
+ * 
+ * 
+ * @class Shell
+ * @extends {React.Component}
+ */
 class Shell extends React.Component {
 
+  /**
+   * Creates an instance of Shell.
+   * 
+   */
   constructor() {
     super();
     this.title = `${appCfg.app.name} ${appCfg.app.version}`;
@@ -24,20 +34,34 @@ class Shell extends React.Component {
     this.closeApp = this.closeApp.bind(this);
   }
 
+  /**
+   * 
+   */
   minimizeApp() {
     app.minimizeAppToSysTray();
   }
 
+  /**
+   * 
+   */
   toggleFullScreen() {
     app.toggleFullscreen();
   }
 
+  /**
+   * 
+   */
   closeApp() {
     this.docDB.save({ event: 'closed' }).then(() => {
       app.close();
     });
   }
 
+  /**
+   * 
+   * 
+   * @returns
+   */
   render() {
     return (
       <Window appName={this.title}

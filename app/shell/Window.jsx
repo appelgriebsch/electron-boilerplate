@@ -19,8 +19,19 @@ const WindowStyle = {
   WebkitUserSelect: 'none'
 };
 
+/**
+ * 
+ * 
+ * @class Window
+ * @extends {React.Component}
+ */
 class Window extends React.Component {
 
+  /**
+   * 
+   * 
+   * @returns
+   */
   render() {
 
     var headerComponents = {};
@@ -71,9 +82,5 @@ class Window extends React.Component {
     );
   }
 }
-
-Window.contextTypes = {
-  muiTheme: React.PropTypes.object.isRequired
-};
 
 export default Radium(Window);
