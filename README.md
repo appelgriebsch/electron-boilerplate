@@ -4,9 +4,9 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 ## Included modules
 * [Electron](http://electron.atom.io)
 * [AngularJS 1.5](https://angularjs.org/)
-* [Angular Material Design](https://material.angularjs.org/)
+* [Angular Material Design 1.x](https://material.angularjs.org/)
 * [Angular UI Router](http://angular-ui.github.io/ui-router/site)
-* [PouchDB](https://pouchdb.com/) + Plugins (geo-spatial, MongoDB-style query language and full-text search engine support)
+* [PouchDB](https://pouchdb.com/) + Plugins (MongoDB-style query language and full-text search engine support)
 
 ## Getting started
 * install node.js (at least Node 4.4.x+ and NPM 2.14.x+ required) from [here](http://www.nodejs.org)
@@ -23,9 +23,6 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 ![screenshot](screenshot.png)
 
 ## Build Distributable Packages
-
-**PLEASE NOTE: you will need a virtual machine with the actual operating system and development tools installed to build the native packages for it**
-
 
 * on OS X (10.9+): creates application bundle and distributable disk image (x64 only, Mac AppStore compatible variant incl.)
 
