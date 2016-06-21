@@ -6,8 +6,8 @@ An electron boilerplate project incl. PouchDB, React + NuclearJS, Grommet UI Fra
 * [ReactJS](http://facebook.github.io/react/)
 * [React-Router](https://github.com/reactjs/react-router)
 * [NuclearJS](https://optimizely.github.io/nuclear-js/) (ImmutableJS and Flux-based architecture)
-* [Grommet UI framework](http://www.grommet.io/)
-* [PouchDB](https://pouchdb.com/) + Plugins (geo-spatial, MongoDB-style query language and full-text search engine support)
+* [React-MDL](https://tleunen.github.io/react-mdl/)
+* [PouchDB](https://pouchdb.com/) + Plugins (MongoDB-style query language and full-text search engine support)
 
 ## Getting started
 * install node.js (at least Node 4.4.x+ and NPM 2.14.x+ required) from [here](http://www.nodejs.org)
@@ -15,7 +15,7 @@ An electron boilerplate project incl. PouchDB, React + NuclearJS, Grommet UI Fra
 * install Python 2.7 from [here](http://www.python.org) and add the installation directory to your system path variable
 * For Windows, install Windows SDK for Windows Server 2008 and .NET Framework 3.5 from [here](http://www.microsoft.com/en-us/download/details.aspx?id=11310)
 * For Windows, install Visual Studio 2013/2015 (Express for Desktop is sufficient).
-* clone git repository (```git clone -b reactjs https://github.com/appelgriebsch/electron-boilerplate.git```)
+* clone git repository (```git clone -b reactjs https://github.com/appelgriebsch/electron-boilerplate.git ./myproject```)
 * open terminal and run ```npm install``` to install dependencies
 * start application in debug by executing ```npm start``` in terminal
 
@@ -24,8 +24,6 @@ An electron boilerplate project incl. PouchDB, React + NuclearJS, Grommet UI Fra
 ![screenshot](screenshot.png)
 
 ## Build Distributable Packages
-
-**PLEASE NOTE: you will need a virtual machine with the actual operating system and development tools installed to build the native packages for it**
 
 * on OS X (10.9+): creates application bundle and distributable disk image (x64 only, Mac AppStore compatible variant incl.)
 
