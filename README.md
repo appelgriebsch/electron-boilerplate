@@ -1,5 +1,5 @@
 # electron-boilerplate
-An electron boilerplate project incl. PouchDB, React + NuclearJS, Grommet UI Framework
+An electron boilerplate project incl. PouchDB, React + NuclearJS, React-MDL UI library based on Google Material-Lite
 
 ## Included modules
 * [Electron](http://electron.atom.io)
@@ -8,6 +8,7 @@ An electron boilerplate project incl. PouchDB, React + NuclearJS, Grommet UI Fra
 * [NuclearJS](https://optimizely.github.io/nuclear-js/) (ImmutableJS and Flux-based architecture)
 * [React-MDL](https://tleunen.github.io/react-mdl/)
 * [PouchDB](https://pouchdb.com/) + Plugins (MongoDB-style query language and full-text search engine support)
+* [Lovefield](https://google.github.io/lovefield/)
 
 ## Getting started
 * install node.js (at least Node 4.4.x+ and NPM 2.14.x+ required) from [here](http://www.nodejs.org)
