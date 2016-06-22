@@ -7,6 +7,7 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 * [Angular Material Design 1.x](https://material.angularjs.org/)
 * [Angular UI Router](http://angular-ui.github.io/ui-router/site)
 * [PouchDB](https://pouchdb.com/) + Plugins (MongoDB-style query language and full-text search engine support)
+* [Lovefield](https://google.github.io/lovefield/)
 
 ## Getting started
 * install node.js (at least Node 4.4.x+ and NPM 2.14.x+ required) from [here](http://www.nodejs.org)
