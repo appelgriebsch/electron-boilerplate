@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "0.9.0",
+  "version": "1.0.1",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "pouchdb": "^5.4.4",
     "pouchdb-find": "^0.10.0",
     "pouchdb-quick-search": "^1.1.0",
-    "radium": "^0.17.1",
+    "radium": "^0.18.0",
     "react": "^15.0.0",
     "react-calendar-heatmap": "^1.0.0",
     "react-dom": "^15.1.0",
