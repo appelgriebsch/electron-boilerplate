@@ -1,5 +1,4 @@
-(function() {
-
+(function () {
   module.exports = {
     defaultModule: 'todo',
     modules: {
@@ -22,6 +21,5 @@
         icon: 'import_export'
       }
     }
-  };
-
-})();
+  }
+})()

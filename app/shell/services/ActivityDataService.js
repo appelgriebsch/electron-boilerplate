@@ -1,79 +1,89 @@
-(function() {
-
-  'use strict';
-
-  function ActivityDataService(PouchDBService) {
-
-    var db;
-    var uuid = require('uuid');
-
-    var _saveDoc = function(doc) {
-
+(function () {
+  'use strict'
+  /**
+   * ActivityDataService - description
+   *
+   * @param  {type} PouchDBService description
+   * @return {type}                description
+   */
+  function ActivityDataService (PouchDBService) {
+    var db
+    var uuid = require('uuid')
+    /**
+     * _saveDoc function - description
+     *
+     * @param  {type} doc description
+     * @return {Promise}     description
+     */
+    var _saveDoc = function (doc) {
       var promise = Promise.resolve(
         db.get(doc._id)
-        .then(function(result) {
-
+        .then(function (result) {
           if ((result.version === undefined) || (result.version !== doc.version)) {
-            doc._rev = result._rev;
-            return db.put(doc);
+            doc._rev = result._rev
+            return db.put(doc)
           }
-          return true;
+          return true
         })
-        .catch(function(err) {
-
-          if (err.status == 404) {
-            return db.put(doc);
+        .catch(function (err) {
+          if (err.status === 404) {
+            return db.put(doc)
           } else {
-            throw err;
+            throw err
           }
         })
-      );
-
-      return promise;
-    };
-
-    var _scanObject = function(doc) {
+      )
+      return promise
+    }
+    /**
+     * _scanObject function - description
+     *
+     * @param  {type} doc description
+     * @return {type}     description
+     */
+    var _scanObject = function (doc) {
       for (var key in doc) {
         if (doc[key] === Object(doc[key])) {
-          _scanObject(doc[key]);
+          _scanObject(doc[key])
         } else if ((typeof doc[key] === 'string') && (doc[key].substring(0, 2) === '${')) {
-          console.log(key + ': ' + doc[key]);
-          delete doc[key]; // remove any placeholder from outgoing stream
+          console.log(key + ': ' + doc[key])
+          delete doc[key] // remove any placeholder from outgoing stream
         }
       }
-    };
-
+    }
     return {
-
-      initialize: function() {
-
+      /**
+       * initialize function - description
+       *
+       * @return {type}  description
+       */
+      initialize: function () {
         var ddoc = {
           _id: '_design/activities',
           version: '1.0',
           views: {
             all: {
-              map: function mapFun(doc) {
-                emit(doc.activity.endTime);
+              map: function mapFun (doc) {
+                emit(doc.activity.endTime)
               }.toString()
             },
             byDate: {
-              map: function mapFun(doc) {
-                emit(doc.activity.endTime);
+              map: function mapFun (doc) {
+                emit(doc.activity.endTime)
               }.toString()
             },
             byType: {
-              map: function mapFun(doc) {
-                emit(doc.activity['@type']);
+              map: function mapFun (doc) {
+                emit(doc.activity['@type'])
               }.toString()
             },
             bySeverity: {
-              map: function mapFun(doc) {
-                emit(doc.class);
+              map: function mapFun (doc) {
+                emit(doc.class)
               }.toString()
             }
           }
-        };
-
+        }
         var template = {
           _id: '_design/templates',
           version: '1.0',
@@ -112,79 +122,85 @@
             'ReceiveAction', // import documents / replicate from action
             'SearchAction' // search for documents
           ]
-        };
-
-        this.templates = template;
-
+        }
+        this.templates = template
         return PouchDBService.initialize('activities').then((pouchdb) => {
-
-          db = pouchdb;
-
+          db = pouchdb
           return Promise.all([
             _saveDoc(ddoc),
             _saveDoc(template)
-          ]);
-        });
+          ])
+        })
       },
-
-      createFromTemplate: function(type, icon, error) {
-
-        var today = new Date();
-        var idx = this.templates.actionTypes.indexOf(type);
-        if (idx == -1) return null;
-
-        var clone = JSON.parse(JSON.stringify(this.templates.action));
-        clone['@type'] = type;
-        clone.image = icon;
-        clone.startTime = today.toISOString();
-
+      /**
+       * createFromTemplate function - description
+       *
+       * @param  {type} type  description
+       * @param  {type} icon  description
+       * @param  {type} error description
+       * @return {type}       description
+       */
+      createFromTemplate: function (type, icon, error) {
+        var today = new Date()
+        var idx = this.templates.actionTypes.indexOf(type)
+        if (idx === -1) return null
+        var clone = JSON.parse(JSON.stringify(this.templates.action))
+        clone['@type'] = type
+        clone.image = icon
+        clone.startTime = today.toISOString()
         if (error) {
-          clone.actionStatus = 'FailedActionStatus';
-          clone.error.description = error.message;
-          clone.error.name = error.name;
-          clone.description = `${error.name}: ${error.message}`;
+          clone.actionStatus = 'FailedActionStatus'
+          clone.error.description = error.message
+          clone.error.name = error.name
+          clone.description = `${error.name}: ${error.message}`
         } else {
-          clone.actionStatus = 'CompletedActionStatus';
-          delete clone.error;
+          clone.actionStatus = 'CompletedActionStatus'
+          delete clone.error
         }
-
-        return clone;
+        return clone
       },
-
-      events: function() {
-
+      /**
+       * events function - description
+       *
+       * @return {type}  description
+       */
+      events: function () {
         var options = {
           descending: true,
           include_docs: true
-        };
-
-        return db.query('activities/all', options);
+        }
+        return db.query('activities/all', options)
       },
-
-      search: function(filter) {
-
+      /**
+       * search function - description
+       *
+       * @param  {type} filter description
+       * @return {type}        description
+       */
+      search: function (filter) {
         var options = {
           descending: true
-        };
-
-        return db.query('activities/all', options);
+        }
+        return db.query('activities/all', options)
       },
-
-      writeEntry: function(severity, event) {
-
+      /**
+       * writeEntry function - description
+       *
+       * @param  {type} severity description
+       * @param  {type} event    description
+       * @return {type}          description
+       */
+      writeEntry: function (severity, event) {
         var doc = {
           _id: uuid.v4(),
           class: severity,
           activity: event
-        };
-
-        _scanObject(doc);
-        console.log(doc);
-        return _saveDoc(doc);
+        }
+        _scanObject(doc)
+        console.log(doc)
+        return _saveDoc(doc)
       }
-    };
+    }
   }
-
-  module.exports = ActivityDataService;
-
-})();
+  module.exports = ActivityDataService
+})()

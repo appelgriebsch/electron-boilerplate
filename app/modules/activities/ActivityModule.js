@@ -1,14 +1,15 @@
-(function(angular) {
-
-  'use strict';
-
-  function ActivityModule(config) {
-
-    var moduleConfig = config;
-
+(function (angular) {
+  'use strict'
+  /**
+   * ActivityModule - description
+   *
+   * @param  {type} config description
+   * @return {type}        description
+   */
+  function ActivityModule (config) {
+    var moduleConfig = config
     angular.module('electron-app')
-      .config(function($stateProvider, $urlRouterProvider) {
-
+      .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
           .state(`${moduleConfig.state}`, {
             url: '/activities',
@@ -29,13 +30,10 @@
                 controller: 'ActivitiesViewController as ctl'
               }
             }
-          });
-      });
-
-    var ActivitiesViewController = require('./controllers/ActivitiesViewController');
-    angular.module('electron-app').controller('ActivitiesViewController', ['$scope', '$state', '$q', 'ActivityDataService', ActivitiesViewController]);
+          })
+      })
+    var ActivitiesViewController = require('./controllers/ActivitiesViewController')
+    angular.module('electron-app').controller('ActivitiesViewController', ['$scope', '$state', '$q', 'ActivityDataService', ActivitiesViewController])
   }
-
-  module.exports = ActivityModule;
-
-})(global.angular);
+  module.exports = ActivityModule
+})(global.angular)

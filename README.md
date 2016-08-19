@@ -1,6 +1,8 @@
 # electron-boilerplate
 An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 
+[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 ## Included modules
 * [Electron](http://electron.atom.io)
 * [AngularJS 1.5](https://angularjs.org/)
