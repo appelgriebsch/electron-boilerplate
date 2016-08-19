@@ -1,7 +1,9 @@
 [ignore]
 
 [include]
+./app/
 
 [libs]
+./node_modules/electron
 
 [options]
