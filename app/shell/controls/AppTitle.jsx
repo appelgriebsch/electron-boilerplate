@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import Radium from 'radium';
+import React from 'react'
+import Radium from 'radium'
 
 const appTitleStyle = {
   WebkitUserSelect: 'none',
@@ -10,14 +10,14 @@ const appTitleStyle = {
   color: '#ffffff',
   paddingLeft: '10px',
   paddingBottom: '5px'
-};
+}
 
 class AppTitle extends React.Component {
-  render() {
+  render () {
     return (
-      <span style={[appTitleStyle]}>{ this.props.title }</span>
-    );
+      <span style={[appTitleStyle]}>{this.props.title}</span>
+    )
   }
 }
 
-export default Radium(AppTitle);
+export default Radium(AppTitle)

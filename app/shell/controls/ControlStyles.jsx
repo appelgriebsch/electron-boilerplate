@@ -6,7 +6,7 @@ export const winIconStyle = {
   ':hover': {
     opacity: 100
   }
-};
+}
 
 export const winButtonStyle = {
   base: {
@@ -35,7 +35,7 @@ export const winButtonStyle = {
       backgroundColor: '#e81123'
     }
   }
-};
+}
 
 export const osxIconStyle = {
   opacity: 0,
@@ -46,7 +46,7 @@ export const osxIconStyle = {
   ':hover': {
     opacity: 100
   }
-};
+}
 
 export const osxButtonStyle = {
   base: {
@@ -82,4 +82,4 @@ export const osxButtonStyle = {
       borderColor: '#128622'
     }
   }
-};
+}

@@ -1,6 +1,8 @@
 # electron-boilerplate
 An electron boilerplate project incl. PouchDB, React + NuclearJS, React-MDL UI library based on Google Material-Lite
 
+[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 ## Included modules
 * [Electron](http://electron.atom.io)
 * [ReactJS](http://facebook.github.io/react/)
