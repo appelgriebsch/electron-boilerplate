@@ -47,7 +47,8 @@ class Shell extends React.Component {
   getChildContext() {
     return {
       documentDatabase: this.docDB,
-      sqlDatabase: this.sqlDB
+      sqlDatabase: this.sqlDB,
+      appConfig: appCfg
     };
   }
 
@@ -111,6 +112,7 @@ class Shell extends React.Component {
 }
 
 Shell.childContextTypes = {
+  appConfig: React.PropTypes.object.isRequired,
   documentDatabase: React.PropTypes.object.isRequired,
   sqlDatabase: React.PropTypes.object.isRequired
 }

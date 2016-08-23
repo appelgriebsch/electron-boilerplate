@@ -2,7 +2,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import { Button, Grid, Cell } from 'react-mdl';
+import { Button, Grid, Cell, FABButton, Icon } from 'react-mdl';
 
 import { toImmutable } from 'nuclear-js';
 import { connect } from 'nuclear-js-react-addons';
@@ -24,7 +24,9 @@ class TodoList extends React.Component {
     super(props, context);
 
     this.state = { todoDlgOpen: false, todoText: '' }
-    this.todoActions = new TodoActions(this.context.reactor, this.context.documentDatabase);
+    this.todoActions = new TodoActions(this.context.appConfig,
+                                       this.context.reactor,
+                                       this.context.documentDatabase);
     this.context.reactor.registerStores({
       'todos': TodoStore
     });
@@ -49,6 +51,10 @@ class TodoList extends React.Component {
     this.setState( { todoDlgOpen: false });
   }
 
+  dummyCreateTodo() {
+    this.todoActions.addTodo('Hello World')
+  }
+
   render() {
 
     const todoDlgButtons = [
@@ -64,10 +70,6 @@ class TodoList extends React.Component {
     actionPosition="right"
     titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
 
-
-    <FloatingActionButton style={floatingButtonStyles.bottom} onTouchTap={this.handleNewTodoDlgOpen}>
-      <FontIcon color="black" className="material-icons">add</FontIcon>
-    </FloatingActionButton>
     <Dialog title="Create a new Todo"
             modal={true}
             actions={todoDlgButtons}
@@ -92,6 +94,9 @@ class TodoList extends React.Component {
                     </Cell>);
           }).toList()}
         </Grid>
+        <FABButton style={floatingButtonStyles.bottom} onTouchTap={this.dummyCreateTodo.bind(this)}>
+          <Icon color="black" name="add"/>
+        </FABButton>
       </div>
     );
   }
@@ -106,6 +111,7 @@ TodoList.defaultProps = {
 }
 
 TodoList.contextTypes = {
+  appConfig: React.PropTypes.object.isRequired,
   documentDatabase: React.PropTypes.object.isRequired,
   reactor: React.PropTypes.object.isRequired
 }

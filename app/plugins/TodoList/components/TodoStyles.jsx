@@ -23,8 +23,8 @@ export const mainContentStyle = {
 export const floatingButtonStyles = {
   bottom: {
     position: 'absolute',
-    bottom: 0,
-    right: 0,
+    bottom: 20,
+    right: 20,
     marginRight: '20px',
     marginBottom: '20px'
   }

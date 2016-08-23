@@ -9,7 +9,7 @@ function initDatabase(db: Object) {
     views: {
       all: {
         map: function mapFun(doc) {
-          if (doc.type === 'todo') {            
+          if (doc.type === 'todo') {
             emit(doc.createdAt);
           }
         }.toString()
@@ -25,12 +25,14 @@ function initDatabase(db: Object) {
  */
 class TodoActions {
 
-  db: Object;
-  reactor: Object;
+  appConfig: Object
+  db: Object
+  reactor: Object
 
-  constructor(reactor: Object, documentDatabase: Object) {
-    this.db = documentDatabase;
-    this.reactor = reactor;
+  constructor(appConfig: Object, reactor: Object, documentDatabase: Object) {
+    this.appConfig = appConfig
+    this.db = documentDatabase
+    this.reactor = reactor
   }
 
   fetchTodos() {
@@ -41,10 +43,10 @@ class TodoActions {
     };
 
     initDatabase(this.db).then(() => {
-      return this.db.query('todos/all', options);
+      return this.db.query('todos/all', options)
     }).then((result) => {
-      let rows = result.rows.map((row) => row.doc);
-      this.reactor.dispatch(ActionTypes.RECEIVE_TODOS, { todos: rows });
+      let rows = result.rows.map((row) => row.doc)
+      this.reactor.dispatch(ActionTypes.RECEIVE_TODOS, { todos: rows })
     });
   }
 
@@ -53,8 +55,10 @@ class TodoActions {
     const todo = {
       title: todoText,
       status: 'open',
-      user: 'admin',
-      createdAt: new Date().toISOString()
+      user: this.appConfig.user,
+      host: this.appConfig.host,
+      createdAt: new Date().toISOString(),
+      type: 'todo'
     };
 
     initDatabase(this.db).then(() => {
