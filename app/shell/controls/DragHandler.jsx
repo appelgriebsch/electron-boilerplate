@@ -8,7 +8,6 @@ const dragStyle = {
   flex: 1
 }
 
-
 /**
  *
  */

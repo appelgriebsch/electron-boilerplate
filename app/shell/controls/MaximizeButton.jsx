@@ -2,8 +2,8 @@
 import React from 'react'
 import Radium from 'radium'
 
-import {winButtonStyle, winIconStyle, osxButtonStyle, osxIconStyle} from './ControlStyles'
-
+import { winButtonStyle, winIconStyle,
+         osxButtonStyle, osxIconStyle } from './ControlStyles'
 
 /**
  *
@@ -19,7 +19,7 @@ class MaximizeButton extends React.Component {
     var btnStyles = []
     var icon = {}
 
-    if (this.props.style !== 'darwin') {
+    if (this.props.platform !== 'darwin') {
       btnStyles = [winButtonStyle.base]
       icon = (
         <svg x='0px' y='0px' viewBox='0 0 10.2 10.2' style={[winIconStyle]}>
@@ -27,7 +27,7 @@ class MaximizeButton extends React.Component {
         </svg>
       )
     } else {
-      btnStyles = [osxButtonStyle.base, osxButtonStyle.maximize]
+      btnStyles = [ osxButtonStyle.base, osxButtonStyle.maximize ]
       icon = (
         <svg x='0px' y='0px' viewBox='0 0 6 5.9' style={[osxIconStyle]}>
           <path fill='#006400' d='M5.4,0h-4L6,4.5V0.6C5.7,0.6,5.3,0.3,5.4,0z'></path>
@@ -42,6 +42,11 @@ class MaximizeButton extends React.Component {
       </a>
     )
   }
+}
+
+MaximizeButton.propTypes = {
+  clickHandler: React.PropTypes.func.isRequired,
+  platform: React.PropTypes.string.isRequired
 }
 
 export default Radium(MaximizeButton)

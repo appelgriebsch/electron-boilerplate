@@ -2,8 +2,8 @@
 import React from 'react'
 import Radium from 'radium'
 
-import {winButtonStyle, winIconStyle, osxButtonStyle, osxIconStyle} from './ControlStyles'
-
+import { winButtonStyle, winIconStyle,
+         osxButtonStyle, osxIconStyle } from './ControlStyles'
 
 /**
  *
@@ -19,7 +19,7 @@ class CloseButton extends React.Component {
     var btnStyles = []
     var icon = {}
 
-    if (this.props.style !== 'darwin') {
+    if (this.props.platform !== 'darwin') {
       btnStyles = [winButtonStyle.base, winButtonStyle.close]
       icon = (
         <svg x='0px' y='0px' viewBox='0 0 10.2 10.2' style={[winIconStyle]}>
@@ -41,6 +41,11 @@ class CloseButton extends React.Component {
       </a>
     )
   }
+}
+
+CloseButton.propTypes = {
+  clickHandler: React.PropTypes.func.isRequired,
+  platform: React.PropTypes.string.isRequired
 }
 
 export default Radium(CloseButton)

@@ -40,22 +40,22 @@ class Window extends React.Component {
 
     var headerComponents = {}
 
-    if (this.props.style !== 'darwin') {
+    if (this.props.platform !== 'darwin') {
       headerComponents = (
         <div style={{height: '24px', flex: 1, alignContent: 'flex-end', alignItems: 'flex-end', justifyContent: 'flex-end', display: 'flex', padding: '2px'}}>
           <AppTitle title={this.props.appName} />
           <DragHandler key='left' />
-          <MinimizeButton style={this.props.style} clickHandler={this.props.minimizeHandler} />
-          <MaximizeButton style={this.props.style} clickHandler={this.props.fullScreenHandler} />
-          <CloseButton style={this.props.style} clickHandler={this.props.closeHandler} />
+          <MinimizeButton platform={this.props.platform} clickHandler={this.props.minimizeHandler} />
+          <MaximizeButton platform={this.props.platform} clickHandler={this.props.fullScreenHandler} />
+          <CloseButton platform={this.props.platform} clickHandler={this.props.closeHandler} />
         </div>
       )
     } else {
       headerComponents = (
         <div style={{height: '24px', flex: 1, alignContent: 'flex-start', alignItems: 'flex-start', justifyContent: 'flex-start', display: 'flex', padding: '2px'}}>
-          <CloseButton style={this.props.style} clickHandler={this.props.closeHandler} />
-          <MinimizeButton style={this.props.style} clickHandler={this.props.minimizeHandler} />
-          <MaximizeButton style={this.props.style} clickHandler={this.props.fullScreenHandler} />
+          <CloseButton platform={this.props.platform} clickHandler={this.props.closeHandler} />
+          <MinimizeButton platform={this.props.platform} clickHandler={this.props.minimizeHandler} />
+          <MaximizeButton platform={this.props.platform} clickHandler={this.props.fullScreenHandler} />
           <DragHandler key='left' />
           <AppTitle title={this.props.appName} />
           <DragHandler key='right' />
@@ -86,6 +86,15 @@ class Window extends React.Component {
       </div>
     )
   }
+}
+
+Window.propTypes = {
+  appName: React.PropTypes.string.isRequired,
+  activeModule: React.PropTypes.string.isRequired,
+  closeHandler: React.PropTypes.func.isRequired,
+  fullScreenHandler: React.PropTypes.func.isRequired,
+  minimizeHandler: React.PropTypes.func.isRequired,
+  platform: React.PropTypes.string.isRequired
 }
 
 Window.contextTypes = {

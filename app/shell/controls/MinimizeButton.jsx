@@ -2,8 +2,8 @@
 import React from 'react'
 import Radium from 'radium'
 
-import {winButtonStyle, winIconStyle, osxButtonStyle, osxIconStyle} from './ControlStyles'
-
+import { winButtonStyle, winIconStyle,
+         osxButtonStyle, osxIconStyle } from './ControlStyles'
 
 /**
  *
@@ -18,7 +18,7 @@ class MinimizeButton extends React.Component {
 
     var btnStyles = []
     var icon = {}
-    
+
     if (this.props.style !== 'darwin') {
       btnStyles = [winButtonStyle.base]
       icon = (
@@ -27,7 +27,7 @@ class MinimizeButton extends React.Component {
         </svg>
       )
     } else {
-      btnStyles = [osxButtonStyle.base, osxButtonStyle.minimize]
+      btnStyles = [ osxButtonStyle.base, osxButtonStyle.minimize ]
       icon = (
         <svg x='0px' y='0px' viewBox='0 0 8 1.1' style={[osxIconStyle]}>
           <rect fill='#995700' width='8' height='1.1'></rect>
@@ -41,6 +41,11 @@ class MinimizeButton extends React.Component {
       </a>
     )
   }
+}
+
+MinimizeButton.propTypes = {
+  clickHandler: React.PropTypes.func.isRequired,
+  platform: React.PropTypes.string.isRequired
 }
 
 export default Radium(MinimizeButton)

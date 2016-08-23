@@ -3,7 +3,7 @@ import electron from 'electron'
 import React from 'react'
 import Radium from 'radium'
 
-import { Provider, connect } from 'nuclear-js-react-addons'
+import { Provider } from 'nuclear-js-react-addons'
 
 import DocumentDatabase from './services/DocumentDatabase'
 import SqlDatabase from './services/SqlDatabase'
@@ -21,6 +21,10 @@ const appCfg = app.sysConfig()
  * @extends {React.Component}
  */
 class Shell extends React.Component {
+
+  title: string;
+  sqlDB: SqlDatabase;
+  docDB: DocumentDatabase;
 
   /**
    * Creates an instance of Shell.
@@ -66,7 +70,7 @@ class Shell extends React.Component {
       <Provider reactor={reactor}>
         <Window appName={this.title}
           activeModule='Todo'
-          style={appCfg.platform}
+          platform={appCfg.platform}
           closeHandler={this.closeApp.bind(this)}
           fullScreenHandler={this.toggleFullScreen.bind(this)}
           minimizeHandler={this.minimizeApp.bind(this)}>

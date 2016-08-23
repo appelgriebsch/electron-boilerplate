@@ -8,6 +8,8 @@ import lf from 'lovefield'
  */
 class SqlDatabase {
 
+  db: Object;
+  
   /**
    * Creates an instance of SqlDatabase.
    *

@@ -12,9 +12,8 @@ const appTitleStyle = {
   paddingBottom: '5px'
 }
 
-
 /**
- * 
+ *
  */
 class AppTitle extends React.Component {
 
@@ -27,6 +26,10 @@ class AppTitle extends React.Component {
       <span style={[appTitleStyle]}>{this.props.title}</span>
     )
   }
+}
+
+AppTitle.propTypes = {
+  title: React.PropTypes.string.isRequired
 }
 
 export default Radium(AppTitle)

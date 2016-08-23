@@ -12,10 +12,12 @@ PouchDB.plugin(require('pouchdb-quick-search'))
  */
 class DocumentDatabase {
 
+  db: PouchDB;
+
   /**
    * Creates an instance of DocumentDatabase.
    *
-   * @param {any} dbName
+   * @param {string} dbName
    * @param {number} [dbVersion=1]
    */
   constructor (dbName:string, dbVersion:number = 1) {
@@ -66,6 +68,17 @@ class DocumentDatabase {
    */
   get (id:string) : Object {
     return this.db.get(id)
+  }
+
+  /**
+   * query - description
+   *
+   * @param  {type} view:string    description
+   * @param  {type} options:Object description
+   * @return {type}                description
+   */
+  query(view:string, options:Object) {
+    return this.db.query(view, options);
   }
 }
 
