@@ -14,10 +14,9 @@ class SqlDatabase {
    * @param {any} dbName
    * @param {number} [dbVersion=1]
    */
-  constructor (dbName, dbVersion = 1) {
+  constructor (dbName:string, dbVersion:number = 1) {
     this.db = lf.schema.create(dbName, dbVersion)
   }
-
 }
 
 export default SqlDatabase

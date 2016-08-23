@@ -4,12 +4,21 @@ import Radium from 'radium'
 
 import {winButtonStyle, winIconStyle, osxButtonStyle, osxIconStyle} from './ControlStyles'
 
+
+/**
+ *
+ */
 class CloseButton extends React.Component {
+
+  constructor (props) {
+    super (props)
+  }
 
   render () {
 
     var btnStyles = []
     var icon = {}
+
     if (this.props.style !== 'darwin') {
       btnStyles = [winButtonStyle.base, winButtonStyle.close]
       icon = (

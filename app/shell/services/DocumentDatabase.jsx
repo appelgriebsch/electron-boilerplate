@@ -11,6 +11,7 @@ PouchDB.plugin(require('pouchdb-quick-search'))
  * @class DocumentDatabase
  */
 class DocumentDatabase {
+
   /**
    * Creates an instance of DocumentDatabase.
    *
@@ -30,7 +31,7 @@ class DocumentDatabase {
    * @param {any} doc
    * @returns
    */
-  save (doc) {
+  save (doc:any) : Object {
 
     if (!doc._id) {
       doc._id = uuid.v4()
@@ -63,7 +64,7 @@ class DocumentDatabase {
    * @param {any} id
    * @returns
    */
-  get (id) {
+  get (id:string) : Object {
     return this.db.get(id)
   }
 }

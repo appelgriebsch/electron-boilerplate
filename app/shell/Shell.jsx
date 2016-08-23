@@ -3,9 +3,12 @@ import electron from 'electron'
 import React from 'react'
 import Radium from 'radium'
 
+import { Provider, connect } from 'nuclear-js-react-addons'
+
 import DocumentDatabase from './services/DocumentDatabase'
 import SqlDatabase from './services/SqlDatabase'
 
+import reactor from './Reactor';
 import Window from './Window'
 
 const app = electron.remote.app
@@ -23,15 +26,11 @@ class Shell extends React.Component {
    * Creates an instance of Shell.
    *
    */
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.title = `${appCfg.app.name} ${appCfg.app.version}`
     this.sqlDB = new SqlDatabase(appCfg.app.name)
     this.docDB = new DocumentDatabase(appCfg.app.name)
-
-    this.minimizeApp = this.minimizeApp.bind(this)
-    this.toggleFullScreen = this.toggleFullScreen.bind(this)
-    this.closeApp = this.closeApp.bind(this)
   }
 
   /**
@@ -64,14 +63,16 @@ class Shell extends React.Component {
    */
   render () {
     return (
-      <Window appName={this.title}
-        activeModule='Todo'
-        style={appCfg.platform}
-        closeHandler={this.closeApp}
-        fullScreenHandler={this.toggleFullScreen}
-        minimizeHandler={this.minimizeApp}>
-        {this.props.children}
-      </Window>
+      <Provider reactor={reactor}>
+        <Window appName={this.title}
+          activeModule='Todo'
+          style={appCfg.platform}
+          closeHandler={this.closeApp.bind(this)}
+          fullScreenHandler={this.toggleFullScreen.bind(this)}
+          minimizeHandler={this.minimizeApp.bind(this)}>
+          {this.props.children}
+        </Window>
+      </Provider>
     )
   }
 }

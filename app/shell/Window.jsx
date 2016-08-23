@@ -27,6 +27,10 @@ const WindowStyle = {
  */
 class Window extends React.Component {
 
+  constructor (props) {
+    super(props)
+  }
+
   /**
    *
    *
@@ -35,6 +39,7 @@ class Window extends React.Component {
   render () {
 
     var headerComponents = {}
+
     if (this.props.style !== 'darwin') {
       headerComponents = (
         <div style={{height: '24px', flex: 1, alignContent: 'flex-end', alignItems: 'flex-end', justifyContent: 'flex-end', display: 'flex', padding: '2px'}}>
@@ -81,6 +86,10 @@ class Window extends React.Component {
       </div>
     )
   }
+}
+
+Window.contextTypes = {
+  reactor: React.PropTypes.object.isRequired
 }
 
 export default Radium(Window)

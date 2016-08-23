@@ -4,11 +4,21 @@ import Radium from 'radium'
 
 import {winButtonStyle, winIconStyle, osxButtonStyle, osxIconStyle} from './ControlStyles'
 
+
+/**
+ *
+ */
 class MaximizeButton extends React.Component {
 
+  constructor (props) {
+    super (props)
+  }
+
   render () {
+
     var btnStyles = []
     var icon = {}
+
     if (this.props.style !== 'darwin') {
       btnStyles = [winButtonStyle.base]
       icon = (

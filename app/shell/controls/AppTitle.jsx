@@ -12,7 +12,16 @@ const appTitleStyle = {
   paddingBottom: '5px'
 }
 
+
+/**
+ * 
+ */
 class AppTitle extends React.Component {
+
+  constructor (props) {
+    super (props)
+  }
+
   render () {
     return (
       <span style={[appTitleStyle]}>{this.props.title}</span>

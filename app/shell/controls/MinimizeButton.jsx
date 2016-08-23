@@ -4,10 +4,21 @@ import Radium from 'radium'
 
 import {winButtonStyle, winIconStyle, osxButtonStyle, osxIconStyle} from './ControlStyles'
 
+
+/**
+ *
+ */
 class MinimizeButton extends React.Component {
+
+  constructor (props) {
+    super (props)
+  }
+
   render () {
+
     var btnStyles = []
     var icon = {}
+    
     if (this.props.style !== 'darwin') {
       btnStyles = [winButtonStyle.base]
       icon = (
@@ -23,6 +34,7 @@ class MinimizeButton extends React.Component {
         </svg>
       )
     }
+
     return (
       <a key='minBtn' style={btnStyles} onClick={this.props.clickHandler}>
         {icon}

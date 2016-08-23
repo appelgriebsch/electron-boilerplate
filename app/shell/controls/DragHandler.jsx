@@ -8,7 +8,16 @@ const dragStyle = {
   flex: 1
 }
 
+
+/**
+ *
+ */
 class DragHandler extends React.Component {
+
+  constructor (props) {
+    super (props)
+  }
+
   render () {
     return (
       <span style={[dragStyle]} />
