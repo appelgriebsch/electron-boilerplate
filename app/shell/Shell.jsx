@@ -3,6 +3,8 @@ import electron from 'electron'
 import React from 'react'
 import Radium from 'radium'
 
+import { Link } from 'react-router'
+
 import { Provider } from 'nuclear-js-react-addons'
 
 import DocumentDatabase from './services/DocumentDatabase'
@@ -66,10 +68,19 @@ class Shell extends React.Component {
    * @returns
    */
   render () {
+
+    let modules = []
+    let activeModule = appCfg.app.name
+
+    this.props.routes[0].childRoutes.map((route) => {
+      modules.push(<Link to={route.path} key={route.path}>{route.path}</Link>)
+    });
+
     return (
       <Provider reactor={reactor}>
         <Window appName={this.title}
-          activeModule='Todo'
+          activeModule={activeModule}
+          modules={modules}
           platform={appCfg.platform}
           closeHandler={this.closeApp.bind(this)}
           fullScreenHandler={this.toggleFullScreen.bind(this)}

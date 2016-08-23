@@ -2,9 +2,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
+import { Router, hashHistory } from 'react-router'
 
+import fs from 'fs'
+import path from 'path'
 import Shell from './shell/Shell'
+
+const routes = {
+  path: '/',
+  component: Shell,
+  childRoutes: [
+  ]
+}
+
+let plugins = fs.readdirSync(path.join(__dirname, 'plugins'))
+plugins.map((plugin) => {
+  console.log(plugin)
+  routes.childRoutes.push(require('./plugins/' + plugin))
+});
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -13,7 +28,7 @@ import Shell from './shell/Shell'
 injectTapEventPlugin()
 
 ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path='/' component={Shell}>
-    </Route>
-  </Router>, document.querySelector('div[role=app]'))
+  <Router history={hashHistory}
+          routes={routes} />,
+          document.querySelector('div[role=app]')
+)

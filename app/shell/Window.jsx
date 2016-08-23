@@ -69,11 +69,7 @@ class Window extends React.Component {
           {headerComponents}
         </div>
         <Layout fixedHeader>
-          <Header title={this.props.activeModule}>
-            <Navigation>
-              {this.props.modules}
-            </Navigation>
-          </Header>
+          <Header title={this.props.activeModule}/>                      
           <Drawer title={this.props.activeModule}>
             <Navigation>
               {this.props.modules}
