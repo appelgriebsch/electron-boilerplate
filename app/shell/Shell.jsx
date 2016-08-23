@@ -40,21 +40,39 @@ class Shell extends React.Component {
   }
 
   /**
+   * getChildContext - description
    *
+   * @return {type}  description
+   */
+  getChildContext() {
+    return {
+      documentDatabase: this.docDB,
+      sqlDatabase: this.sqlDB
+    };
+  }
+
+  /**
+   * minimizeApp - description
+   *
+   * @return {type}  description
    */
   minimizeApp () {
     app.minimizeAppToSysTray()
   }
 
   /**
+   * toggleFullScreen - description
    *
+   * @return {type}  description
    */
   toggleFullScreen () {
     app.toggleFullscreen()
   }
 
   /**
+   * closeApp - description
    *
+   * @return {type}  description
    */
   closeApp () {
     this.docDB.save({ event: 'closed' }).then(() => {
@@ -63,9 +81,9 @@ class Shell extends React.Component {
   }
 
   /**
+   * render - description
    *
-   *
-   * @returns
+   * @return {type}  description
    */
   render () {
 
@@ -90,6 +108,11 @@ class Shell extends React.Component {
       </Provider>
     )
   }
+}
+
+Shell.childContextTypes = {
+  documentDatabase: React.PropTypes.object.isRequired,
+  sqlDatabase: React.PropTypes.object.isRequired
 }
 
 export default Radium(Shell)

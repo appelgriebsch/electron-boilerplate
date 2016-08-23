@@ -1,5 +1,5 @@
 // @flow
-import keyMirror from 'keymirror';
+import keyMirror from 'keymirror'
 
 export default keyMirror({
   RECEIVE_TODOS: null,
@@ -8,4 +8,4 @@ export default keyMirror({
   CHECK_TODO: null,
   UNCHECK_TODO: null,
   SELECT_TODO: null
-});
+})

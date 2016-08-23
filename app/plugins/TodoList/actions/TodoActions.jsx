@@ -1,23 +1,47 @@
 // @flow
 import ActionTypes from './TodoActionTypes';
-import TodoDB from '../stores/TodoDataService';
+
+function initDatabase(db: Object) {
+
+  const viewSpec = {
+    _id: '_design/todos',
+    version: '0.1.0',
+    views: {
+      all: {
+        map: function mapFun(doc) {
+          if (doc.type === 'todo') {            
+            emit(doc.createdAt);
+          }
+        }.toString()
+      }
+    }
+  }
+
+  return db.save(viewSpec)
+}
 
 /**
  *
  */
 class TodoActions {
 
-  db: TodoDB;
+  db: Object;
   reactor: Object;
 
-  constructor(reactor : Object) {
-    this.db = new TodoDB('todos');
+  constructor(reactor: Object, documentDatabase: Object) {
+    this.db = documentDatabase;
     this.reactor = reactor;
   }
 
   fetchTodos() {
-    this.db.initialize().then(() => {
-      return this.db.getTodos();
+
+    const options = {
+      descending: true,
+      include_docs: true
+    };
+
+    initDatabase(this.db).then(() => {
+      return this.db.query('todos/all', options);
     }).then((result) => {
       let rows = result.rows.map((row) => row.doc);
       this.reactor.dispatch(ActionTypes.RECEIVE_TODOS, { todos: rows });
@@ -33,8 +57,8 @@ class TodoActions {
       createdAt: new Date().toISOString()
     };
 
-    this.db.initialize().then(() => {
-      return this.db.addTodo(todo);
+    initDatabase(this.db).then(() => {
+      return this.db.save(todo);
     }).then((result) => {
       console.log(result);
       this.reactor.dispatch(ActionTypes.ADD_TODO, { todo: todo });

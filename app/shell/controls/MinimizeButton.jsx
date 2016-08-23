@@ -11,7 +11,7 @@ import { winButtonStyle, winIconStyle,
 class MinimizeButton extends React.Component {
 
   constructor (props) {
-    super (props)
+    super(props)
   }
 
   render () {

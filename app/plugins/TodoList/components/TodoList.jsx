@@ -24,7 +24,7 @@ class TodoList extends React.Component {
     super(props, context);
 
     this.state = { todoDlgOpen: false, todoText: '' }
-    this.todoActions = new TodoActions(this.context.reactor);
+    this.todoActions = new TodoActions(this.context.reactor, this.context.documentDatabase);
     this.context.reactor.registerStores({
       'todos': TodoStore
     });
@@ -106,13 +106,14 @@ TodoList.defaultProps = {
 }
 
 TodoList.contextTypes = {
+  documentDatabase: React.PropTypes.object.isRequired,
   reactor: React.PropTypes.object.isRequired
 }
 
-function DataBind(props) {
+function dataBinding(props) {
   return {
     todos: ['todos']
   };
 }
 
-export default Radium(connect(DataBind)(TodoList));
+export default Radium(connect(dataBinding)(TodoList));

@@ -14,7 +14,7 @@ const dragStyle = {
 class DragHandler extends React.Component {
 
   constructor (props) {
-    super (props)
+    super(props)
   }
 
   render () {

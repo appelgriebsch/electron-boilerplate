@@ -69,7 +69,7 @@ class Window extends React.Component {
           {headerComponents}
         </div>
         <Layout fixedHeader>
-          <Header title={this.props.activeModule}/>                      
+          <Header title={this.props.activeModule} />
           <Drawer title={this.props.activeModule}>
             <Navigation>
               {this.props.modules}
@@ -94,7 +94,9 @@ Window.propTypes = {
 }
 
 Window.contextTypes = {
-  reactor: React.PropTypes.object.isRequired
+  documentDatabase: React.PropTypes.object.isRequired,
+  reactor: React.PropTypes.object.isRequired,
+  sqlDatabase: React.PropTypes.object.isRequired
 }
 
 export default Radium(Window)

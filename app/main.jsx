@@ -19,7 +19,7 @@ let plugins = fs.readdirSync(path.join(__dirname, 'plugins'))
 plugins.map((plugin) => {
   console.log(plugin)
   routes.childRoutes.push(require('./plugins/' + plugin))
-});
+})
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -29,6 +29,5 @@ injectTapEventPlugin()
 
 ReactDOM.render(
   <Router history={hashHistory}
-          routes={routes} />,
-          document.querySelector('div[role=app]')
+    routes={routes} />, document.querySelector('div[role=app]')
 )

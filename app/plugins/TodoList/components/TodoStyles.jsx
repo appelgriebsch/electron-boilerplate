@@ -4,7 +4,7 @@ export const gridLayoutStyle = {
   width: '100%',
   minHeight: '100%',
   height: '100%'
-};
+}
 
 export const mainContentStyle = {
   base: {
@@ -18,7 +18,7 @@ export const mainContentStyle = {
   nonOverflow: {
     overflow: 'hidden'
   }
-};
+}
 
 export const floatingButtonStyles = {
   bottom: {
