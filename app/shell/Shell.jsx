@@ -2,7 +2,7 @@
 import electron from 'electron'
 import React from 'react'
 import Radium from 'radium'
-
+import { Icon, Tooltip } from 'react-mdl';
 import { Link } from 'react-router'
 
 import { Provider } from 'nuclear-js-react-addons'
@@ -91,8 +91,12 @@ class Shell extends React.Component {
     let modules = []
     let activeModule = appCfg.app.name
 
-    this.props.routes[0].childRoutes.map((route) => {
-      modules.push(<Link to={route.path} key={route.path}>{route.path}</Link>)
+    this.props.route.childRoutes.map((route) => {
+      modules.push(<Tooltip label={route.tooltip} position="right">
+                      <Link to={route.path} key={route.path}>
+                        <Icon name={route.icon} />{route.label}
+                      </Link>
+                    </Tooltip>)
     });
 
     return (
