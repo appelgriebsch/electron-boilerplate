@@ -49,6 +49,7 @@
     "react-dom": "^15.1.0",
     "react-mdl": "^1.5.4",
     "react-router": "^2.0.0",
+    "react-stepzilla": "^1.9.1",
     "react-tap-event-plugin": "^1.0.0",
     "uuid": "^2.0.1"
   }
