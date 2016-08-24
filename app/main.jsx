@@ -15,12 +15,21 @@ const routes = {
   ]
 }
 
+function tryLoadPlugin(plugin:string) : ?Object {
+  let plugInInfo: ?Object
+  try {
+    plugInInfo = require('./plugins/' + plugin)
+    plugInInfo.module = require('./plugins/' + plugin + '/package.json')
+    console.log(plugInInfo)
+  } catch(ex) {
+    plugInInfo = undefined
+  }
+  return plugInInfo
+}
+
 let plugins = fs.readdirSync(path.join(__dirname, 'plugins'))
 plugins.map((plugin) => {
-  const plugInInfo = require('./plugins/' + plugin)
-  plugInInfo.module = require('./plugins/' + plugin + '/package.json')
-  console.log(plugInInfo)
-  routes.childRoutes.push(plugInInfo)
+  routes.childRoutes.push(tryLoadPlugin(plugin))
 })
 
 // Needed for onTouchTap
