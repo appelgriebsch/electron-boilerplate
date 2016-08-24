@@ -9,6 +9,7 @@ import { Provider } from 'nuclear-js-react-addons'
 
 import DocumentDatabase from './services/DocumentDatabase'
 import SqlDatabase from './services/SqlDatabase'
+import TripleStore from './services/TripleStore'
 
 import reactor from './Reactor';
 import Window from './Window'
@@ -27,6 +28,7 @@ class Shell extends React.Component {
   title: string;
   sqlDB: SqlDatabase;
   docDB: DocumentDatabase;
+  graphDB: TripleStore;
 
   /**
    * Creates an instance of Shell.
@@ -37,6 +39,7 @@ class Shell extends React.Component {
     this.title = `${appCfg.app.name} ${appCfg.app.version}`
     this.sqlDB = new SqlDatabase(appCfg.app.name)
     this.docDB = new DocumentDatabase(appCfg.app.name)
+    this.graphDB = new TripleStore(appCfg.app.name)
   }
 
   /**
@@ -46,9 +49,10 @@ class Shell extends React.Component {
    */
   getChildContext() {
     return {
+      appConfig: appCfg,
       documentDatabase: this.docDB,
-      sqlDatabase: this.sqlDB,
-      appConfig: appCfg
+      graphDatabase: this.graphDB,
+      sqlDatabase: this.sqlDB
     };
   }
 
@@ -92,7 +96,7 @@ class Shell extends React.Component {
     let activeModule = appCfg.app.name
 
     this.props.route.childRoutes.map((route) => {
-      modules.push(<Tooltip label={route.tooltip} position="right">
+      modules.push(<Tooltip key={`ttp_${route.path}`} label={route.tooltip} position="right">
                       <Link to={route.path} key={route.path}>
                         <Icon name={route.icon} />{route.label}
                       </Link>
@@ -118,6 +122,7 @@ class Shell extends React.Component {
 Shell.childContextTypes = {
   appConfig: React.PropTypes.object.isRequired,
   documentDatabase: React.PropTypes.object.isRequired,
+  graphDatabase: React.PropTypes.object.isRequired,
   sqlDatabase: React.PropTypes.object.isRequired
 }
 
