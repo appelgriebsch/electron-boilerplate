@@ -96,25 +96,28 @@ class Shell extends React.Component {
     let activeModule = appCfg.app.name
 
     this.props.route.childRoutes.map((route) => {
-      modules.push(<Tooltip key={`ttp_${route.path}`} label={route.tooltip} position="right">
+      modules.push(<Tooltip key={`ttp_${route.path}`}
+                            label={route.module.description}
+                            position="right">
                       <Link to={route.path} key={route.path}>
-                        <Icon name={route.icon} />{route.label}
+                        <Icon name={route.module.config.icon} />
+                        {route.module.config.label}
                       </Link>
                     </Tooltip>)
     });
 
     return (
-      <Provider reactor={reactor}>
-        <Window appName={this.title}
-          activeModule={activeModule}
-          modules={modules}
-          platform={appCfg.platform}
-          closeHandler={this.closeApp.bind(this)}
-          fullScreenHandler={this.toggleFullScreen.bind(this)}
-          minimizeHandler={this.minimizeApp.bind(this)}>
-          {this.props.children}
-        </Window>
-      </Provider>
+        <Provider reactor={reactor}>
+          <Window appName={this.title}
+            activeModule={activeModule}
+            modules={modules}
+            platform={appCfg.platform}
+            closeHandler={this.closeApp.bind(this)}
+            fullScreenHandler={this.toggleFullScreen.bind(this)}
+            minimizeHandler={this.minimizeApp.bind(this)}>
+              {this.props.children}
+          </Window>
+        </Provider>
     )
   }
 }

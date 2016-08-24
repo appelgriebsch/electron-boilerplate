@@ -17,8 +17,10 @@ const routes = {
 
 let plugins = fs.readdirSync(path.join(__dirname, 'plugins'))
 plugins.map((plugin) => {
-  console.log(plugin)
-  routes.childRoutes.push(require('./plugins/' + plugin))
+  const plugInInfo = require('./plugins/' + plugin)
+  plugInInfo.module = require('./plugins/' + plugin + '/package.json')
+  console.log(plugInInfo)
+  routes.childRoutes.push(plugInInfo)
 })
 
 // Needed for onTouchTap

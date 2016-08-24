@@ -93,10 +93,4 @@ Window.propTypes = {
   platform: React.PropTypes.string.isRequired
 }
 
-Window.contextTypes = {
-  documentDatabase: React.PropTypes.object.isRequired,
-  reactor: React.PropTypes.object.isRequired,
-  sqlDatabase: React.PropTypes.object.isRequired
-}
-
 export default Radium(Window)
