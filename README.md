@@ -11,6 +11,7 @@ An electron boilerplate project incl. PouchDB, React + NuclearJS, React-MDL UI l
 * [React-MDL](https://tleunen.github.io/react-mdl/)
 * [PouchDB](https://pouchdb.com/) + Plugins (MongoDB-style query language and full-text search engine support)
 * [Lovefield](https://google.github.io/lovefield/)
+* [rdfstore-js](http://antoniogarrote.github.io/rdfstore-js/)
 
 ## Getting started
 * install node.js (at least Node 4.4.x+ and NPM 2.14.x+ required) from [here](http://www.nodejs.org)

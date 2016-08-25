@@ -8,7 +8,7 @@
         "./README.md"
     ],
     "includePattern": ".jsx",
-    "excludePattern": "(node_modules/|docs)"
+    "excludePattern": "(node_modules|docs)"
   },
   "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"],
   "opts": {

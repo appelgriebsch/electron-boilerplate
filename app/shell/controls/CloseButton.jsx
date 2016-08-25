@@ -6,14 +6,29 @@ import { winButtonStyle, winIconStyle,
          osxButtonStyle, osxIconStyle } from './ControlStyles'
 
 /**
+ *  A React component to render the OS-specific (OSX, Windows) Close button
  *
+ * @class CloseButton
+ * @extends {React.Component}
  */
 class CloseButton extends React.Component {
 
+
+  /**
+   * Creates an instance of CloseButton.
+   *
+   * @param {any} props
+   */
   constructor (props) {
     super(props)
   }
 
+
+  /**
+   *  renders the OS-specific Close button based on the given platform
+   *
+   * @returns an SVG representing the OS-specific Close button
+   */
   render () {
 
     var btnStyles = []

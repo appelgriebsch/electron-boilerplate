@@ -12,6 +12,11 @@ PouchDB.plugin(require('pouchdb-quick-search'))
  */
 class DocumentDatabase {
 
+  /**
+   *
+   *
+   * @type {PouchDB}
+   */
   db: PouchDB;
 
   /**
@@ -30,10 +35,10 @@ class DocumentDatabase {
   /**
    *
    *
-   * @param {any} doc
-   * @returns
+   * @param {JSON} doc
+   * @returns {Promise}
    */
-  save (doc:any) : Object {
+  save (doc:JSON) : Promise {
 
     if (!doc._id) {
       doc._id = uuid.v4()
@@ -63,21 +68,21 @@ class DocumentDatabase {
   /**
    *
    *
-   * @param {any} id
-   * @returns
+   * @param {string} id
+   * @returns {Promise}
    */
-  get (id:string) : Object {
+  get (id:string) : Promise {
     return this.db.get(id)
   }
 
   /**
-   * query - description
    *
-   * @param  {type} view:string    description
-   * @param  {type} options:Object description
-   * @return {type}                description
+   *
+   * @param {string} view
+   * @param {Object} options
+   * @returns {Promise}
    */
-  query(view:string, options:Object) {
+  query(view:string, options:Object) : Promise {
     return this.db.query(view, options);
   }
 }
