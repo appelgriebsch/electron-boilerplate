@@ -3,10 +3,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, hashHistory } from 'react-router'
-import PluginManager from './shell/common/manager/PluginManager'
+import path from 'path'
+import PluginManager from './shell/services/PluginManager'
 
 import Shell from './shell/Shell'
 
+const pluginFolder = path.join(__dirname, 'plugins')
 const routes = {
   path: '/',
   component: Shell,
@@ -14,22 +16,12 @@ const routes = {
   ]
 }
 
-function tryLoadPlugin(plugin:string) : ?Object {
-  let plugInInfo: ?Object
-  try {
-    plugInInfo = require('./plugins/' + plugin)
-    plugInInfo.module = require('./plugins/' + plugin + '/package.json')
-    console.log(plugInInfo)
-  } catch(ex) {
-    plugInInfo = undefined
-  }
-  return plugInInfo
-}
+let pluginManager = new PluginManager(pluginFolder)
 
-let plugins = PluginManager.getRegisteredPlugins();
-console.log("Plugins " + JSON.stringify(plugins));
+let plugins = pluginManager.getRegisteredPlugins();
+console.log(plugins)
 plugins.map((plugin) => {
-  routes.childRoutes.push(tryLoadPlugin(plugin))
+  routes.childRoutes.push(plugin)
 })
 
 // Needed for onTouchTap
