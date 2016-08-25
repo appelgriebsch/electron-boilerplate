@@ -3,9 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, hashHistory } from 'react-router'
+import PluginManager from './shell/common/manager/PluginManager'
 
-import fs from 'fs'
-import path from 'path'
 import Shell from './shell/Shell'
 
 const routes = {
@@ -27,7 +26,8 @@ function tryLoadPlugin(plugin:string) : ?Object {
   return plugInInfo
 }
 
-let plugins = fs.readdirSync(path.join(__dirname, 'plugins'))
+let plugins = PluginManager.getRegisteredPlugins();
+console.log("Plugins " + JSON.stringify(plugins));
 plugins.map((plugin) => {
   routes.childRoutes.push(tryLoadPlugin(plugin))
 })
