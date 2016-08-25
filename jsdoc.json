@@ -1,0 +1,42 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": [
+        "app/",
+        "./README.md"
+    ],
+    "includePattern": ".jsx",
+    "excludePattern": "(node_modules/|docs)"
+  },
+  "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"],
+  "opts": {
+    "template": "node_modules/docdash/",
+    "encoding": "utf8",
+    "destination": "app/docs/",
+    "recurse": true,
+    "verbose": true
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": true
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": false,
+      "includeDate": false
+    }
+  },
+  "docdash": {
+    "static": false,
+    "sort": true
+  },
+  "babel": {
+    "extensions": ["jsx"],
+    "presets": ["react"],
+    "plugins": "transform-flow-strip-types"
+  }
+}
