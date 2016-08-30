@@ -96,14 +96,10 @@ class Shell extends React.Component {
     let activeModule = appCfg.app.name
 
     this.props.route.childRoutes.map((route) => {
-      modules.push(<Tooltip key={`ttp_${route.path}`}
-                            label={route.module.description}
-                            position="right">
-                      <Link to={route.path} key={route.path}>
-                        <Icon name={route.module.config.icon} />
-                        {route.module.config.label}
-                      </Link>
-                    </Tooltip>)
+      modules.push(<Link to={route.path} key={route.path}>
+                      <Icon name={route.module.config.icon} style={{ paddingRight: '10px' }} />
+                      {route.module.config.label}
+                    </Link>)
     });
 
     return (
