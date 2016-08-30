@@ -26,6 +26,10 @@ class PluginManager {
     return plugins;
   }
 
+  deletePlugin(plugin:string) {
+    console.log('Deleting plugin ' + plugin);
+  }
+
   tryLoadPlugin(plugin:string) : ?Object {
     let plugInInfo: ?Object
     try {
