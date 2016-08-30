@@ -14,14 +14,13 @@ let plugins = pluginManager.getRegisteredPlugins()
 class SettingsManager extends React.Component {
 
   deletePlugin (plugin:string) {
-    alert('Inside deletePlugin handler ' + this.pluginName)
-    pluginManager.deletePlugin(plugin.pluginName)
+    pluginManager.deletePlugin(this.location)
   }
 
   render () {
     var createPluginCard = function(plugin) {
       console.log("plugin in PluginCardRenderer " + JSON.stringify(plugin))
-      return (<PluginCard onDelete={this.deletePlugin} pluginName={plugin.module.name} cardTitle={plugin.module.name} cardText={plugin.module.description} cardActionsButtonText='Open Plugin' />)
+      return (<PluginCard location={plugin.location} onDelete={this.deletePlugin} pluginName={plugin.module.name} cardTitle={plugin.module.name} cardText={plugin.module.description} cardActionsButtonText='Open Plugin' />)
     }
     return (
       <div>

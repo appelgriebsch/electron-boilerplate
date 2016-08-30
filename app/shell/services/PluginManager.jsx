@@ -23,17 +23,19 @@ class PluginManager {
     } catch(ex) {
       console.log(ex)
     }
-    return plugins;
+    return plugins
   }
 
   deletePlugin(plugin:string) {
-    console.log('Deleting plugin ' + plugin);
+    console.log(path.join(this.pluginFolder, plugin))
+    this.deleteFolderRecursive(path.join(this.pluginFolder, plugin))
   }
 
   tryLoadPlugin(plugin:string) : ?Object {
     let plugInInfo: ?Object
     try {
       plugInInfo = require(path.join(this.pluginFolder, plugin))
+      plugInInfo.location = plugin
       plugInInfo.module = require(path.join(this.pluginFolder, plugin, '/package.json'))
       console.log(plugInInfo)
     } catch(ex) {
@@ -42,6 +44,21 @@ class PluginManager {
     }
     return plugInInfo
   }
+
+  deleteFolderRecursive(path) {
+    if( fs.existsSync(path) ) {
+      fs.readdirSync(path).forEach(function(file,index){
+        var curPath = path + "/" + file;
+        if(fs.lstatSync(curPath).isDirectory()) { // recurse
+          deleteFolderRecursive(curPath);
+        } else { // delete file
+          fs.unlinkSync(curPath);
+        }
+      })
+      fs.rmdirSync(path);
+    }
+  }
+
 }
 
 export default PluginManager

@@ -11,6 +11,7 @@ class PluginCard extends React.Component {
   cardActionsButtonText: string;
   cardText: string;
   cardTitle: string;
+  location: string;
   deletePlugin;
 
   constructor(props) {
@@ -19,6 +20,7 @@ class PluginCard extends React.Component {
     this.cardActionsButtonText = this.props.cardActionsButtonText
     this.cardText = this.props.cardText
     this.cardTitle = this.props.cardTitle
+    this.location = this.props.location
     this.deletePlugin = this.props.onDelete.bind(this)
   }
 
@@ -27,6 +29,7 @@ class PluginCard extends React.Component {
     cardActionsButtonText: React.PropTypes.string.isRequired,
     cardText: React.PropTypes.string.isRequired,
     cardTitle: React.PropTypes.string.isRequired,
+    loation: React.PropTypes.string.isRequired,
     onDelete: React.PropTypes.func.isRequired,
   }
 
@@ -51,4 +54,3 @@ class PluginCard extends React.Component {
 };
 
 export default Radium(PluginCard);
-// module.exports = PluginCard;
