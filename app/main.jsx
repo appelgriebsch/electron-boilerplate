@@ -5,6 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, hashHistory } from 'react-router'
 import path from 'path'
 import PluginManager from './shell/services/PluginManager'
+import SettingsManager from './shell/services/SettingsManager'
 
 import Shell from './shell/Shell'
 
@@ -12,8 +13,18 @@ const pluginFolder = path.join(__dirname, 'plugins')
 const routes = {
   path: '/',
   component: Shell,
-  childRoutes: [
-  ]
+  childRoutes: [{
+    path: 'settings',
+    component: SettingsManager,
+    module: {
+      'description': 'Maintain application settings',
+      'config': {
+        'label': 'Settings',
+        'icon': 'settings'
+      }
+    }
+  }
+]
 }
 
 let pluginManager = new PluginManager(pluginFolder)
@@ -32,5 +43,5 @@ injectTapEventPlugin()
 
 ReactDOM.render(
   <Router history={hashHistory}
-    routes={routes} />, document.querySelector('div[role=app]')
+  routes={routes} />, document.querySelector('div[role=app]')
 )
