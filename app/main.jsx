@@ -5,7 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, hashHistory } from 'react-router'
 import path from 'path'
 import PluginManager from './shell/services/PluginManager'
-import SettingsManager from './shell/services/SettingsManager'
+import SettingsManager from './shell/services/settingsmanager/SettingsManager'
 
 import Shell from './shell/Shell'
 

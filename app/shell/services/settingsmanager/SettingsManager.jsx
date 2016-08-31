@@ -2,12 +2,12 @@
 import React from 'react'
 import Radium from 'radium'
 
-import PluginCard from '../../components/PluginCard'
-import PluginManager from './PluginManager'
+import PluginCard from '../../../components/PluginCard'
+import PluginManager from '../PluginManager'
 
 import path from 'path'
 
-const pluginFolder = path.resolve('app/plugins') + '/'
+const pluginFolder = path.join(__dirname, '../../../', 'plugins')
 let pluginManager = new PluginManager(pluginFolder)
 let plugins = pluginManager.getRegisteredPlugins()
 
