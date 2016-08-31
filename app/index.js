@@ -21,6 +21,8 @@
   // adds debug features like hotkeys for triggering dev tools and reload
   require('electron-debug')()
   process.on('uncaughtException', onCrash)
+  // add this switch for the notification window
+  app.commandLine.appendSwitch('--enable-transparent-visuals')
   /**
    * createMainWindow - create main application window
    *
