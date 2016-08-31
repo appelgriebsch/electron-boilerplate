@@ -66,7 +66,8 @@
       $q.when(true).then(() => {
         console.log("Notification", title, message)
         notifier.notify(title, {
-          message: message
+          message: message,
+          icon: appCfg.app.icon
         })
       })
     }
