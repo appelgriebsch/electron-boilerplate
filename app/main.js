@@ -31,6 +31,8 @@
       }
     ])
   var PouchDBService = require('./shell/services/PouchDBService')
+  var LovefieldService = require('./shell/services/LovefieldService')
+  var RDFStoreService = require('./shell/services/RDFStoreService')
   var ActivityDataService = require('./shell/services/ActivityDataService')
   var ActivityService = require('./shell/services/ActivityService')
   var ModuleProvider = require('./scripts/ModuleProvider')
@@ -39,6 +41,8 @@
   ModuleProvider.loadModules()
   angular.module('electron-app').provider('modules', [ModuleProvider])
   angular.module('electron-app').service('PouchDBService', [PouchDBService])
+  angular.module('electron-app').service('LovefieldService', [LovefieldService])
+  angular.module('electron-app').service('RDFStoreService', [RDFStoreService])
   angular.module('electron-app').service('ActivityDataService', ['PouchDBService', ActivityDataService])
   angular.module('electron-app').service('ActivityService', ['ActivityDataService', ActivityService])
   angular.module('electron-app').controller('ShellController', ['$scope', '$log', '$q', '$mdSidenav', 'modules', 'ActivityService', ShellController])

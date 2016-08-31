@@ -64,7 +64,6 @@
      */
     $scope.notify = (title, message) => {
       $q.when(true).then(() => {
-        console.log("Notification", title, message)
         notifier.notify(title, {
           message: message,
           icon: appCfg.app.icon
