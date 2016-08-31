@@ -7,13 +7,13 @@
    * @param  {type} $log            description
    * @param  {type} $q              description
    * @param  {type} $mdSidenav      description
-   * @param  {type} $mdToast        description
    * @param  {type} modulesProvider description
    * @param  {type} ActivityService description
    * @return {type}                 description
    */
-  function ShellController ($scope, $log, $q, $mdSidenav, $mdToast, modulesProvider, ActivityService) {
+  function ShellController ($scope, $log, $q, $mdSidenav, modulesProvider, ActivityService) {
     var app = require('electron').remote.app
+    var notifier = require('electron-notifications')
     var appCfg = app.sysConfig()
     /**
      *
@@ -63,10 +63,11 @@
      *
      */
     $scope.notify = (title, message) => {
-      $mdToast.show({
-        template: `<md-toast><span flex>${message}</span></md-toast>`,
-        position: 'bottom right',
-        hideDelay: 2000
+      $q.when(true).then(() => {
+        console.log("Notification", title, message)
+        notifier.notify(title, {
+          message: message
+        })
       })
     }
     /**

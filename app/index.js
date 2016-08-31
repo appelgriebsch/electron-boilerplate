@@ -155,7 +155,8 @@
     return {
       app: {
         name: appName,
-        version: appVersion
+        version: appVersion,
+        icon: path.join(__dirname, 'assets', 'boilerplate_tray.png')
       },
       host: hostname,
       platform: process.platform,
