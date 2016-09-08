@@ -13,11 +13,14 @@ class PluginManager {
 
   getRegisteredPlugins() {
     let plugins = [];
+    let id = 0;
     try {
       fs.readdirSync(this.pluginFolder).map((plugin) => {
         const p = this.tryLoadPlugin(plugin)
         if (p) {
+          // p._id = id;
           plugins.push(p)
+          // id++;
         }
       });
     } catch(ex) {
@@ -45,20 +48,20 @@ class PluginManager {
     return plugInInfo
   }
 
-  deleteFolderRecursive(path) {
-    if( fs.existsSync(path) ) {
-      fs.readdirSync(path).forEach(function(file,index){
-        var curPath = path + "/" + file;
+  deleteFolderRecursive(pluginPath) {
+    var deleteSubDir = function(file,index){
+        var curPath = path.join(pluginPath, '\\', file)
         if(fs.lstatSync(curPath).isDirectory()) { // recurse
-          deleteFolderRecursive(curPath);
+          this.deleteFolderRecursive(curPath);
         } else { // delete file
           fs.unlinkSync(curPath);
         }
-      })
-      fs.rmdirSync(path);
+      }
+    if( fs.existsSync(pluginPath) ) {
+      fs.readdirSync(pluginPath).forEach(deleteSubDir, this)
+      fs.rmdirSync(pluginPath)
     }
   }
-
 }
 
 export default PluginManager

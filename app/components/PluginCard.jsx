@@ -42,7 +42,7 @@ class PluginCard extends React.Component {
       {this.cardText}
       </CardText>
       <CardActions border>
-      <Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>
+      {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
       </CardActions>
       <CardMenu style={{color: '#fff'}}>
       <IconButton name="delete" onClick={this.deletePlugin}/>
@@ -53,4 +53,5 @@ class PluginCard extends React.Component {
   }
 };
 
-export default Radium(PluginCard);
+export default Radium(PluginCard)
+// module.exports = PluginCard
