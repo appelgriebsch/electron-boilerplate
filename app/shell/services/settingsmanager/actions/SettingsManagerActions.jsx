@@ -2,7 +2,7 @@
 import SettingsManagerActionTypes from './SettingsManagerActionTypes'
 
 /**
- *
+ * Represents the SettingsManagerActions which dispatches the actions to the SettingsManagerStore to update the state.
  */
 class SettingsManagerActions {
 
@@ -16,6 +16,10 @@ class SettingsManagerActions {
 
   mountInstalledPlugins(plugins) {
     this.reactor.dispatch(SettingsManagerActionTypes.MOUNT_INSTALLED_PLUGINS, plugins)
+  }
+
+  unmountPlugin(plugin) {
+    this.reactor.dispatch(SettingsManagerActionTypes.UNMOUNT_PLUGIN, plugin)
   }
 }
 

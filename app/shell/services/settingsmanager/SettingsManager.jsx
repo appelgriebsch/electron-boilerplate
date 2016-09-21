@@ -12,14 +12,23 @@ import SettingsManagerStore from './stores/SettingsManagerStore'
 
 import path from 'path'
 
-const pluginFolder = path.join(__dirname, '../../../', 'plugins')
+const pluginFolder = path.join(__dirname, '../../../../', 'plugins')
 
 let settingsManagerActions;
+
+/** SettingsManager is a default plugin which makes use of nuclearjs to display a list of all the installed plugins and various options for the plugins. */
 class SettingsManager extends React.Component {
 
   SettingsManagerActions: SettingsManagerActions
   PluginManager: PluginManager
 
+  /**
+  * Represents a SettingsManager.
+  * Creates a new instance of SettingsManager.
+  * @constructor
+  * @param {object} props - required properties.
+  * @param {object} context - required context properties.
+  */
   constructor(props, context) {
 
     super(props, context)
@@ -29,18 +38,20 @@ class SettingsManager extends React.Component {
     this.context.reactor.registerStores({
       'plugins': SettingsManagerStore
     });
-    settingsManagerActions = this.SettingsManagerActions;
+    settingsManagerActions = this.SettingsManagerActions
   }
 
   deletePlugin (plugin:string) {
+    // settingsManagerActions.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()})
+    settingsManagerActions.unmountPlugin(this.location)
     pluginManager.deletePlugin(this.location)
-    settingsManagerActions.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()})
   }
 
   componentDidMount () {
     this.SettingsManagerActions.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()})
   }
 
+/** Renders plugin cards for each and every installed plugin with various settings */
   render () {
     var createPluginCard = function(plugin) {
       const p = plugin.toJS()
@@ -57,6 +68,9 @@ class SettingsManager extends React.Component {
     }
     return (
       <div>
+      <div id='dropZone' style={{width: '150px', height: '150px'}}>
+      Drag and drop new plugins here.
+      </div>
       Following are the installed Plugins.
       {
         this.props.plugins.toArray().map(createPluginCard.bind(this))
@@ -78,7 +92,6 @@ SettingsManager.defaultProps = {
 
 SettingsManager.contextTypes = {
   appConfig: React.PropTypes.object.isRequired,
-  // documentDatabase: React.PropTypes.object.isRequired,
   reactor: React.PropTypes.object.isRequired
 }
 

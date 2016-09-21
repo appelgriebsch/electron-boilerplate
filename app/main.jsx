@@ -9,7 +9,7 @@ import SettingsManager from './shell/services/settingsmanager/SettingsManager'
 
 import Shell from './shell/Shell'
 
-const pluginFolder = path.join(__dirname, 'plugins')
+const pluginFolder = path.join(__dirname, '../', 'plugins')
 const routes = {
   path: '/',
   component: Shell,

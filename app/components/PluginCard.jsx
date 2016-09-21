@@ -5,6 +5,9 @@ import Radium from 'radium'
 import { Card, CardText, CardActions, CardTitle, CardMenu } from 'react-mdl';
 import { Button, IconButton } from 'react-mdl';
 
+/**
+* Renders a component like Google Now Card.
+*/
 class PluginCard extends React.Component {
 
   pluginName: string;
@@ -14,6 +17,7 @@ class PluginCard extends React.Component {
   location: string;
   deletePlugin;
 
+/** Creates a new Plugin Card component. */
   constructor(props) {
     super(props)
     this.pluginName = this.props.pluginName
