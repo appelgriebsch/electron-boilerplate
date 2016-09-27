@@ -38,7 +38,7 @@
     "linux": {
       "category": "Utility",
       "packageCategory": "utils",
-      "target": ["AppImage", "deb", "rpm", "tar.gz"],
+      "target": ["AppImage"],
       "depends": []
     },
     "mac": {
@@ -61,7 +61,10 @@
     "postinstall": "npm run app-install",
     "start": "electron app/",
     "app-install": "cd app && npm install --no-optional",
-    "build": "build --ia32 --x64",
+    "build": "npm run -s build-linux || npm run -s build-mac || npm run -s build-win",
+    "build-linux": "build --ia32 --x64 --linux",
+    "build-mac": "build --ia32 --x64 --mac",
+    "build-win": "build --ia32 --x64 --win",
     "lint": "standard \"app/**/*.js\"",
     "reformat": "npm run lint || standard \"app/**/*.js\" --fix"
   },
