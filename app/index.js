@@ -1,6 +1,7 @@
 (function () {
   'use strict'
   const electron = require('electron')
+  const electronDevTools = require('electron-devtools-installer')
   const app = electron.app
   const path = require('path')
   const os = require('os')
@@ -132,8 +133,7 @@
     mainWindow = createMainWindow()
     const isDev = require('electron-is-dev')
     if (isDev) {
-      const devToolsPath = path.join(__dirname, '..', 'devTools', 'batarang')
-      BrowserWindow.addDevToolsExtension(devToolsPath)
+      electronDevTools.default(electronDevTools.ANGULARJS_BATARANG);
     }
   })
   /**

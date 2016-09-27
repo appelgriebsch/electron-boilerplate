@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "index.js",
   "scripts": {
@@ -17,12 +17,6 @@
     "boilerplate",
     "angularjs"
   ],
-  "config": {
-    "id": "com.appelgriebsch.electron-boilerplate",
-    "ico": "assets/boilerplate.ico",
-    "icns": "assets/boilerplate.icns",
-    "png": "assets/boilerplate.png"
-  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
@@ -44,11 +38,13 @@
     "duet": "^4.0.0",
     "duet-channel": "^1.0.0",
     "electron-debug": "^1.0.0",
+    "electron-devtools-installer": "^2.0.0",
     "electron-notifications": "^0.1.0",
+    "graphql-pouch": "^1.1.0",
     "lovefield": "^2.1.0",
     "mime": "^1.3.4",
     "node-servicefinder": "appelgriebsch/node-servicefinder",
-    "pouchdb": "^5.1.0",
+    "pouchdb-browser": "^6.0.0",
     "pouchdb-find": "^0.10.0",
     "pouchdb-quick-search": "^1.1.0",
     "rdfstore": "^0.9.16",
