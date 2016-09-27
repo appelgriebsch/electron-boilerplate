@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
   },
-  "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
+  "homepage": "https://github.com/appelgriebsch/electron-boilerplate/tree/angularjs#readme",
   "dependencies": {
     "angular": "^1.5.0",
     "angular-animate": "^1.5.0",

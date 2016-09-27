@@ -43,27 +43,27 @@
     },
     "mac": {
       "category": "",
-      "target": ["dmg", "zip"]
+      "target": ["dmg"]
     },
     "squirrelWindows": {
-
+      "iconUrl": "https://raw.githubusercontent.com/appelgriebsch/electron-boilerplate/angularjs/build/icon.ico"
     },
     "win": {
-      "target": ["squirrel", "zip"]
+      "target": ["squirrel"]
     }
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
   },
-  "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
+  "homepage": "https://github.com/appelgriebsch/electron-boilerplate/tree/angularjs#readme",
   "scripts": {
-    "dist": "build",
-    "lint": "standard \"app/**/*.js\"",
-    "reformat": "npm run lint || standard \"app/**/*.js\" --fix",
     "postinstall": "npm run app-install",
     "start": "electron app/",
-    "app-install": "cd app && npm install --no-optional"
+    "app-install": "cd app && npm install --no-optional",
+    "build": "build --ia32 --x64",
+    "lint": "standard \"app/**/*.js\"",
+    "reformat": "npm run lint || standard \"app/**/*.js\" --fix"
   },
   "devDependencies": {
     "devtron": "^1.1.0",
