@@ -72,6 +72,8 @@
     "electron-packager": "^7.0.0",
     "jsdoc": "^3.4.0",
     "jsdoc-babel": "^0.2.1",
+    "jsonfile": "^2.4.0",
+    "react-dropzone": "^3.6.0",
     "spectron": "^3.0.0",
     "standard": "^8.0.0"
   },
