@@ -15,7 +15,8 @@ import path from 'path'
 
 const pluginFolder = path.join(__dirname, '../../../../', 'plugins')
 
-let settingsManagerActions;
+let settingsManagerActions
+let pluginManager
 
 /** SettingsManager is a default plugin which makes use of nuclearjs to display a list of all the installed plugins and various options for the plugins. */
 class SettingsManager extends React.Component {
@@ -40,6 +41,7 @@ class SettingsManager extends React.Component {
       'plugins': SettingsManagerStore
     });
     settingsManagerActions = this.SettingsManagerActions
+    pluginManager = this.PluginManager
   }
 
   deletePlugin (plugin:string) {
