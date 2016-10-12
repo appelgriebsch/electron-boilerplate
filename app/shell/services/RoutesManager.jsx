@@ -41,6 +41,7 @@ class RoutesManager extends React.Component {
             'icon': 'settings'
           }
         },
+        pluginManager: this.pluginManager
       }]
     }
     this.plugins = this.pluginManager.getRegisteredPlugins()

@@ -1,6 +1,6 @@
 // @flow
 
-import fs from 'fs'
+import fs from 'original-fs'
 import path from 'path'
 
 /** PluginManager includes a set of api methods. */
@@ -47,6 +47,13 @@ class PluginManager {
       console.log(ex)
     }
     return plugins
+  }
+
+  installPlugin (pluginPath:string, name:string) {
+    if(fs.lstatSync(pluginPath).isDirectory())
+      console.log('Cannot process directories');
+     else
+      fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
   }
 
 /**

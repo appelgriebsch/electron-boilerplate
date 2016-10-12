@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import Radium from 'radium'
+import Dropzone from 'react-dropzone'
 
 import PluginCard from '../../../components/PluginCard'
 import PluginManager from '../PluginManager'
@@ -53,7 +54,13 @@ class SettingsManager extends React.Component {
     this.SettingsManagerActions.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()})
   }
 
-/** Renders plugin cards for each and every installed plugin with various settings */
+  onDrop (files) {
+    files.map(file => {
+      pluginManager.installPlugin(file.path, file.name)
+    })
+  }
+
+  /** Renders plugin cards for each and every installed plugin with various settings */
   render () {
     var createPluginCard = function(plugin) {
       const p = plugin.toJS()
@@ -66,20 +73,19 @@ class SettingsManager extends React.Component {
         cardTitle={p.module.name}
         cardText={p.module.description}
         cardActionsButtonText='Open Plugin' />
-      )
-    }
-    return (
-      <div>
-      <div id='dropZone' style={{width: '150px', height: '150px'}}>
-      Drag and drop new plugins here.
-      </div>
+    )
+  }
+  return (
+    <div>
+      <Dropzone onDrop={this.onDrop} multiple={false}>
+        <div>Try dropping some files here, or click to select files to upload.</div>
+      </Dropzone>
       Following are the installed Plugins.
       {
         this.props.plugins.toArray().map(createPluginCard.bind(this))
       }
-      </div>
-    )
-  }
+    </div>
+  )}
 }
 
 SettingsManager.propTypes = {
