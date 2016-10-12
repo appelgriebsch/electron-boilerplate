@@ -1,6 +1,6 @@
 // @flow
 
-import fs from 'original-fs'
+import fs from 'fs'
 import path from 'path'
 
 /** PluginManager includes a set of api methods. */
@@ -9,11 +9,11 @@ class PluginManager {
   pluginFolder:string
 
   /**
-  * Represents a PluginManager.
-  * Checks if the plugins folder path exists and creates a new plugins folder otherwise.
-  * @constructor
-  * @param {string} pluginFolder - path to the plugins folder
-  */
+   * Represents a PluginManager.
+   * Checks if the plugins folder path exists and creates a new plugins folder otherwise.
+   * @constructor
+   * @param {string} pluginFolder - path to the plugins folder
+   */
   constructor(pluginFolder:string) {
     this.pluginFolder = pluginFolder
     // this.pluginFolder = path.join(__dirname, '../../../', 'plugins')
@@ -30,7 +30,7 @@ class PluginManager {
     }
   }
 
-  /** Iterates over all the plugins in the plugins folder, loads and returns the plugins list. */
+/** Iterates over all the plugins in the plugins folder, loads and returns the plugins list. */
   getRegisteredPlugins() {
     let plugins = [];
     let id = 0;
@@ -49,27 +49,17 @@ class PluginManager {
     return plugins
   }
 
-  installPlugin (pluginPath:string, name:string) {
-    if(fs.lstatSync(pluginPath).isDirectory())
-    {
-      console.log('Cannot process directories');
-    }
-    else {
-      fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
-    }
-  }
-
-  /**
-  * Deletes the plugin.
-  * @param {string} plugin - path of the plugin to be deleted.
-  */
+/**
+ * Deletes the plugin.
+ * @param {string} plugin - path of the plugin to be deleted.
+*/
   deletePlugin(plugin:string) {
     const pluginPath = path.join(this.pluginFolder, plugin)
     console.log(pluginPath)
     if(pluginPath.includes('asar'))
-    fs.unlinkSync(pluginPath)
+      fs.unlinkSync(pluginPath)
     else
-    this.deleteFolderRecursive(path.join(this.pluginFolder, plugin))
+      this.deleteFolderRecursive(path.join(this.pluginFolder, plugin))
   }
 
   tryLoadPlugin(plugin:string) : ?Object {
@@ -89,13 +79,13 @@ class PluginManager {
 
   deleteFolderRecursive(pluginPath) {
     var deleteSubDir = function(file,index){
-      var curPath = path.join(pluginPath, '\\', file)
-      if(fs.lstatSync(curPath).isDirectory()) { // recurse
-        this.deleteFolderRecursive(curPath);
-      } else { // delete file
-        fs.unlinkSync(curPath);
+        var curPath = path.join(pluginPath, '\\', file)
+        if(fs.lstatSync(curPath).isDirectory()) { // recurse
+          this.deleteFolderRecursive(curPath);
+        } else { // delete file
+          fs.unlinkSync(curPath);
+        }
       }
-    }
     if( fs.existsSync(pluginPath) ) {
       fs.readdirSync(pluginPath).forEach(deleteSubDir, this)
       fs.rmdirSync(pluginPath)
