@@ -19,14 +19,8 @@
      */
     function DataService (dbName) {
       var promise = new Promise((resolve, reject) => {
-        new PouchDB(dbName, settings)
-        .then((result) => {
-          resolve(result)
-        })
-        .catch((err) => {
-          console.log(err)
-          reject(err)
-        })
+        var result = PouchDB(dbName, settings);
+        resolve(result)        
       })
       return promise
     }
