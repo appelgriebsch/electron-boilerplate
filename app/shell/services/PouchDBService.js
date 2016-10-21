@@ -7,7 +7,7 @@
    */
   function PouchDBService () {
     // initialize pouch db adapter
-    var PouchDB = require('pouchdb/lib/index-browser')
+    var PouchDB = require('pouchdb-browser')
     PouchDB.plugin(require('pouchdb-find'))
     PouchDB.plugin(require('pouchdb-quick-search'))
     var settings = { adapter: 'idb', storage: 'persistent' }
@@ -20,7 +20,7 @@
     function DataService (dbName) {
       var promise = new Promise((resolve, reject) => {
         var result = PouchDB(dbName, settings);
-        resolve(result)        
+        resolve(result)
       })
       return promise
     }

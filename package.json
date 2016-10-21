@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "app/index.js",
   "repository": {
@@ -38,6 +38,8 @@
     "linux": {
       "category": "Utility",
       "packageCategory": "utils",
+      "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
+      "publish": ["github"],
       "target": ["AppImage"],
       "depends": []
     },
@@ -49,6 +51,8 @@
       "iconUrl": "https://raw.githubusercontent.com/appelgriebsch/electron-boilerplate/angularjs/build/icon.ico"
     },
     "win": {
+      "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
+      "publish": ["github"],
       "target": ["squirrel"]
     }
   },
@@ -62,9 +66,9 @@
     "start": "electron app/",
     "app-install": "cd app && npm install --no-optional",
     "build": "npm run -s build-linux || npm run -s build-mac || npm run -s build-win",
-    "build-linux": "build --ia32 --x64 --linux",
-    "build-mac": "build --ia32 --x64 --mac",
-    "build-win": "build --ia32 --x64 --win",
+    "build-linux": "build --x64 --linux",
+    "build-mac": "build --x64 --mac",
+    "build-win": "build --x64 --win",
     "lint": "standard \"app/**/*.js\"",
     "reformat": "npm run lint || standard \"app/**/*.js\" --fix"
   },
