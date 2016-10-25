@@ -3,10 +3,14 @@
 import fs from 'original-fs'
 import path from 'path'
 
+import SettingsManager from './SettingsManager'
+import PluginActions from './routesmanager/actions/PluginActions'
+
 /** PluginManager includes a set of api methods. */
 class PluginManager {
 
   pluginFolder:string
+  PluginControls: PluginActions
 
   /**
    * Represents a PluginManager.
@@ -14,9 +18,13 @@ class PluginManager {
    * @constructor
    * @param {string} pluginFolder - path to the plugins folder
    */
-  constructor(pluginFolder:string) {
+  constructor(pluginFolder:string, pluginControls: PluginActions) {
     this.pluginFolder = pluginFolder
-    // this.pluginFolder = path.join(__dirname, '../../../', 'plugins')
+    this.PluginControls = pluginControls
+    // pluginManager = this
+    this.installPlugin = this.installPlugin.bind(this)
+    this.uninstallPlugin = this.uninstallPlugin.bind(this)
+
     if(!fs.existsSync(this.pluginFolder) ) {
       console.log("Plugins folder doesn't exist. Creating folder");
       fs.mkdirSync(this.pluginFolder, err => {
@@ -38,14 +46,25 @@ class PluginManager {
       fs.readdirSync(this.pluginFolder).map((plugin) => {
         const p = this.tryLoadPlugin(plugin)
         if (p) {
-          // p._id = id;
           plugins.push(p)
-          // id++;
         }
       });
     } catch(ex) {
       console.log(ex)
     }
+    plugins.push({
+      path: 'settings',
+      component: SettingsManager,
+      module: {
+        'description': 'Maintain application settings',
+        'config': {
+          'label': 'Settings',
+          'icon': 'settings'
+        }
+      },
+      'installPlugin': this.installPlugin,
+      'uninstallPlugin': this.uninstallPlugin
+    })
     return plugins
   }
 
@@ -54,13 +73,17 @@ class PluginManager {
       console.log('Cannot process directories');
      else
       fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
+
+    // pluginManager.PluginControls.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()});
+    window.location.reload()
   }
 
 /**
  * Deletes the plugin.
  * @param {string} plugin - path of the plugin to be deleted.
 */
-  deletePlugin(plugin:string) {
+  uninstallPlugin(plugin:string) {
+    this.PluginControls.unmountPlugin(plugin)
     const pluginPath = path.join(this.pluginFolder, plugin)
     console.log(pluginPath)
     if(pluginPath.includes('asar'))
@@ -74,9 +97,7 @@ class PluginManager {
     try {
       plugInInfo = require(path.join(this.pluginFolder, plugin))
       plugInInfo.location = plugin
-      console.log(path.join(this.pluginFolder, plugin, '/package.json'))
       plugInInfo.module = require(path.join(this.pluginFolder, plugin, '/package.json'))
-      console.log(plugInInfo)
     } catch(ex) {
       console.log(ex)
       plugInInfo = undefined

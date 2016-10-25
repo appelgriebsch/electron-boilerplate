@@ -15,7 +15,6 @@ class PluginCard extends React.Component {
   cardText: string;
   cardTitle: string;
   location: string;
-  deletePlugin;
 
 /** Creates a new Plugin Card component. */
   constructor(props) {
@@ -58,4 +57,3 @@ class PluginCard extends React.Component {
 };
 
 export default Radium(PluginCard)
-// module.exports = PluginCard
