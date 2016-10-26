@@ -4,7 +4,7 @@ import routing from '../routing/getters'
 import { connect } from 'nuclear-js-react-addons'
 import Dropzone from 'react-dropzone'
 
-import PluginCard from '../../controls/PluginCard'
+import PluginCard from './PluginCard'
 
 let settingsManager
 /** SettingsManager is a default plugin which makes use of nuclearjs to display a list of all the installed plugins and various options for the plugins. */
@@ -24,8 +24,8 @@ class SettingsManager extends React.Component {
     settingsManager = this
   }
 
-  deletePlugin () {
-    settingsManager.props.route.uninstallPlugin(this.location)
+  deletePlugin (plugin) {
+    settingsManager.props.route.uninstallPlugin(plugin)
   }
 
   onDrop (files) {
@@ -36,9 +36,11 @@ class SettingsManager extends React.Component {
 
   /** Renders plugin cards for each and every installed plugin with various settings */
   render () {
+
     const {
       plugins
     } = this.props;
+
 
     return (
       <div key='Settings'>
@@ -50,10 +52,13 @@ class SettingsManager extends React.Component {
         {
           plugins.toArray().map(plugin => {
             const p = plugin.toJS()
+            const path = `${p.root.href}/${p.location}`
             return (
               <PluginCard
                 key={p.location}
-                location={p.location}
+                location={path}
+                banner={p.module.config.banner}
+                removable={p.module.config.removable || true}
                 onDelete={this.deletePlugin}
                 pluginName={p.module.name}
                 cardTitle={p.module.name}
@@ -67,15 +72,15 @@ class SettingsManager extends React.Component {
   }
 }
 
-  SettingsManager.contextTypes = {
-    appConfig: React.PropTypes.object.isRequired,
-    reactor: React.PropTypes.object.isRequired
-  }
+SettingsManager.contextTypes = {
+  appConfig: React.PropTypes.object.isRequired,
+  reactor: React.PropTypes.object.isRequired
+}
 
-  function dataBinding(props) {
-    return {
-      plugins: routing.plugins
-    };
-  }
+function dataBinding(props) {
+  return {
+    plugins: routing.plugins
+  };
+}
 
-  export default connect(dataBinding)(SettingsManager)
+export default connect(dataBinding)(SettingsManager)

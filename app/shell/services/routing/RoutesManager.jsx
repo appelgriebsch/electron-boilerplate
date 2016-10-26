@@ -7,8 +7,8 @@ import { connect } from 'nuclear-js-react-addons'
 import { toImmutable } from 'nuclear-js'
 
 import Shell from '../../Shell'
-import PluginManager from '../plugin/PluginManager'
-import SettingsManager from '../plugin/SettingsManager'
+import PluginManager from '../extension/PluginManager'
+import SettingsManager from '../extension/SettingsManager'
 import routing from './getters'
 
 /** */

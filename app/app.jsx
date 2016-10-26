@@ -10,7 +10,7 @@ import { Provider } from 'nuclear-js-react-addons'
 import RoutesManager from './shell/services/routing/RoutesManager'
 import PluginStore from './shell/services/routing/stores/PluginStore'
 import pluginActions from './shell/services/routing/actions/PluginActions'
-import pluginManager from './shell/services/plugin/PluginManager'
+import pluginManager from './shell/services/extension/PluginManager'
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release

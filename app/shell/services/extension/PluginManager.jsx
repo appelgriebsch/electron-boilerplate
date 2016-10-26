@@ -2,6 +2,7 @@
 
 import fs from 'original-fs'
 import path from 'path'
+import uri from 'url'
 
 import SettingsManager from './SettingsManager'
 import PluginActions from '../routing/actions/PluginActions'
@@ -55,11 +56,15 @@ class PluginManager {
     plugins.push({
       path: 'settings',
       component: SettingsManager,
+      root: uri.parse(__dirname),
+      location: '../../..',
       module: {
-        'description': 'Maintain application settings',
-        'config': {
-          'label': 'Settings',
-          'icon': 'settings'
+        description: 'Maintain application settings',
+        config: {
+          label: 'Settings',
+          icon: 'settings',
+          banner: 'assets/settings.png',
+          removable: false
         }
       },
       'installPlugin': this.installPlugin,
@@ -95,9 +100,15 @@ class PluginManager {
   tryLoadPlugin(plugin:string) : ?Object {
     let plugInInfo: ?Object
     try {
-      plugInInfo = require(path.join(this.pluginFolder, plugin))
-      plugInInfo.location = plugin
-      plugInInfo.module = require(path.join(this.pluginFolder, plugin, '/package.json'))
+      const pluginObject = require(path.join(this.pluginFolder, plugin))
+      const pluginMeta = require(path.join(this.pluginFolder, plugin, '/package.json'))
+      plugInInfo = {
+        component: pluginObject.default,
+        root: uri.parse(this.pluginFolder),
+        location: plugin,
+        module: pluginMeta,
+        path: pluginMeta.config.path
+      }
     } catch(ex) {
       console.log(ex)
       plugInInfo = undefined

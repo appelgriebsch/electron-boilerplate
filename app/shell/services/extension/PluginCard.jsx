@@ -10,21 +10,9 @@ import { Button, IconButton } from 'react-mdl';
 */
 class PluginCard extends React.Component {
 
-  pluginName: string;
-  cardActionsButtonText: string;
-  cardText: string;
-  cardTitle: string;
-  location: string;
-
 /** Creates a new Plugin Card component. */
   constructor(props) {
     super(props)
-    this.pluginName = this.props.pluginName
-    this.cardActionsButtonText = this.props.cardActionsButtonText
-    this.cardText = this.props.cardText
-    this.cardTitle = this.props.cardTitle
-    this.location = this.props.location
-    this.deletePlugin = this.props.onDelete.bind(this)
   }
 
   propTypes: {
@@ -32,21 +20,34 @@ class PluginCard extends React.Component {
     cardActionsButtonText: React.PropTypes.string.isRequired,
     cardText: React.PropTypes.string.isRequired,
     cardTitle: React.PropTypes.string.isRequired,
-    loation: React.PropTypes.string.isRequired,
+    location: React.PropTypes.string.isRequired,
+    banner: React.PropTypes.string.isRequired,
+    removable: React.PropTypes.bool.isRequired,
     onDelete: React.PropTypes.func.isRequired,
   }
 
   render () {
+
+    const bannerStyle = {
+      color: '#fff',
+      height: '176px',
+      background: `url(file://${this.props.location}/${this.props.banner}) center / cover`
+    }
+
+    const deleteVisible = {
+      visible: this.props.removable ? 'visible' : 'hidden'
+    }
+
     return (
       <div>
         <Card shadow={0} style={{width: '62%', margin: 'auto'}}>
-          <CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>{this.cardTitle}</CardTitle>
+          <CardTitle style={bannerStyle}>{this.cardTitle}</CardTitle>
           <CardText>{this.cardText}</CardText>
           <CardActions border>
             {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
           </CardActions>
           <CardMenu style={{color: '#fff'}}>
-            <IconButton name="delete" onClick={this.deletePlugin}/>
+            <IconButton name="delete" style={deleteVisible} onClick={this.deletePlugin}/>
           </CardMenu>
         </Card>
       </div>
