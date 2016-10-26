@@ -2,12 +2,9 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/appelgriebsch/electron-boilerplate.git"
@@ -17,17 +14,11 @@
     "boilerplate",
     "reactjs"
   ],
-  "config": {
-    "id": "com.appelgriebsch.electron-boilerplate",
-    "ico": "assets/boilerplate.ico",
-    "icns": "assets/boilerplate.icns",
-    "png": "assets/boilerplate.png"
-  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
   },
-  "homepage": "https://github.com/appelgriebsch/electron-boilerplate#readme",
+  "homepage": "https://github.com/appelgriebsch/electron-boilerplate/tree/reactjs#readme",
   "dependencies": {
     "duet": "^4.0.0",
     "duet-channel": "^1.0.0",
@@ -51,7 +42,7 @@
     "react-calendar-heatmap": "^1.0.0",
     "react-dom": "^15.1.0",
     "react-mdl": "^1.5.4",
-    "react-router": "^2.0.0",
+    "react-router": "^3.0.0",
     "react-stepzilla": "^1.9.1",
     "react-tap-event-plugin": "^1.0.0",
     "uuid": "^2.0.1"

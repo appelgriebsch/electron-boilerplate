@@ -47,6 +47,8 @@
     "linux": {
       "category": "Utility",
       "packageCategory": "utils",
+      "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
+      "publish": ["github"],
       "target": ["AppImage"],
       "depends": []
     },
@@ -55,9 +57,11 @@
       "target": ["dmg"]
     },
     "squirrelWindows": {
-      "iconUrl": "https://raw.githubusercontent.com/appelgriebsch/electron-boilerplate/angularjs/build/icon.ico"
+      "iconUrl": "https://raw.githubusercontent.com/appelgriebsch/electron-boilerplate/reactjs/build/icon.ico"
     },
     "win": {
+      "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
+      "publish": ["github"],
       "target": ["squirrel"]
     }
   },
@@ -65,16 +69,16 @@
   "bugs": {
     "url": "https://github.com/appelgriebsch/electron-boilerplate/issues"
   },
-  "homepage": "https://github.com/appelgriebsch/electron-boilerplate/tree/reejs#readme",
+  "homepage": "https://github.com/appelgriebsch/electron-boilerplate/tree/reactjs#readme",
   "scripts": {
     "postinstall": "npm run app-install",
     "start": "npm run app-build && electron app/",
     "app-install": "cd app && npm install --no-optional",
     "app-build": "babel --presets es2015,react --plugins babel-plugin-transform-flow-strip-types --ignore node_modules/ --compact true --source-maps inline --minified --extensions .jsx app/ -d app/",
     "build": "npm run -s build-linux || npm run -s build-mac || npm run -s build-win",
-    "build-linux": "build --ia32 --x64 --linux",
-    "build-mac": "build --ia32 --x64 --mac",
-    "build-win": "build --ia32 --x64 --win",
+    "build-linux": "build --x64 --linux",
+    "build-mac": "build --x64 --mac",
+    "build-win": "build --x64 --win",
     "generate-docs": "jsdoc -c jsdoc.json",
     "lint": "standard \"app/**/*.jsx\"",
     "reformat": "npm run lint || standard \"app/**/*.jsx\" --fix"
