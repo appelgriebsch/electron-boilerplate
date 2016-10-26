@@ -46,8 +46,6 @@ class RoutesManager extends React.Component {
       this.routes.childRoutes.push(plugin.toJS())
     })
 
-    console.log('childRoutes in RoutesManager ' + this.routes.childRoutes);
-
     return(
       <Router history={hashHistory} routes={this.routes} />
     )

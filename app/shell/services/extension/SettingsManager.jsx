@@ -53,12 +53,13 @@ class SettingsManager extends React.Component {
           plugins.toArray().map(plugin => {
             const p = plugin.toJS()
             const path = `${p.root.href}/${p.location}`
+            const isRemovable = (p.module.config.removable ? p.module.config.removable : true)
             return (
               <PluginCard
                 key={p.location}
                 location={path}
                 banner={p.module.config.banner}
-                removable={p.module.config.removable || true}
+                removable={isRemovable}
                 onDelete={this.deletePlugin}
                 pluginName={p.module.name}
                 cardTitle={p.module.name}

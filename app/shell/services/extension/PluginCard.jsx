@@ -41,13 +41,13 @@ class PluginCard extends React.Component {
     return (
       <div>
         <Card shadow={0} style={{width: '62%', margin: 'auto'}}>
-          <CardTitle style={bannerStyle}>{this.cardTitle}</CardTitle>
-          <CardText>{this.cardText}</CardText>
+          <CardTitle style={bannerStyle}>{this.props.cardTitle}</CardTitle>
+          <CardText>{this.props.cardText}</CardText>
           <CardActions border>
             {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
           </CardActions>
           <CardMenu style={{color: '#fff'}}>
-            <IconButton name="delete" style={deleteVisible} onClick={this.deletePlugin}/>
+            <IconButton name="delete" style={deleteVisible} onClick={this.props.onDelete}/>
           </CardMenu>
         </Card>
       </div>

@@ -59,6 +59,7 @@ class PluginManager {
       root: uri.parse(__dirname),
       location: '../../..',
       module: {
+        name: 'Settings',
         description: 'Maintain application settings',
         config: {
           label: 'Settings',
