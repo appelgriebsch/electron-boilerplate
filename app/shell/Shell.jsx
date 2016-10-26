@@ -6,13 +6,13 @@ import { Icon, Tooltip } from 'react-mdl';
 import { Link } from 'react-router'
 import { connect } from 'nuclear-js-react-addons'
 
-import DocumentDatabase from './services/DocumentDatabase'
-import SqlDatabase from './services/SqlDatabase'
-import TripleStore from './services/TripleStore'
+import DocumentDatabase from './services/storage/DocumentDatabase'
+import SqlDatabase from './services/storage/SqlDatabase'
+import TripleStore from './services/storage/TripleStore'
 
 import Window from './Window'
 
-import getters from './services/routesmanager/getters'
+import routing from './services/routing/getters'
 
 const app = electron.remote.app
 const appCfg = app.sysConfig()
@@ -135,7 +135,7 @@ Shell.childContextTypes = {
 
 function dataBinding(props) {
   return {
-    plugins:getters.plugins
+    plugins: routing.plugins
   };
 }
 

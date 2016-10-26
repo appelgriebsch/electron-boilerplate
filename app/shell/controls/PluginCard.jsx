@@ -39,18 +39,16 @@ class PluginCard extends React.Component {
   render () {
     return (
       <div>
-      <Card shadow={0} style={{width: '62%', margin: 'auto'}}>
-      <CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>{this.cardTitle}</CardTitle>
-      <CardText>
-      {this.cardText}
-      </CardText>
-      <CardActions border>
-      {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
-      </CardActions>
-      <CardMenu style={{color: '#fff'}}>
-      <IconButton name="delete" onClick={this.deletePlugin}/>
-      </CardMenu>
-      </Card>
+        <Card shadow={0} style={{width: '62%', margin: 'auto'}}>
+          <CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>{this.cardTitle}</CardTitle>
+          <CardText>{this.cardText}</CardText>
+          <CardActions border>
+            {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
+          </CardActions>
+          <CardMenu style={{color: '#fff'}}>
+            <IconButton name="delete" onClick={this.deletePlugin}/>
+          </CardMenu>
+        </Card>
       </div>
     );
   }

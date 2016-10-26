@@ -2,15 +2,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import RoutesManager from './shell/services/routesmanager/RoutesManager'
 import path from 'path'
 
 import reactor from './shell/Reactor'
 import { Provider } from 'nuclear-js-react-addons'
 
-import PluginStore from './shell/services/routesmanager/stores/PluginStore'
-import pluginActions from './shell/services/routesmanager/actions/PluginActions'
-import pluginManager from './shell/services/PluginManager'
+import RoutesManager from './shell/services/routing/RoutesManager'
+import PluginStore from './shell/services/routing/stores/PluginStore'
+import pluginActions from './shell/services/routing/actions/PluginActions'
+import pluginManager from './shell/services/plugin/PluginManager'
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release

@@ -1,5 +1,5 @@
 // @flow
-import PouchDB from 'pouchdb/lib/index-browser'
+import PouchDB from 'pouchdb-browser'
 import uuid from 'uuid'
 
 PouchDB.plugin(require('pouchdb-find'))

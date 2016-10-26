@@ -3,7 +3,6 @@
 import { Store, toImmutable } from 'nuclear-js'
 
 import PluginActionTypes from '../actions/PluginActionTypes'
-import SettingsManager from '../../SettingsManager'
 
 export default Store({
 

@@ -4,7 +4,7 @@ import fs from 'original-fs'
 import path from 'path'
 
 import SettingsManager from './SettingsManager'
-import PluginActions from './routesmanager/actions/PluginActions'
+import PluginActions from '../routing/actions/PluginActions'
 
 /** PluginManager includes a set of api methods. */
 class PluginManager {
