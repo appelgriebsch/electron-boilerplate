@@ -4,18 +4,21 @@ import React from 'react'
 import Radium from 'radium'
 import { Icon, Tooltip } from 'react-mdl';
 import { Link } from 'react-router'
-
-import { Provider } from 'nuclear-js-react-addons'
+import { connect } from 'nuclear-js-react-addons'
 
 import DocumentDatabase from './services/DocumentDatabase'
 import SqlDatabase from './services/SqlDatabase'
 import TripleStore from './services/TripleStore'
 
-import reactor from './Reactor';
 import Window from './Window'
+
+import getters from './services/routesmanager/getters'
 
 const app = electron.remote.app
 const appCfg = app.sysConfig()
+
+// console.log('props from shell ' + JSON.stringify(this.props));
+// console.log('plugins from shell ' + this.props.reactor.evaluate([]));
 
 /**
  *
@@ -92,10 +95,17 @@ class Shell extends React.Component {
    */
   render () {
 
+    const {
+      plugins
+    } = this.props;
+
     let modules = []
     let activeModule = appCfg.app.name
 
-    this.props.route.childRoutes.map((route) => {
+    console.log('appcfg ' + JSON.stringify(appCfg));
+
+    plugins.toArray().map((r) => {
+      const route = r.toJS()
       modules.push(<Link to={route.path} key={route.path}>
                       <Icon name={route.module.config.icon} style={{ paddingRight: '10px' }} />
                       {route.module.config.label}
@@ -103,17 +113,15 @@ class Shell extends React.Component {
     });
 
     return (
-        <Provider reactor={reactor}>
-          <Window appName={this.title}
-            activeModule={activeModule}
-            modules={modules}
-            platform={appCfg.platform}
-            closeHandler={this.closeApp.bind(this)}
-            fullScreenHandler={this.toggleFullScreen.bind(this)}
-            minimizeHandler={this.minimizeApp.bind(this)}>
-              {this.props.children}
-          </Window>
-        </Provider>
+      <Window appName={this.title}
+        activeModule={activeModule}
+        modules={modules}
+        platform={appCfg.platform}
+        closeHandler={this.closeApp.bind(this)}
+        fullScreenHandler={this.toggleFullScreen.bind(this)}
+        minimizeHandler={this.minimizeApp.bind(this)}>
+          {this.props.children}
+      </Window>
     )
   }
 }
@@ -125,4 +133,11 @@ Shell.childContextTypes = {
   sqlDatabase: React.PropTypes.object.isRequired
 }
 
-export default Radium(Shell)
+function dataBinding(props) {
+  return {
+    plugins:getters.plugins
+  };
+}
+
+export default connect(dataBinding)(Shell)
+// export default Radium(Shell)
