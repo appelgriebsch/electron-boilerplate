@@ -27,20 +27,17 @@
     "appId": "com.appelgriebsch.electron-boilerplate",
     "compression": "maximum",
     "dmg": {
-      "title": "Boilerplate",
-      "icon-size": 80,
+      "iconSize": 80,
       "contents": [
         {
-          "x": 300,
-          "y": 250,
-          "type": "link",
-          "path": "/Applications"
+            "x": 100,
+            "y": 220
         },
         {
-          "x": 120,
-          "y": 130,
-          "type": "file",
-          "path": ""
+          "x": 280,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
         }
       ]
     },
@@ -82,8 +79,6 @@
     "generate-docs": "jsdoc -c jsdoc.json",
     "lint": "standard \"app/**/*.jsx\"",
     "reformat": "npm run lint || standard \"app/**/*.jsx\" --fix"
-    "package:win32-ia32": "electron-packager app/ %npm_package_productName% --arch ia32 --platform win32 --app-version %npm_package_version% --app-bundle-id %npm_package_config_id% --app-copyright \"Copyright (c) 2016 %npm_package_author_name%\" --version-string.CompanyName=\"%npm_package_author_name%\" --version-string.ProductName=\"%npm_package_productName%\" --version-string.FileDescription=\"%npm_package_description%\" --asar --icon %npm_package_config_ico% --prune --out build/",
-    "package:win32-x64": "electron-packager app/ %npm_package_productName% --arch x64 --platform win32 --app-version %npm_package_version% --app-bundle-id %npm_package_config_id% --app-copyright \"Copyright (c) 2016 %npm_package_author_name%\" --version-string.CompanyName=\"%npm_package_author_name%\" --version-string.ProductName=\"%npm_package_productName%\" --version-string.FileDescription=\"%npm_package_description%\" --asar --icon %npm_package_config_ico% --prune --out build/",
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
