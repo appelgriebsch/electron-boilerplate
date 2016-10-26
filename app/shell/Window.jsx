@@ -10,15 +10,6 @@ import MinimizeButton from './controls/MinimizeButton'
 import MaximizeButton from './controls/MaximizeButton'
 import CloseButton from './controls/CloseButton'
 
-try {
-    console.log("Props from Window.jsx " + JSON.stringify(this.props));
-}
-catch (e)
-{
-  console.log('Error in Window.jsx');
-}
-
-
 const WindowStyle = {
   padding: 0,
   margin: 0,

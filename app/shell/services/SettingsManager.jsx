@@ -4,7 +4,7 @@ import getters from './routesmanager/getters'
 import { connect } from 'nuclear-js-react-addons'
 import Dropzone from 'react-dropzone'
 
-import PluginCard from '../../components/PluginCard'
+import PluginCard from '../controls/PluginCard'
 
 let settingsManager
 /** SettingsManager is a default plugin which makes use of nuclearjs to display a list of all the installed plugins and various options for the plugins. */
@@ -43,7 +43,7 @@ class SettingsManager extends React.Component {
       const p = plugin.toJS()
       return (
         <PluginCard
-        key={p.location}
+        key={p.path}
         location={p.location}
         onDelete={this.deletePlugin}
         pluginName={p.module.name}
@@ -61,7 +61,9 @@ class SettingsManager extends React.Component {
         </Dropzone>
         This is the SettingsManager
         {
-          plugins.toArray().map(createPluginCard.bind(this))
+          plugins.toArray().filter(function(plugin) {
+            return (!("settings".localeCompare(plugin.get('path')) == 0))
+          }).map(createPluginCard.bind(this))
         }
       </div>
     )
