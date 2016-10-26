@@ -20,10 +20,7 @@ coverage
 # node-waf configuration
 .lock-wscript
 
-.vscode/*.db*
-
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-build
 dist
 
 # Dependency directory
@@ -41,3 +38,6 @@ app/shell/**/*.js
 app/*.js
 !app/*.jsx
 !app/index.js
+
+# orig files created by kdiff3 mergetool
+*.orig

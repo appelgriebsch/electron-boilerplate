@@ -4,6 +4,7 @@
   'use strict';
 
   const electron = require('electron');
+  const electronDevTools = require('electron-devtools-installer');
   const app = electron.app;
 
   const path = require('path');
@@ -29,9 +30,12 @@
 
   process.on('uncaughtException', onCrash);
 
+  // add this switch for the notification window
+  app.commandLine.appendSwitch('--enable-transparent-visuals')
+
   /**
-   *  create main application window 
-   * 
+   *  create main application window
+   *
    * @returns
    */
   function createMainWindow() {
@@ -51,7 +55,7 @@
   }
 
   /**
-   *  
+   *
    */
   function onClosed() {
     // deref the window
@@ -60,8 +64,8 @@
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @param {any} exc
    */
   function onCrash(exc) {
@@ -69,8 +73,8 @@
   }
 
   /**
-   * 
-   * 
+   *
+   *
    * @returns
    */
   var handleStartupEvent = function() {
@@ -136,7 +140,7 @@
   var trayIcon;
 
   /**
-   *  
+   *
    */
   app.on('activate', function() {
     if (!mainWindow) {
@@ -145,22 +149,19 @@
   });
 
   /**
-   *  
+   *
    */
   app.on('ready', function() {
     mainWindow = createMainWindow();
-
     const isDev = require('electron-is-dev');
     if (isDev) {
-      const devToolsPath = path.join(__dirname, '..', 'devTools', 'react');
-      BrowserWindow.addDevToolsExtension(devToolsPath);
+      electronDevTools.default(electronDevTools.REACT_DEVELOPER_TOOLS);
     }
-
   });
 
   /**
-   * 
-   * 
+   *
+   *
    * @param {any} serviceName
    * @param {any} protocol
    * @param {any} subTypes
@@ -172,8 +173,8 @@
   };
 
   /**
-   * 
-   * 
+   *
+   *
    * @returns
    */
   app.sysConfig = function() {
@@ -195,8 +196,8 @@
   };
 
   /**
-   * 
-   * 
+   *
+   *
    * @returns
    */
   app.getMainWindow = function() {
@@ -204,7 +205,7 @@
   };
 
   /**
-   * 
+   *
    */
   app.close = function() {
     if (mainWindow) {
@@ -214,7 +215,7 @@
   };
 
   /**
-   * 
+   *
    */
   app.toggleFullscreen = function() {
     if (mainWindow) {
@@ -223,7 +224,7 @@
   };
 
   /**
-   * 
+   *
    */
   app.minimizeAppToSysTray = function() {
 
