@@ -9,7 +9,7 @@ import { toImmutable } from 'nuclear-js'
 import Shell from '../../Shell'
 import PluginManager from '../extension/PluginManager'
 import SettingsManager from '../extension/SettingsManager'
-import routing from './getters'
+import extensions from './getters'
 
 /** */
 class RoutesManager extends React.Component {
@@ -54,7 +54,7 @@ class RoutesManager extends React.Component {
 
 function dataBinding(props) {
   return {
-    plugins: routing.plugins
+    plugins: extensions.plugins
   };
 }
 

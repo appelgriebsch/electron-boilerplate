@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import routing from '../routing/getters'
+import extensions from '../routing/getters'
 import { connect } from 'nuclear-js-react-addons'
 import Dropzone from 'react-dropzone'
 

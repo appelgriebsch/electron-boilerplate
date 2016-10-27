@@ -12,7 +12,7 @@ import TripleStore from './services/storage/TripleStore'
 
 import Window from './Window'
 
-import routing from './services/routing/getters'
+import extensions from './services/routing/getters'
 
 const app = electron.remote.app
 const appCfg = app.sysConfig()
@@ -105,10 +105,10 @@ class Shell extends React.Component {
     console.log('appcfg ' + JSON.stringify(appCfg));
 
     plugins.toArray().map((r) => {
-      const route = r.toJS()
-      modules.push(<Link to={route.path} key={route.path}>
-                      <Icon name={route.module.config.icon} style={{ paddingRight: '10px' }} />
-                      {route.module.config.label}
+      const plugin = r.toJS()
+      modules.push(<Link to={plugin.path} key={plugin.path}>
+                      <Icon name={plugin.module.config.icon} style={{ paddingRight: '10px' }} />
+                      {plugin.module.config.label}
                     </Link>)
     });
 
@@ -135,7 +135,7 @@ Shell.childContextTypes = {
 
 function dataBinding(props) {
   return {
-    plugins: routing.plugins
+    plugins: extensions.plugins
   };
 }
 

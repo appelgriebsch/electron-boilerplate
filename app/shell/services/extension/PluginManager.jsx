@@ -117,7 +117,7 @@ class PluginManager {
     return plugInInfo
   }
 
-  deleteFolderRecursive(pluginPath) {
+  deleteFolderRecursive(pluginPath:string) {
     var deleteSubDir = function(file,index){
         var curPath = path.join(pluginPath, '\\', file)
         if(fs.lstatSync(curPath).isDirectory()) { // recurse
