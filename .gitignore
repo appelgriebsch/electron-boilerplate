@@ -31,6 +31,7 @@ app/node_modules
 # build artefacts from babel-compile
 app/plugins/**/*.js
 !app/plugins/**/*.jsx
+plugins/*.asar
 
 app/shell/**/*.js
 !app/shell/**/*.jsx

@@ -7,8 +7,9 @@ import { connect } from 'nuclear-js-react-addons'
 import { toImmutable } from 'nuclear-js'
 
 import Shell from '../../Shell'
-import SettingsManager from '../settingsmanager'
-import getters from './getters'
+import PluginManager from '../extension/PluginManager'
+import SettingsManager from '../extension/SettingsManager'
+import extensions from './getters'
 
 /** */
 class RoutesManager extends React.Component {
@@ -45,8 +46,6 @@ class RoutesManager extends React.Component {
       this.routes.childRoutes.push(plugin.toJS())
     })
 
-    console.log('childRoutes in RoutesManager ' + this.routes.childRoutes);
-
     return(
       <Router history={hashHistory} routes={this.routes} />
     )
@@ -55,7 +54,7 @@ class RoutesManager extends React.Component {
 
 function dataBinding(props) {
   return {
-    plugins:getters.plugins
+    plugins: extensions.plugins
   };
 }
 

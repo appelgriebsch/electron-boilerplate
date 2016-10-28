@@ -19,7 +19,7 @@ class MinimizeButton extends React.Component {
     var btnStyles = []
     var icon = {}
 
-    if (this.props.style !== 'darwin') {
+    if (this.props.platform !== 'darwin') {
       btnStyles = [winButtonStyle.base]
       icon = (
         <svg x='0px' y='0px' viewBox='0 0 10.2 1' style={[winIconStyle]}>
