@@ -80,7 +80,7 @@ SettingsManager.contextTypes = {
 
 function dataBinding(props) {
   return {
-    plugins: routing.plugins
+    plugins: extensions.plugins
   };
 }
 
