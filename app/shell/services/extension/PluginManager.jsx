@@ -3,6 +3,7 @@
 import fs from 'original-fs'
 import path from 'path'
 import uri from 'url'
+import PouchDB from 'pouchdb-browser'
 
 import SettingsManager from './SettingsManager'
 import PluginActions from '../routing/actions/PluginActions'
@@ -12,19 +13,36 @@ class PluginManager {
 
   pluginFolder:string
   PluginControls: PluginActions
+  ConfigDb: PouchDB
+  dbName: string
+  config: JSON
 
   /**
-   * Represents a PluginManager.
-   * Checks if the plugins folder path exists and creates a new plugins folder otherwise.
-   * @constructor
-   * @param {string} pluginFolder - path to the plugins folder
-   */
+  * Represents a PluginManager.
+  * Checks if the plugins folder path exists and creates a new plugins folder otherwise.
+  * @constructor
+  * @param {string} pluginFolder - path to the plugins folder
+  */
   constructor(pluginFolder:string, pluginControls: PluginActions) {
+    this.dbName = 'PluginConfig'
+    this.config = {
+      _id: 'pluginConfig',
+      "pluginsToDelete": [],
+      "uninstalledPlugins":[],
+      "disabledPlugins":[]
+    }
+
     this.pluginFolder = pluginFolder
     this.PluginControls = pluginControls
-    // pluginManager = this
     this.installPlugin = this.installPlugin.bind(this)
     this.uninstallPlugin = this.uninstallPlugin.bind(this)
+    this.ConfigDb = new PouchDB(this.dbName, {
+      adapter: 'idb',
+      storage: 'persistent'
+    })
+    console.log('saving first configuration from constructor');
+    this.saveConfiguration()
+    this.performCleanUp()
 
     if(!fs.existsSync(this.pluginFolder) ) {
       console.log("Plugins folder doesn't exist. Creating folder");
@@ -39,7 +57,7 @@ class PluginManager {
     }
   }
 
-/** Iterates over all the plugins in the plugins folder, loads and returns the plugins list. */
+  /** Iterates over all the plugins in the plugins folder, loads and returns the plugins list. */
   getRegisteredPlugins() {
     let plugins = [];
     let id = 0;
@@ -74,28 +92,77 @@ class PluginManager {
     return plugins
   }
 
+  saveConfiguration () {
+    this.config._rev = this.config._rev
+    this.ConfigDb.put(this.config)
+    .then((res) => {
+      console.log('Successfully saved settings to database');
+    })
+    .catch((err) => {
+      console.log('Error saving settings to database' + err);
+    })
+  }
+
+  readConfiguration () {
+    this.ConfigDb.get('pluginConfig')
+    .then((pluginConfig) => {
+      this.config = pluginConfig
+      console.log('Loaded plugin config ' + this.config);
+    })
+    .catch((err) => {
+      console.log('Error reading settings from database ' + err);
+    })
+  }
+
+  markForDelete (plugin:string) {
+    this.readConfiguration()
+    this.config.pluginsToDelete.push(plugin)
+    this.saveConfiguration()
+  }
+
+  performCleanUp () {
+    this.readConfiguration()
+    while(this.config.pluginsToDelete.length > 0)
+    {
+      const tempPlugin = this.config.pluginsToDelete.pop()
+      try {
+        this.deletePlugin(tempPlugin)
+        this.config.uninstalledPlugins.push(tempPlugin)
+      } catch (e) {
+        console.log('Error deleting plugin ' + tempPlugin);
+        this.config.pluginsToDelete.push(tempPlugin)
+      }
+    }
+    console.log('Saving configuration after clean up');
+    this.saveConfiguration()
+  }
+
   installPlugin (pluginPath:string, name:string) {
     if(fs.lstatSync(pluginPath).isDirectory())
-      console.log('Cannot process directories');
-     else
-      fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
+    console.log('Cannot process directories');
+    else
+    fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
 
     // pluginManager.PluginControls.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()});
     window.location.reload()
   }
 
-/**
- * Deletes the plugin.
- * @param {string} plugin - path of the plugin to be deleted.
-*/
-  uninstallPlugin(plugin:string) {
-    this.PluginControls.unmountPlugin(plugin)
+  deletePlugin (plugin:string) {
     const pluginPath = path.join(this.pluginFolder, plugin)
-    console.log(pluginPath)
     if(pluginPath.includes('asar'))
       fs.unlinkSync(pluginPath)
     else
       this.deleteFolderRecursive(path.join(this.pluginFolder, plugin))
+  }
+
+  /**
+  * Deletes the plugin.
+  * @param {string} plugin - path of the plugin to be deleted.
+  */
+  uninstallPlugin(plugin:string) {
+    console.log('Uninstalled plugin received ' + JSON.stringify(plugin));
+    this.PluginControls.unmountPlugin(plugin)
+    this.markForDelete(plugin)
   }
 
   tryLoadPlugin(plugin:string) : ?Object {
@@ -119,13 +186,13 @@ class PluginManager {
 
   deleteFolderRecursive(pluginPath:string) {
     var deleteSubDir = function(file,index){
-        var curPath = path.join(pluginPath, '\\', file)
-        if(fs.lstatSync(curPath).isDirectory()) { // recurse
-          this.deleteFolderRecursive(curPath);
-        } else { // delete file
-          fs.unlinkSync(curPath);
-        }
+      var curPath = path.join(pluginPath, '\\', file)
+      if(fs.lstatSync(curPath).isDirectory()) { // recurse
+        this.deleteFolderRecursive(curPath);
+      } else { // delete file
+        fs.unlinkSync(curPath);
       }
+    }
     if( fs.existsSync(pluginPath) ) {
       fs.readdirSync(pluginPath).forEach(deleteSubDir, this)
       fs.rmdirSync(pluginPath)
