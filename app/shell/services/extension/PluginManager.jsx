@@ -34,7 +34,7 @@ class PluginManager {
           alert('Error creating plugins folder ' + err)
           console.log('Error creating plugins folder ' + err)
         }
-        console.log('created plugins folder ' + path.join(__dirname, '../../../../', 'plugins'));
+        console.log('created plugins folder ' + this.pluginFolder);
       })
     }
   }
