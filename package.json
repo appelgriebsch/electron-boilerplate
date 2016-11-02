@@ -51,7 +51,7 @@
       "packageCategory": "utils",
       "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
       "publish": ["github"],
-      "target": ["AppImage"],
+      "target": ["rpm", "deb"],
       "depends": []
     },
     "mac": {
@@ -80,9 +80,9 @@
     "app-prune": "cd app && npm prune --production",
     "pre-build": "npm run -s app-prune && npm run -s app-build",
     "build": "npm run -s build-linux || npm run -s build-mac || npm run -s build-win",
-    "build-linux": "npm run pre-build && build --x64 --x86 --linux",
+    "build-linux": "npm run pre-build && build --x64 --linux",
     "build-mac": "npm run pre-build && build --x64 --mac",
-    "build-win": "npm run pre-build && build --x64 --x86 --win",
+    "build-win": "npm run pre-build && build --x64 --win",
     "generate-docs": "jsdoc -c jsdoc.json",
     "lint": "standard \"app/**/*.jsx\"",
     "reformat": "npm run lint || standard \"app/**/*.jsx\" --fix"
