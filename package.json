@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "app/index.js",
   "repository": {
@@ -25,7 +25,12 @@
   },
   "build": {
     "appId": "com.appelgriebsch.electron-boilerplate",
-    "compression": "maximum",
+    "asar": false,
+    "files": [
+      "**/*",
+      "!**/*.jsx",
+      "!plugins/**/*"
+    ],
     "dmg": {
       "iconSize": 80,
       "contents": [
@@ -72,10 +77,12 @@
     "start": "npm run app-build && electron app/",
     "app-install": "cd app && npm install --no-optional",
     "app-build": "babel --presets es2015,react --plugins babel-plugin-transform-flow-strip-types --ignore node_modules/ --compact true --source-maps inline --minified --extensions .jsx app/ -d app/",
+    "app-prune": "cd app && npm prune --production",
+    "pre-build": "npm run -s app-prune && npm run -s app-build",
     "build": "npm run -s build-linux || npm run -s build-mac || npm run -s build-win",
-    "build-linux": "build --x64 --linux",
-    "build-mac": "build --x64 --mac",
-    "build-win": "build --x64 --win",
+    "build-linux": "npm run pre-build && build --x64 --x86 --linux",
+    "build-mac": "npm run pre-build && build --x64 --mac",
+    "build-win": "npm run pre-build && build --x64 --x86 --win",
     "generate-docs": "jsdoc -c jsdoc.json",
     "lint": "standard \"app/**/*.jsx\"",
     "reformat": "npm run lint || standard \"app/**/*.jsx\" --fix"
