@@ -16,6 +16,8 @@
   // initialize service finder module
   const ServiceFinder = require('node-servicefinder').ServiceFinder;
 
+  const isDevMode = require('electron-is-dev');
+
   const appName = app.getName();
   const appVersion = app.getVersion();
   const appPath = app.getAppPath();
@@ -27,7 +29,16 @@
   const username = (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
 
   // adds debug features like hotkeys for triggering dev tools and reload
-  require('electron-debug')();
+  let debugOptions = {}
+
+  if ((isDevMode) ||
+      (process.env.DEBUG === "1")) {
+    debugOptions = { enabled: true, showDevTools: 'bottom' }
+  }
+
+  console.log(process.env.DEBUG)
+
+  require('electron-debug')(debugOptions);
   process.on('uncaughtException', onCrash);
 
   /**
@@ -150,8 +161,7 @@
    */
   app.on('ready', function() {
     mainWindow = createMainWindow();
-    const isDev = require('electron-is-dev');
-    if (isDev) {
+    if (isDevMode) {
       electronDevTools.default(electronDevTools.REACT_DEVELOPER_TOOLS);
     }
   });

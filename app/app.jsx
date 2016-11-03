@@ -30,16 +30,18 @@ const sysConfig = electron.remote.app.sysConfig()
 
 let pluginFolder = path.join(sysConfig.paths.appPath, 'plugins')
 
-fs.access(pluginFolder, fs.R_OK | fs.W_OK, (err) => {
-  if (err) {
-    // can't write to app folder, create a plugin structure in user folder instead
-    pluginFolder = path.join(sysConfig.paths.data, 'plugins')
-    const baseDependencies = path.join(sysConfig.paths.appPath, 'node_modules')
-    if (!fs.existsSync(baseDependencies)){
-      fs.symlinkSync(baseDependencies, path.join(sysConfig.paths.data, 'node_modules'), 'dir')
-    }
+try {
+  fs.accessSync(pluginFolder, fs.R_OK | fs.W_OK)
+}
+catch(err) {
+  // can't write to app folder, create a plugin structure in user folder instead
+  pluginFolder = path.join(sysConfig.paths.data, 'plugins')
+  const baseDependencies = path.join(sysConfig.paths.appPath, 'node_modules')
+  const symlink = path.join(sysConfig.paths.data, 'node_modules')
+  if (!fs.existsSync(symlink) && (fs.existsSync(baseDependencies))) {
+    fs.symlinkSync(baseDependencies, symlink, 'dir')
   }
-})
+}
 
 const pluginActions = new PluginActions(reactor)
 const pluginManager = new PluginManager(pluginFolder, pluginActions)
