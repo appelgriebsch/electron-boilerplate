@@ -4,7 +4,6 @@
   'use strict';
 
   const electron = require('electron');
-  const electronDevTools = require('electron-devtools-installer');
   const app = electron.app;
 
   const path = require('path');
@@ -15,8 +14,6 @@
 
   // initialize service finder module
   const ServiceFinder = require('node-servicefinder').ServiceFinder;
-
-  const isDevMode = require('electron-is-dev');
 
   const appName = app.getName();
   const appVersion = app.getVersion();
@@ -31,12 +28,9 @@
   // adds debug features like hotkeys for triggering dev tools and reload
   let debugOptions = {}
 
-  if ((isDevMode) ||
-      (process.env.DEBUG === "1")) {
-    debugOptions = { enabled: true, showDevTools: 'bottom' }
+  if (process.env.DEBUG === "1") {
+    debugOptions = { enabled: true, showDevTools: 'bottom' };
   }
-
-  console.log(process.env.DEBUG)
 
   require('electron-debug')(debugOptions);
   process.on('uncaughtException', onCrash);
@@ -160,9 +154,15 @@
    *
    */
   app.on('ready', function() {
-    mainWindow = createMainWindow();
-    if (isDevMode) {
-      electronDevTools.default(electronDevTools.REACT_DEVELOPER_TOOLS);
+    if (!mainWindow) {
+      mainWindow = createMainWindow();
+    }
+    if (process.env.DEBUG === "1") {
+      const electronDevTools = require('electron-devtools-installer');
+      electronDevTools.default(electronDevTools.REACT_DEVELOPER_TOOLS)
+      .then((name) => {
+        console.log(`Added Extension:  ${name}`);
+      });
     }
   });
 
@@ -235,7 +235,6 @@
    *
    */
   app.minimizeAppToSysTray = function() {
-
     trayIcon = new Tray(path.join(__dirname, 'assets', 'boilerplate_tray.png'));
     trayIcon.setToolTip('App is running in background mode.');
     trayIcon.on('click', () => {
@@ -248,5 +247,4 @@
       mainWindow.hide();
     }
   };
-
 })();

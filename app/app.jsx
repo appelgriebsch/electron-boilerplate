@@ -31,6 +31,9 @@ const sysConfig = electron.remote.app.sysConfig()
 let pluginFolder = path.join(sysConfig.paths.appPath, 'plugins')
 
 try {
+  if(!fs.existsSync(pluginFolder)) {
+    fs.mkdirSync(pluginFolder)
+  }
   fs.accessSync(pluginFolder, fs.R_OK | fs.W_OK)
 }
 catch(err) {
@@ -40,6 +43,9 @@ catch(err) {
   const symlink = path.join(sysConfig.paths.data, 'node_modules')
   if (!fs.existsSync(symlink) && (fs.existsSync(baseDependencies))) {
     fs.symlinkSync(baseDependencies, symlink, 'dir')
+  }
+  if(!fs.existsSync(pluginFolder)) {
+    fs.mkdirSync(pluginFolder)
   }
 }
 

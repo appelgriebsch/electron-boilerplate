@@ -25,18 +25,6 @@ class PluginManager {
     // pluginManager = this
     this.installPlugin = this.installPlugin.bind(this)
     this.uninstallPlugin = this.uninstallPlugin.bind(this)
-
-    if(!fs.existsSync(this.pluginFolder) ) {
-      console.log("Plugins folder doesn't exist. Creating folder");
-      fs.mkdirSync(this.pluginFolder, err => {
-        if(err)
-        {
-          alert('Error creating plugins folder ' + err)
-          console.log('Error creating plugins folder ' + err)
-        }
-        console.log('created plugins folder ' + this.pluginFolder);
-      })
-    }
   }
 
 /** Iterates over all the plugins in the plugins folder, loads and returns the plugins list. */
