@@ -18,6 +18,7 @@
 
   const appName = app.getName();
   const appVersion = app.getVersion();
+  const appPath = app.getAppPath();
   const dataDir = app.getPath('userData') + path.sep;
   const cacheDir = app.getPath('userCache') + path.sep;
   const tempDir = app.getPath('temp') + path.sep;
@@ -27,11 +28,7 @@
 
   // adds debug features like hotkeys for triggering dev tools and reload
   require('electron-debug')();
-
   process.on('uncaughtException', onCrash);
-
-  // add this switch for the notification window
-  app.commandLine.appendSwitch('--enable-transparent-visuals')
 
   /**
    *  create main application window
@@ -187,6 +184,7 @@
       platform: process.platform,
       user: username,
       paths: {
+        appPath: appPath,
         home: homeDir,
         temp: tempDir,
         data: dataDir,

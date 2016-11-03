@@ -24,7 +24,6 @@
     "duet-channel": "^1.0.0",
     "electron-debug": "^1.0.0",
     "electron-devtools-installer": "^2.0.0",
-    "electron-notifications": "^0.1.0",
     "history": "^4.2.0",
     "keymirror": "^0.1.1",
     "lovefield": "^2.1.8",
