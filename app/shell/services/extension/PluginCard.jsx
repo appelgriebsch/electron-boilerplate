@@ -35,22 +35,20 @@ class PluginCard extends React.Component {
     }
 
     const deleteVisible = {
-      visible: this.props.removable ? 'visible' : 'hidden'
+      visibility: this.props.removable ? 'visible' : 'hidden'
     }
 
     return (
-      <div>
-        <Card shadow={0} style={{width: '62%', margin: 'auto'}}>
-          <CardTitle style={bannerStyle}>{this.props.cardTitle}</CardTitle>
-          <CardText>{this.props.cardText}</CardText>
-          <CardActions border>
-            {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
-          </CardActions>
-          <CardMenu style={{color: '#fff'}}>
-            <IconButton name="delete" style={deleteVisible} onClick={this.props.onDelete}/>
-          </CardMenu>
-        </Card>
-      </div>
+      <Card shadow={0} style={{ width: '62%', margin: 'auto', marginBottom: '2em' }}>
+        <CardTitle style={bannerStyle}>{this.props.cardTitle}</CardTitle>
+        <CardText>{this.props.cardText}</CardText>
+        <CardActions border>
+          {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
+        </CardActions>
+        <CardMenu style={{color: '#fff'}}>
+          <IconButton name="delete" style={deleteVisible} onClick={this.props.onDelete}/>
+        </CardMenu>
+      </Card>
     );
   }
 };
