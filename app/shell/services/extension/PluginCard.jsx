@@ -46,7 +46,7 @@ class PluginCard extends React.Component {
           {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
         </CardActions>
         <CardMenu style={{color: '#fff'}}>
-          <IconButton name="delete" style={deleteVisible} onClick={this.props.onDelete}/>
+          <IconButton name="delete" style={deleteVisible} onClick={this.props.onDelete(this.props.location)}/>
         </CardMenu>
       </Card>
     );
