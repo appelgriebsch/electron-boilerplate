@@ -51,7 +51,7 @@
       "packageCategory": "utils",
       "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
       "publish": ["github"],
-      "target": ["AppImage"],
+      "target": ["rpm", "deb"],
       "depends": []
     },
     "mac": {
@@ -74,15 +74,15 @@
   "homepage": "https://github.com/appelgriebsch/electron-boilerplate/tree/reactjs#readme",
   "scripts": {
     "postinstall": "npm run app-install",
-    "start": "npm run app-build && electron app/",
+    "start": "npm run app-build && cross-env DEBUG=1 electron app/",
     "app-install": "cd app && npm install --no-optional",
     "app-build": "babel --presets es2015,react --plugins babel-plugin-transform-flow-strip-types --ignore node_modules/ --compact true --source-maps inline --minified --extensions .jsx app/ -d app/",
     "app-prune": "cd app && npm prune --production",
     "pre-build": "npm run -s app-prune && npm run -s app-build",
     "build": "npm run -s build-linux || npm run -s build-mac || npm run -s build-win",
-    "build-linux": "npm run pre-build && build --x64 --x86 --linux",
+    "build-linux": "npm run pre-build && build --x64 --linux",
     "build-mac": "npm run pre-build && build --x64 --mac",
-    "build-win": "npm run pre-build && build --x64 --x86 --win",
+    "build-win": "npm run pre-build && build --x64 --win",
     "generate-docs": "jsdoc -c jsdoc.json",
     "lint": "standard \"app/**/*.jsx\"",
     "reformat": "npm run lint || standard \"app/**/*.jsx\" --fix"
@@ -92,6 +92,7 @@
     "babel-plugin-transform-flow-strip-types": "^6.14.0",
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
+    "cross-env": "^3.1.3",
     "devtron": "^1.1.0",
     "docdash": "^0.4.0",
     "electron-builder": "^7.0.0",

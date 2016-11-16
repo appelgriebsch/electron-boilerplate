@@ -33,6 +33,7 @@ app/plugins/**/*.js
 !app/plugins/**/*.jsx
 plugins/*.asar
 app/plugins
+
 app/shell/**/*.js
 !app/shell/**/*.jsx
 

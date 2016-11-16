@@ -4,7 +4,6 @@
   'use strict';
 
   const electron = require('electron');
-  const electronDevTools = require('electron-devtools-installer');
   const app = electron.app;
 
   const path = require('path');
@@ -18,6 +17,7 @@
 
   const appName = app.getName();
   const appVersion = app.getVersion();
+  const appPath = app.getAppPath();
   const dataDir = app.getPath('userData') + path.sep;
   const cacheDir = app.getPath('userCache') + path.sep;
   const tempDir = app.getPath('temp') + path.sep;
@@ -26,12 +26,14 @@
   const username = (process.platform === 'win32') ? process.env.USERNAME : process.env.USER;
 
   // adds debug features like hotkeys for triggering dev tools and reload
-  require('electron-debug')();
+  let debugOptions = {}
 
+  if (process.env.DEBUG === "1") {
+    debugOptions = { enabled: true, showDevTools: 'bottom' };
+  }
+
+  require('electron-debug')(debugOptions);
   process.on('uncaughtException', onCrash);
-
-  // add this switch for the notification window
-  app.commandLine.appendSwitch('--enable-transparent-visuals')
 
   /**
    *  create main application window
@@ -152,10 +154,15 @@
    *
    */
   app.on('ready', function() {
-    mainWindow = createMainWindow();
-    const isDev = require('electron-is-dev');
-    if (isDev) {
-      electronDevTools.default(electronDevTools.REACT_DEVELOPER_TOOLS);
+    if (!mainWindow) {
+      mainWindow = createMainWindow();
+    }
+    if (process.env.DEBUG === "1") {
+      const electronDevTools = require('electron-devtools-installer');
+      electronDevTools.default(electronDevTools.REACT_DEVELOPER_TOOLS)
+      .then((name) => {
+        console.log(`Added Extension:  ${name}`);
+      });
     }
   });
 
@@ -187,6 +194,7 @@
       platform: process.platform,
       user: username,
       paths: {
+        appPath: appPath,
         home: homeDir,
         temp: tempDir,
         data: dataDir,
@@ -227,7 +235,6 @@
    *
    */
   app.minimizeAppToSysTray = function() {
-
     trayIcon = new Tray(path.join(__dirname, 'assets', 'boilerplate_tray.png'));
     trayIcon.setToolTip('App is running in background mode.');
     trayIcon.on('click', () => {
@@ -240,5 +247,4 @@
       mainWindow.hide();
     }
   };
-
 })();

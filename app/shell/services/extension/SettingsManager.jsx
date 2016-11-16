@@ -1,5 +1,7 @@
 // @flow
 import React from 'react'
+import Radium from 'radium'
+
 import extensions from '../routing/getters'
 import { connect } from 'nuclear-js-react-addons'
 import Dropzone from 'react-dropzone'
@@ -44,8 +46,10 @@ class SettingsManager extends React.Component {
 
     return (
       <div key='Settings'>
-        <Dropzone key="dropZone" onDrop={this.onDrop} multiple={false}>
-          <div>
+        <Dropzone key="dropZone" onDrop={this.onDrop} multiple={false}
+          style={{ width: '62%', margin: 'auto', marginTop: '2em', marginBottom: '2em',
+          borderStyle: 'dashed', height: '5em', borderWidth: '2px', borderColor: 'gray', textAlign: 'center', verticalAlign: 'middle' }}>
+          <div style={{ marginTop: '1.5em', marginBottom: '1.5em' }}>
             Try dropping some files here, or click to select files to upload.
           </div>
         </Dropzone>
@@ -53,7 +57,7 @@ class SettingsManager extends React.Component {
           plugins.toArray().map(plugin => {
             const p = plugin.toJS()
             const path = `${p.root.href}/${p.location}`
-            const isRemovable = (p.module.config.removable ? p.module.config.removable : true)
+            const isRemovable = (p.module.config.removable !== undefined ? p.module.config.removable : true)
             return (
               <PluginCard
                 key={p.location}
@@ -84,4 +88,4 @@ function dataBinding(props) {
   };
 }
 
-export default connect(dataBinding)(SettingsManager)
+export default connect(dataBinding)(Radium(SettingsManager))

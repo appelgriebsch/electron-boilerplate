@@ -6,6 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import path from 'path'
+import fs from 'fs'
 
 import reactor from './shell/Reactor'
 import { Provider } from 'nuclear-js-react-addons'
@@ -25,13 +26,31 @@ reactor.registerStores({
   'plugins': PluginStore
 });
 
-let pluginFolder = electron.remote.app.getAppPath()
-pluginFolder = pluginFolder.endsWith('app.asar') ? pluginFolder.replace('app.asar', '') : pluginFolder
+const sysConfig = electron.remote.app.sysConfig()
 
-console.log(pluginFolder)
+let pluginFolder = path.join(sysConfig.paths.appPath, 'plugins')
+
+try {
+  if(!fs.existsSync(pluginFolder)) {
+    fs.mkdirSync(pluginFolder)
+  }
+  fs.accessSync(pluginFolder, fs.R_OK | fs.W_OK)
+}
+catch(err) {
+  // can't write to app folder, create a plugin structure in user folder instead
+  pluginFolder = path.join(sysConfig.paths.data, 'plugins')
+  const baseDependencies = path.join(sysConfig.paths.appPath, 'node_modules')
+  const symlink = path.join(sysConfig.paths.data, 'node_modules')
+  if (!fs.existsSync(symlink) && (fs.existsSync(baseDependencies))) {
+    fs.symlinkSync(baseDependencies, symlink, 'dir')
+  }
+  if(!fs.existsSync(pluginFolder)) {
+    fs.mkdirSync(pluginFolder)
+  }
+}
 
 const pluginActions = new PluginActions(reactor)
-const pluginManager = new PluginManager(path.join(pluginFolder, 'plugins'), pluginActions)
+const pluginManager = new PluginManager(pluginFolder, pluginActions)
 pluginActions.mountInstalledPlugins({ plugins: pluginManager.getRegisteredPlugins() })
 
 ReactDOM.render(
