@@ -15,7 +15,7 @@ class PluginManager {
   PluginControls: PluginActions
   ConfigDb: PouchDB
   dbName: string
-  config: JSON
+  config: Object
 
   /**
   * Represents a PluginManager.
@@ -25,13 +25,7 @@ class PluginManager {
   */
   constructor(pluginFolder:string, pluginControls: PluginActions) {
     this.dbName = 'PluginConfig'
-    this.config = {
-      _id: 'pluginConfig',
-      "pluginsToDelete": [],
-      "uninstalledPlugins":[],
-      "disabledPlugins":[]
-    }
-
+    this.config = {}
     this.pluginFolder = pluginFolder
     this.PluginControls = pluginControls
     this.installPlugin = this.installPlugin.bind(this)
@@ -40,9 +34,25 @@ class PluginManager {
       adapter: 'idb',
       storage: 'persistent'
     })
-    console.log('saving first configuration from constructor');
-    this.saveConfiguration()
-    this.performCleanUp()
+    this.readConfiguration().then((config) => {
+      console.log('After initial read of the config from db ' + JSON.stringify(this.config));
+      this.config = config
+      this.performCleanUp()
+    }).catch((err) => {
+      console.log(err)
+      if(err.status == 404) {
+        console.log('Initializing database configuration for first use')
+        this.saveInitalConfiguration().then((result) => {
+          console.log('Initialized the configuration for first use')
+        })
+        .catch((err) => {
+          console.log('Error in initializing app for first use')
+        })
+      }
+      else {
+        console.log('Error with the db ' + err);
+      }
+    })
   }
 
   /** Iterates over all the plugins in the plugins folder, loads and returns the plugins list. */
@@ -80,26 +90,53 @@ class PluginManager {
     return plugins
   }
 
+  saveInitalConfiguration () {
+    var p = new Promise((resolve, reject) => {
+      this.config = {
+        _id: 'pluginConfig',
+        "pluginsToDelete": [],
+        "uninstalledPlugins":[],
+        "disabledPlugins":[]
+      }
+      this.ConfigDb.put(this.config)
+      .then((result) => {
+        resolve(result)
+      })
+      .catch((err) => {
+        console.log('error in initializing for first time');
+        reject(err)
+      })
+    })
+    return p
+  }
+
   saveConfiguration () {
-    this.config._rev = this.config._rev
-    this.ConfigDb.put(this.config)
-    .then((res) => {
-      console.log('Successfully saved settings to database');
+    var p = new Promise((resolve, reject) => {
+      this.ConfigDb.get('pluginConfig')
+      .then((pluginConfig) => {
+        this.config._rev = pluginConfig._rev
+        return this.ConfigDb.put(this.config)
+        .catch((err) => {
+          console.log('Error in saving the configuration' + err);
+        })
+      })
     })
-    .catch((err) => {
-      console.log('Error saving settings to database' + err);
-    })
+    return p
   }
 
   readConfiguration () {
-    this.ConfigDb.get('pluginConfig')
-    .then((pluginConfig) => {
-      this.config = pluginConfig
-      console.log('Loaded plugin config ' + this.config);
+    var p = new Promise((resolve, reject) => {
+      this.ConfigDb.get('pluginConfig')
+      .then((pluginConfig) => {
+        console.log('In readConfig ' + JSON.stringify(this.config));
+        resolve(pluginConfig)
+      })
+      .catch((err) => {
+        console.log('Error reading settings from database ' + err);
+        reject(err)
+      })
     })
-    .catch((err) => {
-      console.log('Error reading settings from database ' + err);
-    })
+    return p
   }
 
   markForDelete (plugin:string) {
@@ -109,20 +146,22 @@ class PluginManager {
   }
 
   performCleanUp () {
-    this.readConfiguration()
-    while(this.config.pluginsToDelete.length > 0)
-    {
-      const tempPlugin = this.config.pluginsToDelete.pop()
-      try {
-        this.deletePlugin(tempPlugin)
-        this.config.uninstalledPlugins.push(tempPlugin)
-      } catch (e) {
-        console.log('Error deleting plugin ' + tempPlugin);
-        this.config.pluginsToDelete.push(tempPlugin)
+    this.readConfiguration().then((pluginConfig) => {
+      while(this.config.pluginsToDelete.length > 0)
+      {
+        const tempPlugin = this.config.pluginsToDelete.pop()
+        try {
+          this.deletePlugin(tempPlugin)
+          this.config.uninstalledPlugins.push(tempPlugin)
+        } catch (e) {
+          console.log('Error deleting plugin ' + tempPlugin);
+          // this.config.pluginsToDelete.push(tempPlugin)
+        }
       }
-    }
-    console.log('Saving configuration after clean up');
-    this.saveConfiguration()
+      this.saveConfiguration().then((result) => {
+        console.log('Configuration updated after cleanup');
+      })
+    })
   }
 
   installPlugin (pluginPath:string, name:string) {

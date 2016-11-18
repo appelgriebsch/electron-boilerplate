@@ -25,17 +25,12 @@ class RoutesManager extends React.Component {
   constructor(props) {
 
     super(props)
-    this.uninstallPlugin = this.uninstallPlugin.bind(this)
     this.PluginControls = this.props.PluginControls
     this.routes = {
       path: '/',
       component: Shell,
       childRoutes: []
     }
-  }
-
-  uninstallPlugin(plugin:string) {
-    this.PluginControls.unmountPlugin(plugin)
   }
 
   render () {

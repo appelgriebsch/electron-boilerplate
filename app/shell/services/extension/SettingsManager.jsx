@@ -64,7 +64,7 @@ class SettingsManager extends React.Component {
                 location={path}
                 banner={p.module.config.banner}
                 removable={isRemovable}
-                onDelete={this.deletePlugin}
+                onDelete={settingsManager.deletePlugin}
                 pluginName={p.module.name}
                 cardTitle={p.module.name}
                 cardText={p.module.description}

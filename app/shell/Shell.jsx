@@ -17,9 +17,6 @@ import extensions from './services/routing/getters'
 const app = electron.remote.app
 const appCfg = app.sysConfig()
 
-// console.log('props from shell ' + JSON.stringify(this.props));
-// console.log('plugins from shell ' + this.props.reactor.evaluate([]));
-
 /**
  *
  *
@@ -102,8 +99,6 @@ class Shell extends React.Component {
     let modules = []
     let activeModule = appCfg.app.name
 
-    console.log('appcfg ' + JSON.stringify(appCfg));
-
     plugins.toArray().map((r) => {
       const plugin = r.toJS()
       modules.push(<Link to={plugin.path} key={plugin.path}>
@@ -140,4 +135,3 @@ function dataBinding(props) {
 }
 
 export default connect(dataBinding)(Shell)
-// export default Radium(Shell)
