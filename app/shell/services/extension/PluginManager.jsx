@@ -155,6 +155,7 @@ class PluginManager {
           this.config.uninstalledPlugins.push(tempPlugin)
         } catch (e) {
           console.log('Error deleting plugin ' + tempPlugin);
+          console.log('error ' + e);
           // this.config.pluginsToDelete.push(tempPlugin)
         }
       }
@@ -175,7 +176,8 @@ class PluginManager {
   }
 
   deletePlugin (plugin:string) {
-    const pluginPath = path.join(this.pluginFolder, plugin)
+    // const pluginPath = path.join(this.pluginFolder, plugin)
+    const pluginPath = plugin
     if(pluginPath.includes('asar'))
       fs.unlinkSync(pluginPath)
     else
