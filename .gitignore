@@ -43,4 +43,7 @@ app/*.js
 
 # orig files created by kdiff3 mergetool
 *.orig
+
 *.un~
+# asar packages
+*.asar

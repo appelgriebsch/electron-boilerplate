@@ -5,6 +5,7 @@ import Radium from 'radium'
 import { Card, CardText, CardActions, CardTitle, CardMenu } from 'react-mdl';
 import { Button, IconButton } from 'react-mdl';
 
+
 /**
 * Renders a component like Google Now Card.
 */
@@ -13,6 +14,7 @@ class PluginCard extends React.Component {
 /** Creates a new Plugin Card component. */
   constructor(props) {
     super(props)
+    this.deletePlugin = this.deletePlugin.bind(this)
   }
 
   propTypes: {
@@ -24,6 +26,12 @@ class PluginCard extends React.Component {
     banner: React.PropTypes.string.isRequired,
     removable: React.PropTypes.bool.isRequired,
     onDelete: React.PropTypes.func.isRequired,
+  }
+
+  deletePlugin(event)
+  {
+    console.log('location ' + this.props.location);
+    this.props.onDelete(this.props.location)
   }
 
   render () {
@@ -46,11 +54,13 @@ class PluginCard extends React.Component {
           {/*<Button colored value={this.pluginName}>{this.cardActionsButtonText}</Button>*/}
         </CardActions>
         <CardMenu style={{color: '#fff'}}>
-          <IconButton name="delete" style={deleteVisible} onClick={this.props.onDelete}/>
+          <IconButton name={this.props.location} style={deleteVisible} onClick={this.deletePlugin}/>
         </CardMenu>
       </Card>
     );
   }
 };
 
+// module.exports = PluginCard
 export default Radium(PluginCard)
+// export PluginCard
