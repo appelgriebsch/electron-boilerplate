@@ -48,7 +48,6 @@ class PluginManager {
       } catch (e) {
         console.log('Error deleting plugin ' + tempPlugin);
         console.log('error ' + e);
-        // this.config.pluginsToDelete.push(tempPlugin)
       }
     }
     console.log('performCleanup return ' + JSON.stringify(pluginConfig));
@@ -72,9 +71,7 @@ class PluginManager {
                 console.log(typeof this.config.pluginsToDelete)
                 console.log('pluginsToDelete ' + this.config.pluginsToDelete);
                 console.log('p.location ' + p.location);
-                {
-                  plugins.push(p)
-                }
+                plugins.push(p)
               }
             }
       });
