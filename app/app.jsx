@@ -51,7 +51,9 @@ catch(err) {
 
 const pluginActions = new PluginActions(reactor)
 const pluginManager = new PluginManager(pluginFolder, pluginActions)
-pluginActions.mountInstalledPlugins({ plugins: pluginManager.getRegisteredPlugins() })
+pluginManager.readConfiguration().then(() => {
+  pluginActions.mountInstalledPlugins({ plugins: pluginManager.getRegisteredPlugins() })
+})
 
 ReactDOM.render(
   <Provider reactor={reactor}>

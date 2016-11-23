@@ -27,7 +27,8 @@ class SettingsManager extends React.Component {
   }
 
   deletePlugin (plugin) {
-    settingsManager.props.route.uninstallPlugin(plugin)
+    console.log('plugin from delete of SettingsManager ' + plugin.replace(/^.*[\\\/]/, ''));
+    settingsManager.props.route.uninstallPlugin(plugin.replace(/^.*[\\\/]/, ''))
   }
 
   onDrop (files) {
