@@ -27,7 +27,6 @@ class SettingsManager extends React.Component {
   }
 
   deletePlugin (plugin) {
-    console.log('plugin from delete of SettingsManager ' + plugin.replace(/^.*[\\\/]/, ''));
     settingsManager.props.route.uninstallPlugin(plugin.replace(/^.*[\\\/]/, ''))
   }
 
@@ -43,7 +42,6 @@ class SettingsManager extends React.Component {
     const {
       plugins
     } = this.props;
-
 
     return (
       <div key='Settings'>

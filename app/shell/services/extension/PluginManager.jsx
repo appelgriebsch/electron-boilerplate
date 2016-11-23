@@ -51,6 +51,8 @@ class PluginManager {
       }
     }
     console.log('performCleanup return ' + JSON.stringify(pluginConfig));
+    this.config = pluginConfig
+    this.saveConfiguration(this.config)
     return pluginConfig
   }
 
@@ -62,18 +64,17 @@ class PluginManager {
       fs.readdirSync(this.pluginFolder).map((plugin) => {
         console.log('plugin path ' + plugin);
         if ((this.config.pluginsToDelete.indexOf(plugin) === -1) &&
-            (this.config.uninstalledPlugins.indexOf(plugin) === -1) &&
-            (this.config.disabledPlugins.indexOf(plugin) === -1))
-            {
-              const p = this.tryLoadPlugin(plugin)
-              if (p) {
-                console.log(this.config)
-                console.log(typeof this.config.pluginsToDelete)
-                console.log('pluginsToDelete ' + this.config.pluginsToDelete);
-                console.log('p.location ' + p.location);
-                plugins.push(p)
-              }
-            }
+        (this.config.disabledPlugins.indexOf(plugin) === -1))
+        {
+          const p = this.tryLoadPlugin(plugin)
+          if (p) {
+            console.log(this.config)
+            console.log(typeof this.config.pluginsToDelete)
+            console.log('pluginsToDelete ' + this.config.pluginsToDelete);
+            console.log('p.location ' + p.location);
+            plugins.push(p)
+          }
+        }
       });
     } catch(ex) {
       console.log(ex)
@@ -154,9 +155,9 @@ class PluginManager {
 
   installPlugin (pluginPath:string, name:string) {
     if(fs.lstatSync(pluginPath).isDirectory())
-    console.log('Cannot process directories');
+      console.log('Cannot process directories');
     else
-    fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
+      fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
 
     // pluginManager.PluginControls.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()});
     window.location.reload()
