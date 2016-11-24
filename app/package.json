@@ -47,6 +47,6 @@
     "pouchdb-find": "^0.10.0",
     "pouchdb-quick-search": "^1.1.0",
     "rdfstore": "^0.9.16",
-    "uuid": "^2.0.1"
+    "uuid": "^3.0.0"
   }
 }
