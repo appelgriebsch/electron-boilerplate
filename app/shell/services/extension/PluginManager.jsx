@@ -50,7 +50,6 @@ class PluginManager {
         console.log('error ' + e);
       }
     }
-    console.log('performCleanup return ' + JSON.stringify(pluginConfig));
     this.config = pluginConfig
     this.saveConfiguration(this.config)
     return pluginConfig
@@ -62,16 +61,11 @@ class PluginManager {
     let id = 0;
     try {
       fs.readdirSync(this.pluginFolder).map((plugin) => {
-        console.log('plugin path ' + plugin);
         if ((this.config.pluginsToDelete.indexOf(plugin) === -1) &&
         (this.config.disabledPlugins.indexOf(plugin) === -1))
         {
           const p = this.tryLoadPlugin(plugin)
           if (p) {
-            console.log(this.config)
-            console.log(typeof this.config.pluginsToDelete)
-            console.log('pluginsToDelete ' + this.config.pluginsToDelete);
-            console.log('p.location ' + p.location);
             plugins.push(p)
           }
         }
@@ -97,7 +91,6 @@ class PluginManager {
       'installPlugin': this.installPlugin,
       'uninstallPlugin': this.uninstallPlugin
     })
-    console.log('plugins to be returned ' + JSON.stringify(plugins));
     this.performCleanUp()
     return plugins
   }
@@ -157,16 +150,26 @@ class PluginManager {
     if(fs.lstatSync(pluginPath).isDirectory())
       console.log('Cannot process directories');
     else
-      fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,newPlugin)))
-
-    // pluginManager.PluginControls.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()});
-    let newPluginModule = this.tryLoadPlugin(newPlugin)
-    if(newPluginModule)
     {
-      console.log('newPlugin from PluginManager ' + JSON.stringify(newPluginModule));
-      this.PluginControls.mountNewlyInstalledPlugin({ plugins: newPluginModule })
+      let readStream = fs.createReadStream(pluginPath)
+      let writeStream = fs.createWriteStream(path.join(this.pluginFolder,newPlugin))
+      readStream.pipe(writeStream)
+
+      writeStream.on('error',(err) => {
+        console.log('Error occured while installing plugin');
+        console.log(err);
+      })
+
+      writeStream.on('close',(err) => {
+        console.log('Successfullly completed copying the necessary files for plugin installation');
+        let newPluginModule = this.tryLoadPlugin(newPlugin)
+        if(newPluginModule)
+        {
+          console.log('newPlugin from PluginManager ' + JSON.stringify(newPluginModule));
+          this.PluginControls.mountNewlyInstalledPlugin({ plugins: newPluginModule })
+        }
+      })
     }
-    // window.location.reload()
   }
 
   deletePlugin (plugin:string) {
