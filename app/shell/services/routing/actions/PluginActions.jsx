@@ -12,12 +12,16 @@ class PluginActions {
     this.reactor = reactor
   }
 
-  mountInstalledPlugins(plugins) {
+  mountInstalledPlugins(plugins: Object) {
     this.reactor.dispatch(PluginActionTypes.MOUNT_INSTALLED_PLUGINS, plugins)
   }
 
-  unmountPlugin(plugin) {
+  unmountPlugin(plugin: Object) {
     this.reactor.dispatch(PluginActionTypes.UNMOUNT_PLUGIN, plugin)
+  }
+
+  mountNewlyInstalledPlugin(newPlugin: Object) {
+    this.reactor.dispatch(PluginActionTypes.MOUNT_NEWLY_INSTALLED_PLUGIN, newPlugin)
   }
 }
 

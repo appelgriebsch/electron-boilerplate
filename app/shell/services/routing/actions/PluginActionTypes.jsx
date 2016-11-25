@@ -5,4 +5,5 @@ import keyMirror from 'keymirror'
 export default keyMirror({
   MOUNT_INSTALLED_PLUGINS: null,
   UNMOUNT_PLUGIN: null,
+  MOUNT_NEWLY_INSTALLED_PLUGIN: null,
 })

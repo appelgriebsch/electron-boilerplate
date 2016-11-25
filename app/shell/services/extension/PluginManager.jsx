@@ -153,14 +153,20 @@ class PluginManager {
     return p
   }
 
-  installPlugin (pluginPath:string, name:string) {
+  installPlugin (pluginPath:string, newPlugin:string) {
     if(fs.lstatSync(pluginPath).isDirectory())
       console.log('Cannot process directories');
     else
-      fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,name)))
+      fs.createReadStream(pluginPath).pipe(fs.createWriteStream(path.join(this.pluginFolder,newPlugin)))
 
     // pluginManager.PluginControls.mountInstalledPlugins({plugins:pluginManager.getRegisteredPlugins()});
-    window.location.reload()
+    let newPluginModule = this.tryLoadPlugin(newPlugin)
+    if(newPluginModule)
+    {
+      console.log('newPlugin from PluginManager ' + JSON.stringify(newPluginModule));
+      this.PluginControls.mountNewlyInstalledPlugin({ plugins: newPluginModule })
+    }
+    // window.location.reload()
   }
 
   deletePlugin (plugin:string) {
