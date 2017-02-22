@@ -70,11 +70,11 @@
     "reformat": "npm run lint || standard \"app/**/*.js\" --fix"
   },
   "devDependencies": {
-    "devtron": "^1.1.0",
-    "electron-builder": "^8.0.0",
-    "electron-packager": "^8.0.0",
-    "electron": "^1.4.0",
-    "spectron": "^3.0.0",
-    "standard": "^8.0.0"
+    "devtron": "^1.4.0",
+    "electron-builder": "^13.11.1",
+    "electron-packager": "^8.5.2",
+    "electron": "^1.4.15",
+    "spectron": "^3.6.0",
+    "standard": "^8.6.0"
   }
 }
