@@ -24,6 +24,7 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
 ## Screenshot
 
 ![screenshot](screenshot.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fappelgriebsch%2Felectron-boilerplate.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fappelgriebsch%2Felectron-boilerplate?ref=badge_shield)
 
 ## Build Distributable Packages
 
@@ -42,3 +43,7 @@ An electron boilerplate project incl. PouchDB, AngularJS + Material Design
   ```bash
   npm run build:linux       // will execute sub-tasks npm run build:linux-ia32 and npm run build:linux-x64
   ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fappelgriebsch%2Felectron-boilerplate.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fappelgriebsch%2Felectron-boilerplate?ref=badge_large)
