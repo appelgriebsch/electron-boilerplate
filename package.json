@@ -2,7 +2,7 @@
   "name": "boilerplate",
   "productName": "Boilerplate",
   "description": "An Electron boilerplate project",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": "Andreas Gerlach <andi@appelgriebsch.org>",
   "main": "app/index.js",
   "repository": {
@@ -21,8 +21,8 @@
       "iconSize": 80,
       "contents": [
         {
-            "x": 100,
-            "y": 220
+          "x": 100,
+          "y": 220
         },
         {
           "x": 280,
@@ -36,21 +36,31 @@
       "category": "Utility",
       "packageCategory": "utils",
       "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
-      "publish": ["github"],
-      "target": ["AppImage"],
+      "publish": [
+        "github"
+      ],
+      "target": [
+        "AppImage"
+      ],
       "depends": []
     },
     "mac": {
       "category": "",
-      "target": ["dmg"]
+      "target": [
+        "dmg"
+      ]
     },
     "squirrelWindows": {
       "iconUrl": "https://raw.githubusercontent.com/appelgriebsch/electron-boilerplate/angularjs/build/icon.ico"
     },
     "win": {
       "remoteReleases": "https://github.com/appelgriebsch/electron-boilerplate",
-      "publish": ["github"],
-      "target": ["squirrel"]
+      "publish": [
+        "github"
+      ],
+      "target": [
+        "squirrel"
+      ]
     }
   },
   "license": "MIT",
@@ -71,10 +81,10 @@
   },
   "devDependencies": {
     "devtron": "^1.4.0",
-    "electron-builder": "^13.11.1",
-    "electron-packager": "^8.5.2",
-    "electron": "^1.4.15",
-    "spectron": "^3.6.0",
-    "standard": "^8.6.0"
+    "electron-builder": "^19.52.0",
+    "electron-packager": "^10.1.1",
+    "electron": "^1.7.1",
+    "spectron": "^3.7.2",
+    "standard": "^10.0.3"
   }
 }

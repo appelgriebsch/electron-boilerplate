@@ -52,7 +52,7 @@
       <span ui-view="toolbar"></span>
       <span class="draggable" flex></span>
       <md-button class="md-icon-button" md-no-ink ng-repeat="module in shell.modules"
-                 ng-href="#{{ module.info.url }}" ng-class="{ selected: $state.includes('{{ module.info.state }}') }">
+                 ng-href="#!{{ module.info.url }}" ng-class="{ selected: $state.includes('{{ module.info.state }}') }">
         <md-icon>{{ module.info.icon }}</md-icon>
         <md-tooltip>{{ module.info.tooltip }}</md-tooltip>
       </md-button>
