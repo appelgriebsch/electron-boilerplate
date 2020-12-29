@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/appelgriebsch/electron-boilerplate/tree/angularjs#readme",
   "dependencies": {
-    "angular": "^1.6.8",
+    "angular": "^1.8.0",
     "angular-animate": "^1.6.8",
     "angular-aria": "^1.6.2",
     "angular-centered": "^1.0.1",
